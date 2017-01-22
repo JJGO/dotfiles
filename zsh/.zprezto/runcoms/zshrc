@@ -1,0 +1,42 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# Python from pyenv
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
+# Matlab
+export PATH="/Applications/MATLAB_R2016b.app/bin:$PATH"
+
+
+# CLI colors
+export CLICOLOR=1
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+
+# Configure Editor
+export EDITOR='vim'
+
+# ALIASES
+if [ -f ~/.aliases ]; then
+    source ~/.aliases
+fi
+
+# Tmuxinator completions
+source ~/.bin/tmuxinator.zsh
+

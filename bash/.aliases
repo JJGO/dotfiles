@@ -1,0 +1,7 @@
+alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
+alias matlabc='matlab -nodesktop -nosplash'
+# alias jc='source activate py3 && jupyter qtconsole --style monokai &'
+alias tab='open . -a iterm'
+alias diff='colordiff'
+alias yt="youtube-dl"
+alias popcorn="cd /Volumes/Macintosh\ HD/Usuarios/JoseJavier/Series && mount -t smbfs //nmt:1234@pch-a210/share ./PCH"

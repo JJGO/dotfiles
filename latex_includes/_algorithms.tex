@@ -1,0 +1,33 @@
+%!TEX root = main.tex
+%% Jose Javier Gonzalez Ortiz %%
+%% Algorithmic Configuration  %%
+%% 2016-07-07                 %%
+
+\usepackage{algorithm} % Allows for algorithm description
+\usepackage[noend]{algpseudocode}
+
+% Number algorithms within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+% \numberwithin{algorithm}{section}
+
+% Multiline Comment
+\newcommand\LONGCOMMENT[1]{%
+  \hfill\ \begin{minipage}[t]{\eqboxwidth{COMMENT}}#1\strut\end{minipage}%
+}
+% Do while loop
+\algdef{SE}[DOWHILE]{Do}{doWhile}{\algorithmicdo}[1]{\algorithmicwhile\ #1}%
+% Break statement
+\newcommand{\Break}{\State \textbf{break} }
+% Yield Statement, for generators
+\newcommand{\Yield}{\State \textbf{yield} }
+
+% Go to statement
+\algnewcommand{\algorithmicgoto}{\textbf{go to}}%
+\algnewcommand{\Goto}{\algorithmicgoto\xspace}%
+% Label for Goto staments
+\algnewcommand{\Label}{\State\unskip}
+
+
+% Uncomment Larger spaces between algorithms
+% \newfloat{algorithm}{ht}{lop}
+% \let\Algorithm\algorithm
+% \renewcommand\algorithm[1][]{\Algorithm[#1]\setstretch{1.4}}

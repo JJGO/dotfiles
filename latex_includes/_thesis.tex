@@ -1,0 +1,88 @@
+%!TEX root = main.tex
+%% Jose Javier Gonzalez Ortiz %%
+%% Plantilla LaTeX TFG        %%
+%% 2016-07-07                 %%
+
+%%%%%%%%%%% FONTS %%%%%%%%%%%
+\usepackage{mathptmx} % Load Times New Roman
+\usepackage{lmodern} % Latin Modern as the overall font of the document
+\renewcommand{\rmdefault}{ptm} % Times New Roman as the default text of the document
+
+% Latin Modern Sans Serif for all the Sections
+% For other Font Typefaces https://es.sharelatex.com/learn/Font_typefaces
+    \allsectionsfont{\fontfamily{lmss}\selectfont}
+
+% Latin Modern Sans Serif for \paragraph and \subparagraph headings
+    \titleformat{\paragraph}
+        {\fontfamily{lmss}\selectfont\normalsize\bfseries}{\theparagraph}{1em}{}
+    \titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+    \titleformat{\subparagraph}
+        {\fontfamily{lmss}\selectfont\normalsize\bfseries}{\thesubparagraph}{1em}{}
+    \titlespacing*{\subparagraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+%%%%%%%%%%% TOC %%%%%%%%%%%
+\usepackage{titletoc} % Allows customization of table of contents titles
+    \setcounter{secnumdepth}{5} % Last numbered level \subparagraph (max. 5)
+    \setcounter{tocdepth}{2} % Last numbered level shown in the TOC (max. 3)
+
+\usepackage[titles]{tocloft} % control over the typography of the Table of Contents
+    \renewcommand{\cfttoctitlefont}{\fontfamily{lmss}\huge\bfseries\selectfont}
+    \renewcommand{\cftloftitlefont}{\fontfamily{lmss}\huge\bfseries\selectfont}
+    \renewcommand{\cftlottitlefont}{\fontfamily{lmss}\huge\bfseries\selectfont}
+    % \renewcommand{\cftpartfont}{\fontfamily{ppl}\large\bfseries\selectfont}
+    % \renewcommand{\cftpartpagefont}{\fontfamily{ppl}\large\bfseries\selectfont}
+
+\newcommand{\setupname}[1]{%
+  \addtocontents{toc}{%
+    \unexpanded{\unexpanded{%
+      \renewcommand{\cftchappresnum}{#1 }%
+      \setlength\cftchapnumwidth{\widthof{\bfseries #1 }}%
+      \addtolength\cftchapnumwidth{\fixedchapnumwidth}%
+    }}%
+  }%
+}
+\AtBeginDocument{\edef\fixedchapnumwidth{\the\cftchapnumwidth}}
+
+%%%%%%%%%%% SPACING %%%%%%%%%%%
+    \setlength{\cftbeforechapskip}{6pt}         % Espacio que precede a los capítulos
+    % \setlength{\cftsubsecindent}{26.65pt}       % Sangría del número de subsección
+    % \setlength{\cftsubsubsecindent}{35.70pt}    % Sangría del número de subsubsección
+    % \setlength{\cftparaindent}{44.75pt}         % Sangría del número de párrafo
+    % \setlength{\cftsubparaindent}{53.80pt}      % Sangría del número de subpárrafo
+
+
+
+
+%%%%%%%%%%% HEADER/FOOTER %%%%%%%%%%%
+% Estilo
+    \pagestyle{fancy}
+
+% Centrar en la zona del margen
+    \setlength{\voffset}{-13pt}
+    \setlength{\headheight}{13pt}
+    \footskip = 36pt
+
+% Formato de las líneas separadoras
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    
+% Formato del texto
+    % \fancyhf{}
+    % \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+    % \renewcommand{\sectionmark}[1]{\markright{#1}{}}
+
+    \newcommand{\theleftside}{}
+    \newcommand{\leftside}[1]{\renewcommand{\theleftside}{#1}}
+    \newcommand{\therightside}{}
+    \newcommand{\rightside}[1]{\renewcommand{\therightside}{#1}}
+
+    \newcommand{\emptyHeader}{\fancyhead[C]{{}}}
+    \newcommand{\fullHeader}{\fancyhead[C]{{\textsc{{\leftmark} }}}}
+
+%
+    \numberwithin{equation}{chapter} % Number equations within chapters (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+    \numberwithin{figure}{chapter} % Number figures within chapters (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+    \numberwithin{table}{chapter} % Number tables within chapters (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+    \numberwithin{algorithm}{chapter} % Number algorithms within chapters (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+    \AtBeginDocument{\numberwithin{lstlisting}{chapter}}
+

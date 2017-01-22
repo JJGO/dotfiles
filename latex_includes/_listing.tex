@@ -1,0 +1,64 @@
+%!TEX root = main.tex
+%% Jose Javier Gonzalez Ortiz %%
+%% Code Listing Configuration %%
+%% 2016-07-07                 %%
+
+\usepackage{listings} % Main package for inserting code
+% \usepackage[scaled]{beramono} % For using the beramono font in tt
+\usepackage{inconsolata} % For using the beramono font in tt
+\usepackage[usenames,dvipsnames]{xcolor} % Required for custom colors
+\usepackage{caption,subcaption} % For custom caption environments
+
+% Number listings within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+% \AtBeginDocument{\numberwithin{lstlisting}{section}}
+
+% Defines the Spanish babel identifier for Listing
+\addto\captionsspanish{%
+   \renewcommand{\lstlistingname}{Código} % For Codigo caption (requires caption package)
+}
+
+% \renewcommand{\lstlistingname}{Code}% Listing -> Code
+\renewcommand{\lstlistlistingname}{List of \lstlistingname s}% List of Listings -> List of Codes
+
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{keyword}{HTML}{A71D5D}
+% General config
+\lstset{
+    aboveskip=3mm,
+    belowskip=3mm,
+    numbers=left,
+    numbersep=8pt,
+    numberstyle=\small\ttfamily\color{gray},
+    columns=flexible,
+    showstringspaces=false, % underline spaces within strings only
+    tabsize=4, % sets default tabsize to 4 spaces
+    showspaces=false, % show spaces everywhere adding particularunderscores; it overrides 'showstringspaces'
+    showtabs=false, % show tabs within strings adding particularunderscores
+    breaklines=true, % sets automatic line breaking
+    showstringspaces=false,
+    breakatwhitespace=true, % sets if automatic breaks should only happenat whitespace
+    keepspaces=true, % keeps spaces in text, useful for keepingindentation of code (possibly needs columns=flexible)
+    stepnumber=1, % the step between two line-numbers. If it's1, each line will be numbered
+    captionpos=t, % sets the caption-position to top
+    escapeinside={<@}{@>},            % if you want to add LaTeX within your code
+    commentstyle=\color{pgreen},
+    keywordstyle=\color{keyword},
+    stringstyle=\color[HTML]{0086B3},
+    basicstyle=\ttfamily,
+    upquote=true,
+    literate={*}{{\char42}}1
+         {-}{{\char45}}1
+         {^}{{\char94}}1
+}
+
+% GAMS language (Uncomment as needed)
+% \lstdefinelanguage{GAMS}{
+%     morekeywords={
+% ABORT , ACRONYM , ACRONYMS , ALIAS , ALL , AND , ASSIGN , BINARY , CARD , DISPLAY , EPS , EQ , EQUATION , EQUATIONS , GE , GT , INF , INTEGER , LE , LOOP , LT , MAXIMIZING , MINIMIZING , MODEL , MODELS , NA , NE , NEGATIVE , NOT , OPTION , OPTIONS , OR , ORD , PARAMETER , PARAMETERS , POSITIVE , PROD , SCALAR , SCALARS , SET , SETS , SMAX , SMIN , SOS1 , SOS2 , SUM , SYSTEM , TABLE , USING , VARIABLE , VARIABLES , XOR , YES , REPEAT , UNTIL , WHILE , IF , THEN , ELSE , SEMICONT , SEMIINT , FILE , FILES , PUT , PUTPAGE , PUTTL , PUTCLOSE , FREE , NO , SOLVE , FOR , ELSEIF , ABS , ARCTAN , CEIL , COS , ERROR , EXP , FLOOR , LOG , LOG10 , MAP , MAPVAL , MAX , MIN , MOD , NORMAL , POWER , ROUND , SIGN , SIN , SQR , SQRT , TRUNC , UNIFORM , LO , UP , FX , SCALE , PRIOR , PC , PS , PW , TM , BM , CASE , DATE , IFILE , OFILE , PAGE , RDATE , RFILE , RTIME , SFILE , TIME , TITLE , TS , TL , TE , TF , LJ , NJ , SJ , TJ , LW , NW , SW , TW , ND , NR , NZ , CC , HDCC , TLCC , LL , HDLL , TLLL , LP , WS , /,PROD: },
+% sensitive = false,
+% morecomment=[f]*,%
+% morecomment=[s]{$ontext}{$offtext},
+% morecomment=[s][\color{pgreen}]{/}{/},
+% morestring=[b]”,
+% morestring=[b]’
+% }
