@@ -1,0 +1,6 @@
+# Don't stow .DS_Store files
+
+\.DS_Store
+
+# Ignore editor temp files
+.+~
