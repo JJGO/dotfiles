@@ -42,6 +42,8 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+
+
 colorscheme molokai
 syntax enable
 set tabstop=4
@@ -98,6 +100,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
 " Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'rizzatti/dash.vim'
+
 
 if has("cscope")
     set csprg=/usr/bin/cscope
