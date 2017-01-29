@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+
+from shutil import copyfile
+
+TEMPLATE_NAME = 'report.tex'
+INCLUDES_FOLDER = 'latex_includes'
+
+def latex_init(name, files, includes_dir, cwd):
+    name = name + '.tex'
+
+    with open(os.path.join(includes_dir, TEMPLATE_NAME), 'r') as f:
+        template = f.read()
+        template = template.replace(TEMPLATE_NAME, name)
+        head, tail = template.split(r'\input{_core.tex}')
+
+    files = ['_core.tex'] + files
+
+
+    for file in files:
+        if not os.path.isfile(os.path.join(includes_dir, file)):
+            print('File {0} not found in {1}'.format(file, includes_dir))
+            sys.exit(1)
+
+    for file in files:
+        head += '\\input{{{0}}}\n'.format(file)
+        origin = os.path.join(includes_dir, file)
+        target = os.path.join(cwd, file)
+
+        with open(origin, 'r') as f:
+            include = f.read().replace(TEMPLATE_NAME, name)
+        with open(target, 'w') as f:
+            print(include, file=f)
+
+        print('Copied {0}'.format(file))
+
+    with open(os.path.join(cwd, name), 'w') as f:
+        print(head+tail, file=f)
+        print('Copied {0}'.format(name))
+
+if __name__ == '__main__':
+    if sys.argv[1] in ['-h', '--help']:
+        print('latex-init copies tex templates in ~/bin/latex_includes to pwd')
+        print('Usage is as follows:')
+        print('    latex-init <name> [<includes>...]')
+        sys.exit(0)
+
+    if len(sys.argv) < 2:
+        name = TEMPLATE_NAME
+    else:
+        name = sys.argv[1]
+    files = ['_{0}.tex'.format(a) for a in sys.argv[2:]]
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    dir_path = os.path.join(dir_path, INCLUDES_FOLDER)
+    cwd = os.getcwd()
+
+    latex_init(name, files, dir_path, cwd)

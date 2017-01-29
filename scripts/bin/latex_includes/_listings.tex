@@ -1,7 +1,12 @@
-%!TEX root = main.tex
+%!TEX root = report.tex
 %% Jose Javier Gonzalez Ortiz %%
 %% Code Listing Configuration %%
 %% 2016-07-07                 %%
+
+
+%%%%%% SAMPLE USE %%%%%%
+% \lstinputlisting[caption = Sample Code ,label = cod:somecode, language=Python]{code.py}
+
 
 \usepackage{listings} % Main package for inserting code
 % \usepackage[scaled]{beramono} % For using the beramono font in tt
@@ -22,6 +27,7 @@
 
 \definecolor{pgreen}{rgb}{0,0.5,0}
 \definecolor{keyword}{HTML}{A71D5D}
+\definecolor{emphco}{HTML}{008040}
 % General config
 \lstset{
     aboveskip=3mm,
@@ -45,11 +51,16 @@
     keywordstyle=\color{keyword},
     stringstyle=\color[HTML]{0086B3},
     basicstyle=\ttfamily,
+    emphstyle=\color{emphco},
     upquote=true,
     literate={*}{{\char42}}1
          {-}{{\char45}}1
          {^}{{\char94}}1
+    % otherkeywords={self},
+    % emph={PSK,__init__}
 }
+
+
 
 % GAMS language (Uncomment as needed)
 % \lstdefinelanguage{GAMS}{

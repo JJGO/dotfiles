@@ -1,4 +1,4 @@
-%!TEX root = main.tex
+%!TEX root = report.tex
 %% Jose Javier Gonzalez Ortiz %%
 %% Core default Configuration %%
 %% 2016-07-07                 %%
@@ -9,16 +9,16 @@
 
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \usepackage[utf8]{inputenc} % For Spanish characters
-\usepackage[english,spanish,es-noshorthands,es-tabla]{babel}  % English localisation
+\usepackage[spanish, english]{babel}  % English localisation
 % \usepackage[spanish, es-noshorthands,es-tabla]{babel}               % Spanish hyphenation and document rules
 
 
 % =========== General Formatting =============
 \usepackage[left=2.5cm, right=2.5cm, top=2.5cm, bottom=2cm]{geometry} % Margin sizes
 \usepackage{microtype} % Slightly tweak font spacing for aesthetics
-% \usepackage{fancyhdr} % Allows for nice header and footer
+\usepackage{fancyhdr} % Allows for nice header and footer
 \usepackage{sectsty} % Allows customizing section commands
-% \usepackage{titlesec} % Allows customization of section titles
+\usepackage{titlesec} % Allows customization of section titles
 \usepackage{appendix} % Enables appendices
 \usepackage{enumerate} % Custom numerate, useful for i,ii,iii... I,II,III...
 \usepackage{relsize} % Defines several commands to set font sizes relative to the current size. Useful for enlarging math
@@ -75,8 +75,8 @@
 
 % =============== Other ===============
 \usepackage{datetime} % Date-Time formatting
-\usepackage{ulem} % For strikethrough text \st{}
-\normalem %Restores the emphasis to italics after ulem
+% \usepackage{ulem} % For strikethrough text \st{}
+% \normalem %Restores the emphasis to italics after ulem
 \usepackage{textcomp} %Text Com­pan­ion fonts
 
 \usepackage{pdfpages} % Insert pdfs
