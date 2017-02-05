@@ -4,4 +4,6 @@ alias jc='pyenv shell anaconda3-4.2.0 && jupyter qtconsole --style monokai &'
 alias tab='open . -a iterm'
 alias diff='colordiff'
 alias yt="youtube-dl"
+alias doc2pdf="soffice --headless --convert-to pdf"
+alias ppt2pdf="soffice --headless --convert-to pdf"
 alias popcorn="cd /Volumes/Macintosh\ HD/Usuarios/JoseJavier/Series && mount -t smbfs //nmt:1234@pch-a210/share ./PCH"

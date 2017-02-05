@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+
+import sys, os
+
+EXT_LIST = ['.doc', '.docx', '.ppt', '.pptx']
+
+if __name__ == '__main__':
+
+    filename, file_extension = os.path.splitext(sys.argv[1])
+    if file_extension in EXT_LIST and not os.path.isfile(filename + '.pdf'):
+        sys.exit(0)
+    else:
+        sys.exit(1)
