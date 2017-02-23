@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+if [ -d "/Volumes/DURALUMIN" ]; then
+    # Things to do
+    echo "============================================================="
+    echo $(date +"%m/%d/%y %H:%M:%S")
+    /usr/local/bin/unison duralumin
+    /usr/local/bin/terminal-notifier -message "Synced DURALUMIN"
+fi

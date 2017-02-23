@@ -1,0 +1,10 @@
+root = /Users/josejavier/52_MasterTeleco
+root = /Volumes/DURALUMIN
+
+path = 52_MasterTeleco
+
+ignore = Name .DS_Store
+
+auto = true
+batch = true
+fat = true
