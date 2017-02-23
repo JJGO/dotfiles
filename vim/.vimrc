@@ -145,3 +145,9 @@ set nohlsearch
 
 set t_Co=256
 
+
+
+if $VIM_CRONTAB == "true"
+    set nobackup
+    set nowritebackup
+endif
