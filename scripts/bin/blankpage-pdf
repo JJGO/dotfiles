@@ -1,0 +1,59 @@
+﻿#!/usr/bin/env python
+# python merge_pdfs.py <folder> <output_file> [<pages_per_printed_page>]
+
+"""Merge pdfs in a folder
+
+Usage:
+  merge_pdfs.py [options] FILE...
+  merge_pdfs.py [options] -f FOLDER
+  merge_pdfs.py (-h | --help)
+
+Arguments:
+  FILE        PDF files to merge
+
+Options:
+  -f FOLDER        Join all PDF files inside a folder
+  -o OUTPUT        Output file to save to. Defaults to merged.pdf
+  -p PAGES         Adds white pages for printing so it is <pages> pages per printed page
+  -d PAGES         Adds white pages for printing double sided <pages> pages per printed page
+  -v, --verbose    Display information about what is happening
+  -h, --help       Show this screen.
+
+"""
+
+import sys, os, glob
+
+try:
+    from docopt import docopt
+except:
+    raise EnvironmentError("ERROR: Missing docopt try running \n\tsudo pip install docopt")
+
+try:
+    from PyPDF2 import PdfFileWriter, PdfFileReader
+except:
+    raise EnvironmentError("ERROR: Missing PyPDF2 try running \n\tsudo pip install PyPDF2")
+
+
+
+if __name__ == '__main__':
+    arguments = docopt(__doc__)
+    output_file = arguments['-o'] if arguments['-o'] else 'merged.pdf'
+    alingment = int(arguments['-p']) if arguments['-p'] else 1
+    alingment = int(arguments['-d'])*2 if arguments['-d'] else alingment
+    files = arguments['FILE'] if not arguments['-f'] else glob.glob(arguments['-f']+"/*.pdf")
+
+    output = PdfFileWriter()
+    for filename in files:
+        input = PdfFileReader(open(filename,'rb'))
+        N = input.getNumPages()
+        whitePages = (alingment - N % alingment) % alingment
+        print("Processing %s : %d Pages and %d Whitepages" % (filename,N,whitePages)) if arguments['--verbose'] else None
+        for p in [input.getPage(i) for i in range(N)]:
+            output.addPage(p)
+        for _ in range(whitePages):
+            output.addBlankPage()
+    print("Saving output in %s ..." % output_file) if arguments['--verbose'] else None
+    outputStream = open(output_file, "wb")
+    output.write(outputStream)
+    outputStream.close()
+    print("DONE!\n") if arguments['--verbose'] else None
