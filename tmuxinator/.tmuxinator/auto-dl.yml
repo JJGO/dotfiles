@@ -32,6 +32,7 @@ root: ~/
 
 windows:
   - main:
+      - open -a /Applications/Transmission.app &
       - open -a /Applications/Sonarr.app &
       - open -a /Applications/Radarr.app &
       - jackett
