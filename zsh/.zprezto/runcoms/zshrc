@@ -40,3 +40,5 @@ fi
 # Tmuxinator completions
 source ~/.bin/tmuxinator.zsh
 
+# Fasd init
+eval "$(fasd --init auto)"

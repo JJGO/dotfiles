@@ -30,3 +30,6 @@ source ~/.bin/tmuxinator.bash
 
 # Bash Prompt
 PS1="\[\e]0;\u@\h: \W\a\]\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[00;36m\]\W\[\033[00m\]\$ "
+
+# Fasd Init
+eval "$(fasd --init auto)"
