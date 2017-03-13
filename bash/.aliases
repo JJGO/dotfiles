@@ -9,7 +9,7 @@ alias ppt2pdf="soffice --headless --convert-to pdf"
 alias popcorn="cd /Volumes/Macintosh\ HD/Usuarios/JoseJavier/Series && mount -t smbfs //nmt:1234@pch-a210/share ./PCH"
 alias jackett="mono --debug /Applications/Jackett/JackettConsole.exe"
 alias loco="/usr/local/bin/sl"
-
+alias dc="cd"
 alias crontab="VIM_CRONTAB=true crontab"
 
 alias eject-duralumin="sync-duralumin && diskutil unmount /Volumes/DURALUMIN"
