@@ -1,0 +1,17 @@
+\usepackage[outputdir=aux, newfloat]{minted}
+\usepackage{inconsolata} % For using the inconsolata font in tt
+
+
+\renewcommand{\theFancyVerbLine}{\sffamily \textcolor{gray}{\scriptsize \arabic{FancyVerbLine}}}
+
+\BeforeBeginEnvironment{minted}{\vspace{.25cm}}
+\AfterEndEnvironment{minted}{\vspace{.25cm}}
+
+\newenvironment{code}{\captionsetup{type=listing}}{}
+\SetupFloatingEnvironment{listing}{name=Code}
+
+
+\addto\captionsspanish{%
+   \renewcommand{\listingname}{Código} % For Codigo caption (requires caption package)
+}
+% \setminted[numpy]{linenos, numberblanklines=false}
