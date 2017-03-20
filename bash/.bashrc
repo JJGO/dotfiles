@@ -10,7 +10,7 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # Matlab
-export PATH="/Applications/MATLAB_R2016b.app/bin:$PATH"
+export PATH="/Applications/MATLAB_R2017a.app/bin:$PATH"
 
 
 # CLI colors
