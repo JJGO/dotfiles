@@ -1,7 +1,9 @@
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 alias matlabc='matlab -nodesktop -nosplash'
-alias jc='jupyter qtconsole --style monokai &'
+alias jc="jupyter nbconvert"
+alias jq='jupyter qtconsole --style monokai &'
 alias jn="jupyter notebook"
+alias jn-b="jupyter notebook --no-browser"
 alias tab='open . -a iterm'
 alias diff='colordiff'
 alias yt="youtube-dl"
