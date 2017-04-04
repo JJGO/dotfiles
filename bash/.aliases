@@ -1,5 +1,6 @@
 alias ga='git add'
 alias gs='git status'
+alias ts='tig status'
 
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 alias matlabc='matlab -nodesktop -nosplash'
@@ -20,3 +21,6 @@ alias dc="cd"
 alias crontab="VIM_CRONTAB=true crontab"
 
 alias eject-duralumin="sync-duralumin && diskutil unmount /Volumes/DURALUMIN"
+
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome &"
+alias chromec="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary &"
