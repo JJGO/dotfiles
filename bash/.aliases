@@ -27,3 +27,5 @@ alias chromec="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ C
 
 alias k="k -h"
 alias ka="k -Ah"
+
+alias imgur-dl="python $HOME/bin/imguralbum.py"
