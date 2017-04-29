@@ -42,3 +42,9 @@ source ~/.bin/tmuxinator.zsh
 
 # Fasd init
 eval "$(fasd --init auto)"
+
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+# Source k
+source $HOME/bin/k/k.sh
+
