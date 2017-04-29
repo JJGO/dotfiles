@@ -24,3 +24,6 @@ alias eject-duralumin="sync-duralumin && diskutil unmount /Volumes/DURALUMIN"
 
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome &"
 alias chromec="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary &"
+
+alias k="k -h"
+alias ka="k -Ah"
