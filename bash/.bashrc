@@ -25,6 +25,11 @@ if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
 
+# SECRET ALIASES
+if [ -f ~/.secret-aliases ]; then
+    source ~/.secret-aliases
+fi
+
 # Tmuxinator completions
 source ~/.bin/tmuxinator.bash
 

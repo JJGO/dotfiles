@@ -14,7 +14,6 @@ alias yt="youtube-dl"
 alias yta="youtube-dl --extract-audio --audio-format mp3"
 alias doc2pdf="soffice --headless --convert-to pdf"
 alias ppt2pdf="soffice --headless --convert-to pdf"
-alias popcorn="cd /Volumes/Macintosh\ HD/Usuarios/JoseJavier/Series && mount -t smbfs //nmt:1234@pch-a210/share ./PCH && cd -"
 alias jackett="mono --debug /Applications/Jackett/JackettConsole.exe"
 alias loco="/usr/local/bin/sl"
 alias dc="cd"
@@ -28,4 +27,4 @@ alias chromec="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ C
 alias k="k -h"
 alias ka="k -Ah"
 
-alias imgur-dl="python $HOME/bin/imguralbum.py"
+alias -g "brew-upgrade-all"="brew update && brew outdated | xargs brew upgrade"
