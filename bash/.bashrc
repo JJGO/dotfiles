@@ -38,3 +38,9 @@ PS1="\[\e]0;\u@\h: \W\a\]\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[00;36m\]\W\[\03
 
 # Fasd Init
 eval "$(fasd --init auto)"
+
+PATH="/Users/josejavier/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/josejavier/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/josejavier/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/josejavier/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/josejavier/perl5"; export PERL_MM_OPT;
