@@ -15,10 +15,21 @@ then
   mv ~/.bash_profile ~/.bash_profile.bk
 fi
 
+if [ -f ~/.bashrc ];
+then
+  mv ~/.bashrc ~/.bashrc.bk
+fi
+
 for f in ~/.zprezto/runcoms/z*
 do
     mv "$f" "$f.bk"
 done
+
+if [ -f ~/.gitconfig ];
+then
+  mv ~/.gitconfig ~/.gitconfig.bk
+fi
+
 
 for program in ${PROGRAMS[@]}; do
   stow -v $program
