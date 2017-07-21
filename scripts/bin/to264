@@ -1,0 +1,6 @@
+mkdir -p "h264"
+for f in "$@";
+do
+    echo "$f"
+    ffmpeg -i "$f" -map 0 -c:a copy -c:s copy -c:v libx264 "h264/$f"
+done
