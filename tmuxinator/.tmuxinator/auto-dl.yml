@@ -36,5 +36,5 @@ windows:
       - open -a /Applications/Sonarr.app &
       - open -a /Applications/Radarr.app &
       - jackett
-  - sync
-      - syncthing
+     # - sync
+        # - syncthing
