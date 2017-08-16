@@ -29,3 +29,5 @@ alias k="k -h"
 alias ka="k -Ah"
 
 alias -g "brew-upgrade-all"="brew update && brew outdated | xargs brew upgrade"
+
+alias ghostscript="/usr/local/bin/gs"
