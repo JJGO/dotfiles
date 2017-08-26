@@ -15,19 +15,53 @@ alias yt="youtube-dl"
 alias yta="youtube-dl --extract-audio --audio-format mp3"
 alias doc2pdf="soffice --headless --convert-to pdf"
 alias ppt2pdf="soffice --headless --convert-to pdf"
-alias jackett="mono --debug /Applications/Jackett/JackettConsole.exe"
+
 alias loco="/usr/local/bin/sl"
 alias dc="cd"
 alias crontab="VIM_CRONTAB=true crontab"
 
-alias eject-duralumin="sync-duralumin && diskutil unmount /Volumes/DURALUMIN"
-
-alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome &"
-alias chromec="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary &"
-
-alias k="k -h"
-alias ka="k -Ah"
-
-alias -g "brew-upgrade-all"="brew update && brew outdated | xargs brew upgrade"
-
 alias ghostscript="/usr/local/bin/gs"
+
+
+# OS dependent aliases
+case "$(uname -s)" in
+
+   Darwin)
+     # echo 'Mac OS X'
+     alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome &"
+     alias chromec="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary &"
+
+     alias jackett="mono --debug /Applications/Jackett/JackettConsole.exe"
+     alias eject-duralumin="sync-duralumin && diskutil unmount /Volumes/DURALUMIN"
+     alias "brew-upgrade-all"="brew update && brew outdated | xargs brew upgrade"
+
+     ;;
+
+   Linux)
+     # echo 'Linux'
+     ;;
+
+   CYGWIN*|MINGW32*|MSYS*)
+     # echo 'MS Windows'
+     ;;
+
+   # Add here more strings to compare
+   # See correspondence table at the bottom of this answer
+
+   *)
+     # echo 'other OS'
+     ;;
+esac
+
+
+# Global Alias (only zsh)
+case $SHELL in
+*/zsh)
+   # assume Zsh
+   ;;
+*/bash)
+   # assume Bash
+   ;;
+*)
+   # assume something else
+esac
