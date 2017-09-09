@@ -33,7 +33,7 @@ case "$(uname -s)" in
 
      alias jackett="mono --debug /Applications/Jackett/JackettConsole.exe"
      alias eject-duralumin="sync-duralumin && diskutil unmount /Volumes/DURALUMIN"
-     alias "brew-upgrade-all"="brew update && brew outdated | xargs brew upgrade"
+     alias "bu"="brew update && brew outdated | xargs brew upgrade  && brew cleanup -s"
 
      ;;
 
