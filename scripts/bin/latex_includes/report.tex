@@ -1,9 +1,13 @@
 %!TEX root = report.tex
 %!TEX output_directory = aux
+% Author: Jose Javier Gonzalez Ortiz
 \documentclass[a4paper]{article}
-\input{_core.tex}
 
-\usepackage{parskip}
+% =========== PDFLaTeX specific =============
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{datetime} % Date-Time formatting
+
+\input{_core.tex}
 
 \addbibresource{mybib.bib}
 
@@ -33,8 +37,7 @@
 
 \begin{figure}[htp]
   \centering
-    % \includegraphics[width=\textwidth]{images/figure.pdf}
-    \missingfigure[figwidth=\textwidth]{Some Figure}
+    \includegraphics[width=0.6\textwidth]{/Users/josejavier/bin/latex_includes/sample_image}
     \caption{Sample Figure}
     \label{fig:sample fig}
 \end{figure}
@@ -44,16 +47,14 @@
   \begin{subfigure}{.45\textwidth}
     \centering
     \caption{First Subfigure}
-    % \includegraphics[width=\textwidth]{images/figure.pdf}
-    \missingfigure[figwidth=\textwidth]{Some subfigure}
+    \includegraphics[width=\textwidth]{/Users/josejavier/bin/latex_includes/sample_image}
     \label{fig:samplesubfiga}
   \end{subfigure}%
   \hfill
   \begin{subfigure}{.45\textwidth}
     \centering
     \caption{Second Subfigure}
-    % \includegraphics[width=\textwidth]{images/figure.pdf}
-    \missingfigure[figwidth=\textwidth]{Some subfigure}
+    \includegraphics[width=\textwidth]{/Users/josejavier/bin/latex_includes/sample_image}
     \label{fig:samplesubfigb}
   \end{subfigure}
   \caption{Sample Figure with subfigures}
