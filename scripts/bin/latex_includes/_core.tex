@@ -1,13 +1,12 @@
 %!TEX root = report.tex
 %% Jose Javier Gonzalez Ortiz %%
 %% Core default Configuration %%
-%% 2016-07-07                 %%
+%% 2017-09-18                 %%
 
 %%%%%%%%%%%%
 % PACKAGES %
 %%%%%%%%%%%%
 
-\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \usepackage[utf8]{inputenc} % For Spanish characters
 \usepackage[spanish, english]{babel}  % English localisation
 % \usepackage[spanish, es-noshorthands,es-tabla]{babel}               % Spanish hyphenation and document rules
@@ -25,6 +24,7 @@
 \usepackage{setspace} % Sup­port for set­ting the spac­ing be­tween lines in a doc­u­ment. \sin­glespac­ing, \one­half­s­pac­ing, and \dou­blespac­ing
 \usepackage{changepage} % To change relative geometry of particular pages
 \usepackage[usenames,dvipsnames]{xcolor} % Required for custom colors
+\usepackage{parskip} % For increased paragraph spacing
 
 % =========== Linking =============
 \usepackage{hyperref} % For hyperlinks in the PDF
@@ -43,7 +43,8 @@
 \usepackage{amsfonts} % Math Fonts
 \usepackage{upgreek} % Nice sigma => \upsigma
 \usepackage{array} % Enables array features
-\usepackage{siunitx} % For SI Unit easy formatting
+\usepackage[binary-units=true, per-mode=symbol]{siunitx} % For SI Unit easy formatting
+\sisetup{detect-all}
 
 % =============== Figures ===============
 \usepackage{graphicx} % Image insertion.
@@ -62,11 +63,18 @@
 \usepackage{csquotes}% Recommended package for biblatex
 % Use biblatex as the bibliography package.
 % The specific settings emulate the tradional bibtex alpha style
-\usepackage[backend=bibtex]{biblatex}
-
+% \usepackage[backend=bibtex]{biblatex}
+\usepackage[%
+    backend=biber,
+    % style=ieee,
+    % natbib=true,
+    % backref=false,
+    % backrefstyle=all+,
+    hyperref=true,
+]{biblatex}
 
 % ============ Glossaries ============
-\usepackage[acronym]{glossaries} % Very good package to create glossaries, acronym lists or symbols (nomenclature) lists.
+% \usepackage[acronym]{glossaries} % Very good package to create glossaries, acronym lists or symbols (nomenclature) lists.
 
 % =============== Footnotes ===============
 \usepackage{footnote}
@@ -74,7 +82,7 @@
 \makesavenoteenv{table} % Footnotes in Tables are displayed correctly
 
 % =============== Other ===============
-\usepackage{datetime} % Date-Time formatting
+\usepackage{soul} % For striking and highlighting
 % \usepackage{ulem} % For strikethrough text \st{}
 % \normalem %Restores the emphasis to italics after ulem
 \usepackage{textcomp} %Text Com­pan­ion fonts
