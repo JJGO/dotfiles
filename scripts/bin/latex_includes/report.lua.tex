@@ -1,0 +1,143 @@
+%!TEX program = lualatex
+%!TEX root = report.lua.tex
+%!TEX output_directory = aux
+% Author: Jose Javier Gonzalez Ortiz
+\documentclass[a4paper]{article}
+
+% =========== LuaLaTeX specific =============
+\usepackage{fontspec}         % all different fonts
+
+\input{_core.tex}
+
+\setmainfont{Arial}
+
+\addbibresource{mybib.bib}
+
+% Global variables
+  \newcommand{\HWTitle}{Sample Report}
+  \newcommand{\HWSubtitle}{Sample Course}
+  \newcommand{\HWDueDate}{\today}
+  \newcommand{\HWAuthorName}{José Javier González Ortiz}
+  \title{\HWTitle \\ \vspace{.25cm}}
+  \date{\HWDueDate}
+  \author{\HWAuthorName}
+
+\begin{document}
+\maketitle
+
+% \tableofcontents
+
+\hfill
+
+\section{Sample Section} % (fold)
+\label{sec:sample_section}
+
+\subsection{Sample figures} % (fold)
+\label{sub:sample_figures}
+
+% subsection sample_figures (end)
+
+\begin{figure}[htp]
+  \centering
+    \includegraphics[width=0.6\textwidth]{/Users/josejavier/bin/latex_includes/sample_image}
+    \caption{Sample Figure}
+    \label{fig:sample fig}
+\end{figure}
+
+\begin{figure}[htp]
+  \centering
+  \begin{subfigure}{.45\textwidth}
+    \centering
+    \caption{First Subfigure}
+    \includegraphics[width=\textwidth]{/Users/josejavier/bin/latex_includes/sample_image}
+    \label{fig:samplesubfiga}
+  \end{subfigure}%
+  \hfill
+  \begin{subfigure}{.45\textwidth}
+    \centering
+    \caption{Second Subfigure}
+    \includegraphics[width=\textwidth]{/Users/josejavier/bin/latex_includes/sample_image}
+    \label{fig:samplesubfigb}
+  \end{subfigure}
+  \caption{Sample Figure with subfigures}
+  \label{fig:samplesubfig}
+\end{figure}
+
+\subsection{Sample Tables} % (fold)
+\label{sub:sample_tables}
+
+\begin{table}[htp]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{llr}
+\toprule
+\multicolumn{2}{c}{Item} & \multirow{2}{*}{Price (\$)} \\
+\cmidrule(r){1-2}
+Animal    & Description &   \\
+\midrule
+\multirow{2}{*}{Gnat}      & per gram    & 13.65      \\
+          &    each     & 0.01       \\
+Gnu       & stuffed     & 92.50      \\
+Emu       & stuffed     & 33.33      \\
+Armadillo & frozen      & 8.99       \\
+\bottomrule
+\end{tabular}
+\caption{Some table }
+\label{tab:sample table}
+\end{table}
+
+
+\begin{table}[htp]
+    \centering
+    \begin{subtable}[htp]{0.5\textwidth}
+        \centering
+        \begin{tabular}{lll}
+        \toprule[1.5pt]
+        \textbf{Command} & \textbf{Declaration} & \textbf{Output}\\
+        \midrule
+        \verb|\textnormal| &\verb|\normalfont| & Example text\\
+        \verb|\textrm| & \verb|\rmfamily| & \rmfamily Example text\\
+        \verb|\textsf| & \verb|\sffamily| & \sffamily Example text\\
+        \verb|\texttt| &\verb|\ttfamily| & \ttfamily Example text\\
+        \verb|\textit| &\verb|\itshape| & \itshape Example text\\
+        \verb|\textsl| &\verb|\slshape| & \slshape Example text\\
+        \verb|\textsc| &\verb|\scshape| & \scshape Example text\\
+        \verb|\textbf| &\verb|\bfseries| & \bfseries Example text\\
+        \verb|\textmd| &\verb|\mdseries| & \mdseries Example text\\
+        % \verb|\textlf| &\verb|\lfseries| & \lfseries Example text\\
+        \bottomrule[1.5pt]
+        \end{tabular}
+      \caption{First Subtable}
+      \label{tab:subtable-a}
+    \end{subtable}
+    
+    \begin{subtable}[htp]{\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{lrrrc}
+        \toprule[1.5pt]
+        \textbf{Command} & \textbf{Declaration} & \textbf{Output}\\
+        \midrule
+        Command       & [10pt]  & [11pt]  & [12pt]  & Sample \\
+        \verb|\tiny|         &  5      &  6      &  6      & {\tiny Example Text} \\
+        \verb|\scriptsize|   &  7      &  8      &  8      & {\scriptsize Example Text} \\
+        \verb|\footnotesize| &  8      &  9      &  10     & {\footnotesize Example Text} \\
+        \verb|\small|        &  9      &  10     &  10.95  & {\small Example Text} \\
+        \verb|\normalsize|   &  10     &  10.95  &  12     & {\normalsize Example Text} \\
+        \verb|\large|        &  12     &  12     &  14.4   & {\large Example Text} \\
+        \verb|\Large|        &  14.4   &  14.4   &  17.28  & {\Large Example Text} \\
+        \verb|\LARGE|        &  17.28  &  17.28  &  20.74  & {\LARGE Example Text} \\
+        \verb|\huge|         &  20.74  &  20.74  &  24.88  & {\huge Example Text} \\
+        \verb|\Huge|         &  24.88  &  24.88  &  24.88  & {\Huge Example Text} \\
+        \bottomrule[1.5pt]
+        \end{tabular}
+        \caption{Second Subtable}
+        \label{tab:subtable-b}
+    \end{subtable}
+      \caption{Sample Subtables}
+      \label{tab:subtable}
+\end{table}
+
+% subsection sample_tables (end)
+
+\end{document}
