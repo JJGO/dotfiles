@@ -6,23 +6,31 @@ import sys
 from shutil import copyfile
 
 TEMPLATE_NAME = 'report.tex'
+TEMPLATE_NAME_LUA = 'report.lua.tex'
 INCLUDES_FOLDER = 'latex_includes'
+LUALATEX = False
+
 
 def latex_init(name, files, includes_dir, cwd):
     name = name + '.tex'
 
-    with open(os.path.join(includes_dir, TEMPLATE_NAME), 'r') as f:
+    template_name = TEMPLATE_NAME if not LUALATEX else TEMPLATE_NAME_LUA
+
+    with open(os.path.join(includes_dir, template_name), 'r') as f:
         template = f.read()
-        template = template.replace(TEMPLATE_NAME, name)
+        template = template.replace(template_name, name)
         head, tail = template.split(r'\input{_core.tex}')
 
     files = ['_core.tex'] + files
-
 
     for file in files:
         if not os.path.isfile(os.path.join(includes_dir, file)):
             print('File {0} not found in {1}'.format(file, includes_dir))
             sys.exit(1)
+
+    if '_minted.tex' in files:
+        head = '%!TEX options = -shell-escape\n' + head
+        head += r'\usepackage{shellesc}' + '\n'
 
     for file in files:
         head += '\\input{{{0}}}\n'.format(file)
@@ -36,22 +44,30 @@ def latex_init(name, files, includes_dir, cwd):
 
         print('Copied {0}'.format(file))
 
+    
+
     with open(os.path.join(cwd, name), 'w') as f:
         print(head+tail, file=f)
         print('Copied {0}'.format(name))
 
+
 if __name__ == '__main__':
-    if sys.argv[1] in ['-h', '--help']:
+    args = sys.argv
+    if args[1] in ['-h', '--help']:
         print('latex-init copies tex templates in ~/bin/latex_includes to pwd')
         print('Usage is as follows:')
-        print('    latex-init <name> [<includes>...]')
+        print('    latex-init [-l | --lua] <name> [<includes>...]')
         sys.exit(0)
 
-    if len(sys.argv) < 2:
+    if args[1] in ['-l', '--lua']:
+        args = args[1:]
+        LUALATEX = True
+
+    if len(args) < 2:
         name = TEMPLATE_NAME
     else:
-        name = sys.argv[1]
-    files = ['_{0}.tex'.format(a) for a in sys.argv[2:]]
+        name = args[1]
+    files = ['_{0}.tex'.format(a) for a in args[2:]]
     dir_path = os.path.dirname(os.path.realpath(__file__))
     dir_path = os.path.join(dir_path, INCLUDES_FOLDER)
     cwd = os.getcwd()
