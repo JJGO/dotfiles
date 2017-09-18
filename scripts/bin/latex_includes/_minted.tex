@@ -1,3 +1,11 @@
+%!TEX root = report.tex
+%% Jose Javier Gonzalez Ortiz %%
+%% Code Minting Configuration %%
+%% 2017-09-18                 %%
+
+% You need to add  the following line to the VERY top of your main file for LaTeX to find pygments
+%!TEX options = -shell-escape
+
 \usepackage[outputdir=aux, newfloat]{minted}
 \usepackage{inconsolata} % For using the inconsolata font in tt
 
@@ -8,10 +16,12 @@
 \AfterEndEnvironment{minted}{\vspace{.25cm}}
 
 \newenvironment{code}{\captionsetup{type=listing}}{}
-\SetupFloatingEnvironment{listing}{name=Code}
+\SetupFloatingEnvironment{listing}{name=Listing}
 
 
 \addto\captionsspanish{%
    \renewcommand{\listingname}{Código} % For Codigo caption (requires caption package)
 }
 % \setminted[numpy]{linenos, numberblanklines=false}
+
+\setminted{linenos, numberblanklines=false, fontsize=\footnotesize,breaklines=true}
