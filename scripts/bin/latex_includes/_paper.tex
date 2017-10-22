@@ -1,4 +1,4 @@
-%!TEX root = report.tex
+%!TEX root = ML_HW2.tex
 %% Jose Javier Gonzalez Ortiz  %%
 %% Paper article Configuration %%
 %% 2016-07-07                  %%
@@ -11,7 +11,40 @@
 \usepackage{multicol} % For multiple column documents
 \usepackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
 
+\newgeometry{hmarginratio=1:1,top=15mm,bottom=25mm,columnsep=20pt, left=15mm}
+
 %%%%% Abstract %%%%%
 \usepackage{abstract} % Allows abstract customization
     \renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
     \renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+% \usepackage[small,labelfont=bf,up,textfont=up,skip=2pt]{caption} % Custom captions under/above floats in tables or figures
+
+\usepackage{enumitem} % Customized lists
+\setlist[itemize]{noitemsep} % Make itemize lists more compact
+
+\usepackage{titlesec} % Allows customization of titles
+% \renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+% \renewcommand\thesubsection{\roman{subsection}} % roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+ % Trucos para reducir espacio
+% \linespread{0.95}
+% \setlength{\belowcaptionskip}{1pt}
+% \setlength{\abovecaptionskip}{5pt}
+% \setlength{\dbltextfloatsep}{5pt}
+
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{\baselineskip}{0.7\baselineskip}
+\titlespacing*{\subsection}{0pt}{\baselineskip}{0.7\baselineskip}
+
+\usepackage{titling} % Customizing the title section
+% \setlength{\droptitle}{-4\baselineskip} % Move the title up
+
+\pretitle{\begin{center}\Huge\bfseries} % Article title formatting
+\posttitle{\end{center}} % Article title closing formatting
+\title{\Large \HWTitle \\ \HWSubtitle} % Article title
+\author{\textsc{\HWAuthorName}}
+% \date{\vspace{-1cm}}
+\date{\vspace{0cm}}
