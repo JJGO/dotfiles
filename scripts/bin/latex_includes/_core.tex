@@ -42,6 +42,7 @@
 \usepackage{amssymb} % Math Symbols
 \usepackage{amsfonts} % Math Fonts
 \usepackage{upgreek} % Nice sigma => \upsigma
+\usepackage{bbm} % Extra mathbb fonts
 \usepackage{array} % Enables array features
 \usepackage[binary-units=true, per-mode=symbol]{siunitx} % For SI Unit easy formatting
 \sisetup{detect-all}
@@ -51,6 +52,7 @@
 \usepackage{float} % % Required for tables and figures in the multi-column environment - they need to be placed in specific locations with the [H] (e.g. \begin{table}[H])
 \usepackage{wrapfig} % Al­lows fig­ures or ta­bles to have text wrapped around them
 \usepackage{rotating} % Allows for sideways figure with twoside recognition
+\usepackage{adjustbox} % sev­eral macros to ad­just boxed con­tent
 
 % =============== Tables ===============
 \usepackage{booktabs} % Horizontal rules in tables
@@ -58,6 +60,7 @@
 \usepackage{multicol} % Combined columns in tables
 \usepackage{colortbl} % Color cells
 \usepackage{longtable} % Tables than span multipages
+\newcommand{\bftab}{\fontseries{b}\selectfont} % Command to bold one cell in a table
 
 % ============ Bibliography ============
 \usepackage{csquotes}% Recommended package for biblatex
@@ -89,6 +92,7 @@
 
 \usepackage{pdfpages} % Insert pdfs
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{blindtext} % Package to generate dummy text throughout this template
 \usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
 \usepackage{pdflscape} % Individual horizontal pages
 %\usepackage[space]{grffile} % insert files with spaces
@@ -96,11 +100,11 @@
 %\usepackage{fix-cm} % Computer-Modern at arbitrarysizes
 \usepackage{eurosym} % Eurosymbol
 %\usepackage{watermark} % To use display water marks in the document
-
 %%%%%%%%%%%%
 % CAPTIONS %
 %%%%%%%%%%%%
 \usepackage[hang, small,labelfont=bf,up]{caption} % Custom captions under/above floats in tables or figures
+% \usepackage[small,labelfont=bf,up,textfont=up,skip=2pt]{caption} % Custom captions under/above floats in tables or figures
 \usepackage{subcaption} % For custom caption environments
     % \numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
     % \numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
