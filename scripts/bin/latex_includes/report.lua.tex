@@ -7,13 +7,6 @@
 % =========== LuaLaTeX specific =============
 \usepackage{fontspec}         % all different fonts
 
-\input{_core.tex}
-
-\setmainfont{Arial}
-
-\addbibresource{mybib.bib}
-
-% Global variables
   \newcommand{\HWTitle}{Sample Report}
   \newcommand{\HWSubtitle}{Sample Course}
   \newcommand{\HWDueDate}{\today}
@@ -21,6 +14,14 @@
   \title{\HWTitle \\ \vspace{.25cm}}
   \date{\HWDueDate}
   \author{\HWAuthorName}
+
+\input{_core.tex}
+
+\setmainfont{Arial}
+
+\addbibresource{mybib.bib}
+
+% Global variables
 
 \begin{document}
 \maketitle
