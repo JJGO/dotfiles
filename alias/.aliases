@@ -1,5 +1,6 @@
 alias ga='git add'
 alias gs='git status'
+alias gu='git pull'
 alias ts='tig status'
 alias gg='git graph'
 
