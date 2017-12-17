@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # Setup.
-VERSION="0.0.1"
+VERSION="0.2.3"
 
 version() {
 	printf "git-fire version %s\n" "$VERSION"
@@ -48,9 +48,11 @@ fire() {
 		git push --set-upstream "${remote}" "$(current_branch)" || true
 	done
 
-	for sha in $(git rev-list -g stash); do
-		git push origin "$sha":refs/heads/"$(current_branch $initial_branch)"-stash-"$sha"
-	done
+  if [[ $(git stash list) != '' ]]; then
+	  for sha in $(git rev-list -g stash); do
+		  git push origin "$sha":refs/heads/"$(current_branch $initial_branch)"-stash-"$sha"
+	  done
+  fi
 
 	printf "\n\nLeave building!\n"
 }
