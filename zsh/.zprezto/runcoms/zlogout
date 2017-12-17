@@ -6,8 +6,9 @@
 #
 
 # Print the message.
-cowsay <<-EOF
 
-Thank you. Come again!
-  -- Dr. Apu Nahasapeemapetilon
-EOF
+if command -V figlet > /dev/null; then
+    figlet -f slant "See You Space Cowboy..."
+else
+    echo "See You Space Cowboy..."
+fi
