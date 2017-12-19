@@ -7,7 +7,7 @@
 # Dont link DS_Store files
 find . -name ".DS_Store" -exec rm {} \;
 
-PROGRAMS=(bash env git latex mackup python scripts ssh stow tmux tmuxinator unison vim zsh)
+PROGRAMS=(alias bash env git latex mackup python scripts ssh stow tmux tmuxinator unison vim zsh)
 
 # Clean common conflicts
 if [ -f ~/.bash_profile ];
