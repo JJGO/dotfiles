@@ -4,6 +4,9 @@ alias gu='git pull'
 alias ts='tig status'
 alias gg='git graph'
 
+alias hgrep='history -n 1 | grep'
+alias rsub='rmate'
+
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 alias matlabc='matlab -nodesktop -nosplash'
 alias jc="jupyter nbconvert"
@@ -47,7 +50,7 @@ case "$(uname -s)" in
    Darwin)
      # echo 'Mac OS X'
      alias sed='gsed'
-     
+
      alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome &"
      alias chromec="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary &"
 
