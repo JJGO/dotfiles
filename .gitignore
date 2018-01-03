@@ -5,3 +5,4 @@ k/
 imgur-album-downloader/
 ssh/.ssh/known_hosts
 ssh/.ssh/known_hosts2
+.secret-aliases
