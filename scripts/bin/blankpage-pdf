@@ -1,5 +1,4 @@
-﻿#!/usr/bin/env python
-# python merge_pdfs.py <folder> <output_file> [<pages_per_printed_page>]
+#!/usr/bin/env python
 
 """Merge pdfs in a folder
 
@@ -21,7 +20,7 @@ Options:
 
 """
 
-import sys, os, glob
+import glob
 
 try:
     from docopt import docopt
@@ -33,8 +32,6 @@ try:
 except:
     raise EnvironmentError("ERROR: Missing PyPDF2 try running \n\tsudo pip install PyPDF2")
 
-
-
 if __name__ == '__main__':
     arguments = docopt(__doc__)
     output_file = arguments['-o'] if arguments['-o'] else 'merged.pdf'
@@ -44,10 +41,10 @@ if __name__ == '__main__':
 
     output = PdfFileWriter()
     for filename in files:
-        input = PdfFileReader(open(filename,'rb'))
+        input = PdfFileReader(open(filename, 'rb'))
         N = input.getNumPages()
         whitePages = (alingment - N % alingment) % alingment
-        print("Processing %s : %d Pages and %d Whitepages" % (filename,N,whitePages)) if arguments['--verbose'] else None
+        print("Processing %s : %d Pages and %d Whitepages" % (filename, N, whitePages)) if arguments['--verbose'] else None
         for p in [input.getPage(i) for i in range(N)]:
             output.addPage(p)
         for _ in range(whitePages):
