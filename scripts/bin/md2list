@@ -1,0 +1,58 @@
+#!/usr/bin/env python
+
+import subprocess
+import pathlib
+import argparse
+import shutil
+
+TEMPLATE_FILE = pathlib.Path.home() / "bin/latex_includes/checklist_template.tex"
+INCLUDE_FILE = 'rawlist.tex'
+
+parser = argparse.ArgumentParser(description='Convert Markdown files into PDF checklists')
+
+parser.add_argument('-o', dest='dst', default=None, help='Output folder')
+parser.add_argument('-t', dest='template_file', default=TEMPLATE_FILE, help='Template Latex File')
+parser.add_argument('--aux', dest='aux_folder', default='/tmp/md2list_aux', help='Auxiliary Folder')
+parser.add_argument(dest='src',  nargs='+', help='Input md file[s]')
+
+
+aux_folder = None
+template_file = None
+
+
+def md_to_pdf(src_file, dst_file):
+    ascii_file = aux_folder / src_file.name
+    tex_file = aux_folder / INCLUDE_FILE
+    print(f"Processing {src_file}")
+    with open(ascii_file, 'w') as fp:
+        subprocess.call(['iconv', '-f', 'UTF-8', '-t', 'US-ASCII', '-c', src_file.absolute()], stdout=fp)
+    subprocess.call(['pandoc', '-f', 'markdown', '-t', 'latex', ascii_file.absolute(), '-o', tex_file.absolute()])
+    subprocess.call(['/Library/TeX/texbin/pdflatex', '-output-directory', aux_folder.absolute(), template_file.absolute()], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.call(['mv', template_file.with_suffix('.pdf'), dst_file.absolute()])
+    return True
+
+
+if __name__ == '__main__':
+
+    args = parser.parse_args()
+
+    aux_folder = pathlib.Path(args.aux_folder)
+    aux_folder.mkdir(parents=True, exist_ok=True)
+
+    template_file = pathlib.Path(args.template_file)
+    shutil.copy(template_file, aux_folder)
+    template_file = aux_folder / template_file.name
+
+    dst = args.dst
+
+    if dst is not None:
+        dst = pathlib.Path(dst)
+        dst.mkdir(parents=True, exist_ok=True)
+
+    for src_file in args.src:
+        src_file = pathlib.Path(src_file)
+        if dst is None:
+            dst_file = src_file.with_suffix('.pdf')
+        else:
+            dst_file = dst / src_file.with_suffix('.pdf').name
+        md_to_pdf(src_file, dst_file)
