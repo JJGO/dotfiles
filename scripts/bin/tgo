@@ -1,0 +1,91 @@
+#!/usr/bin/env python
+
+
+import argparse
+import datetime
+import os
+import pathlib
+import subprocess
+import time
+from tqdm import tqdm
+
+parser = argparse.ArgumentParser(description='Run DSE go tests in parallel')
+
+parser.add_argument('-o', dest='out', default='logs', help='Output path to use for logs')
+parser.add_argument('-v', dest='verbose', action='store_true', default=False, help='Verbose mode')
+parser.add_argument('-P', dest='num_workers', type=int, default=1, help='Number of parallel tests')
+parser.add_argument('-n', dest='iter', default=100, type=int, help='Number of iterations to run')
+parser.add_argument(dest='tests', nargs='*', default=None, help="Test(s) to run")
+
+
+class color:
+    MAGENTA     = '\033[95m'
+    CYAN        = '\033[96m'
+    DARKCYAN    = '\033[36m'
+    BLUE        = '\033[94m'
+    GREEN       = '\033[92m'
+    ORANGE      = '\033[93m'
+    RED         = '\033[91m'
+    BOLD        = '\033[1m'
+    UNDERLINE   = '\033[4m'
+    END         = '\033[0m'
+
+
+if __name__ == '__main__':
+    args = parser.parse_args()
+    start = time.time()
+    N = args.iter
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    out = pathlib.Path(args.out) / timestamp
+    max_processes = args.num_workers
+    print(color.MAGENTA + f"Saving logs to {out}" + color.END)
+
+    for test in args.tests:
+
+        failed = []
+        print(f"Running test {color.BOLD} {test} for {N} iterations with {max_processes} workers" + color.END)
+
+        testpath = out / test
+        testpath.mkdir(parents=True, exist_ok=True)
+        processes = set()
+        completed = 0
+        assigned = 0
+
+        with tqdm(total=N) as pbar:
+
+            while completed < N:
+
+                if assigned < N:
+                    with open(testpath / f"{assigned}.txt", 'w') as f:
+                        p = subprocess.Popen(['go', 'test', f'-run={test}'], stdout=f, stderr=f)
+                        processes.add((assigned, p))
+                        assigned += 1
+
+                if len(processes) >= max_processes or assigned == N:
+                    os.wait()
+
+                for i, p in frozenset(processes):
+                    if p.poll() is not None:
+                        err = p.returncode
+                        completed += 1
+                        processes.remove((i, p))
+                        pbar.update(1)
+                        if err != 0:
+                            failed.append(i)
+                            if args.verbose:
+                                print(color.ORANGE + f"Test {test} failed at iteration {i} with code {err}" + color.END)
+                        # else:
+                        #     if args.verbose:
+                        #         print(color.CYAN + f"Test {test} succeded at iteration {i} with code {err}" + color.END)
+
+        fail = len(failed)
+        if fail == 0:
+            print(color.GREEN + f"Test {test} PASSED consistently!" + color.END)
+        else:
+            print(color.RED + f"Test {test} FAILED {fail}/{N} times" + color.END)
+            with open(testpath / "failed.txt", 'w') as f:
+                f.writelines([f"{i}.txt\n" for i in sorted(failed)])
+
+    m = len(args.tests)
+    totaltime = time.time() - start
+    print(color.BOLD + f"Completed {m} tests in {totaltime:.2f} seconds" + color.END)
