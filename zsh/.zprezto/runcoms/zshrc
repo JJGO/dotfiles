@@ -20,6 +20,12 @@ if [ -f ~/.secret-aliases ]; then
     source ~/.secret-aliases
 fi
 
+# TMP ALIASES
+if [ -f ~/.tmp-aliases ]; then
+    source ~/.tmp-aliases
+fi
+
+
 # Tmuxinator completions
 if [ -f ~/.bin/tmuxinator.zsh ]; then
     source ~/.bin/tmuxinator.zsh
