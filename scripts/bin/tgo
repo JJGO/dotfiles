@@ -13,6 +13,7 @@ parser = argparse.ArgumentParser(description='Run DSE go tests in parallel')
 
 parser.add_argument('-o', dest='out', default='logs', help='Output path to use for logs')
 parser.add_argument('-v', dest='verbose', action='store_true', default=False, help='Verbose mode')
+parser.add_argument('-r', dest='race', action='store_true', default=False, help='Check for race conditions')
 parser.add_argument('-P', dest='num_workers', type=int, default=1, help='Number of parallel tests')
 parser.add_argument('-n', dest='iter', default=100, type=int, help='Number of iterations to run')
 parser.add_argument(dest='tests', nargs='*', default=None, help="Test(s) to run")
@@ -47,36 +48,37 @@ if __name__ == '__main__':
 
         testpath = out / test
         testpath.mkdir(parents=True, exist_ok=True)
-        processes = set()
-        completed = 0
+
         assigned = 0
+        failed = []
 
         with tqdm(total=N) as pbar:
 
-            while completed < N:
+            while assigned < N:
 
-                if assigned < N:
-                    with open(testpath / f"{assigned}.txt", 'w') as f:
-                        p = subprocess.Popen(['go', 'test', f'-run={test}'], stdout=f, stderr=f)
-                        processes.add((assigned, p))
-                        assigned += 1
+                processes = []
 
-                if len(processes) >= max_processes or assigned == N:
-                    os.wait()
+                for j in range(assigned, min(assigned+max_processes, N)):
+                    with open(testpath / f"{j}.txt", 'w') as f:
+                        test_cmd = ['go', 'test', f'-run={test}']
+                        if args.race:
+                            test_cmd.append('-race')
 
-                for i, p in frozenset(processes):
-                    if p.poll() is not None:
-                        err = p.returncode
-                        completed += 1
-                        processes.remove((i, p))
-                        pbar.update(1)
-                        if err != 0:
-                            failed.append(i)
-                            if args.verbose:
-                                print(color.ORANGE + f"Test {test} failed at iteration {i} with code {err}" + color.END)
-                        # else:
-                        #     if args.verbose:
-                        #         print(color.CYAN + f"Test {test} succeded at iteration {i} with code {err}" + color.END)
+                        p = subprocess.Popen(test_cmd, stdout=f, stderr=f)
+                    processes.append((j, p))
+
+                assigned += len(processes)
+
+                [p.wait() for j, p in processes]
+
+                failed_now = [j for j, p in processes if p.returncode != 0]
+                failed.extend(failed_now)
+
+                if args.verbose:
+                    for j in failed_now:
+                        print(color.ORANGE + f"Test {test} failed at iteration {j}" + color.END)
+
+                pbar.update(len(processes))
 
         fail = len(failed)
         if fail == 0:
