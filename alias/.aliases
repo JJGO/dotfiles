@@ -4,8 +4,6 @@ alias gu='git pull'
 alias ts='tig status'
 alias gg='git graph'
 
-alias v='vim'
-
 alias hgrep='history -n 1 | grep'
 alias rsub='rmate'
 
