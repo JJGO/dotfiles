@@ -36,4 +36,9 @@ for program in ${PROGRAMS[@]}; do
   echo "Configuring $program"
 done
 
+
+echo "Configuring Crotabs..."
+
+sudo crontab -u $USER $HOME/.cron/crontab
+
 echo "Done!"
