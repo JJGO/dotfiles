@@ -20,6 +20,7 @@ alias yt="youtube-dl"
 alias yta="youtube-dl --extract-audio --audio-format mp3"
 alias doc2pdf="soffice --headless --convert-to pdf"
 alias ppt2pdf="soffice --headless --convert-to pdf"
+alias grepc="grep -P --color=always" #Color grep
 
 alias loco="/usr/local/bin/sl"
 alias dc="cd"
@@ -27,7 +28,76 @@ alias crontab="VIM_CRONTAB=true crontab"
 
 alias ghostscript="/usr/local/bin/gs"
 
+# For remote sublime text
+if ! command -v subl > /dev/null; then
+    alias subl="rmate"
+fi
+
+
+# SECRET ALIASES
+if [ -f ~/.secret-aliases ]; then
+    source ~/.secret-aliases
+fi
+
+# TMP ALIASES (for local stuff)
+if [ -f ~/.tmp-aliases ]; then
+    source ~/.tmp-aliases
+fi
+
+
 # Functions
+
+# fzf
+if command -v fzf > /dev/null; then
+
+  function fzf-history() {
+      local tac
+      if which tac > /dev/null; then
+          tac="tac"
+      else
+          tac="tail -r"
+      fi
+      BUFFER=$(\history -n 1 | fzf)
+      CURSOR=$#BUFFER
+  }
+  zle -N fzf-history
+  bindkey '^r' fzf-history
+
+  fh() {
+    print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+  }
+
+  # fkill - kill process
+  fkill() {
+    local pid
+    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+
+    if [ "x$pid" != "x" ]
+    then
+      echo $pid | xargs kill -${1:-9}
+    fi
+  }
+
+  v() {
+    local file
+    file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vi "${file}" || return 1
+  }
+
+  #less on fuzzy find
+  fl() {
+    less $(fzf)
+  }
+
+fi
+
+# Comment below if not fzf and fasd
+unalias z
+# fasd & fzf change directory - jump using `fasd` if given argument, filter output of `fasd` using `fzf` else'
+z() {
+  [ $# -gt 0 ] && fasd_cd -d "$*" && return
+  local dir
+  dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+}
 
 # Rename iterm Windows
 # $1 = type; 0 - both, 1 - tab, 2 - title
@@ -88,3 +158,5 @@ case $SHELL in
 *)
    # assume something else
 esac
+
+
