@@ -6,25 +6,22 @@ import datetime
 
 import os
 import pathlib
+import re
 import signal
 import subprocess
 import sys
 import time
-from tqdm import tqdm
+from multiprocessing import Pool, Value
 from shutil import copyfile
+from tqdm import tqdm
 
-VERBOSE_FILES = ['test_test.go', 'util.go']
-RANDOM_INSERT_LINE = 22
-RANDOM_SEED_LINE = "rand.Seed(time.Now().UTC().UnixNano())\n"
-BACKUP_EXT = '.bk'
-VERBOSE_EXT = '.vb'
 
 parser = argparse.ArgumentParser(description='Run DSE go tests in parallel')
 
 parser.add_argument('-o', '--output',  dest='out', default='logs', help='Output path to use for logs')
-parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', default=False, help='Verbose mode')
+parser.add_argument('-v', '--verbose', dest='verbose', action='count', default=0, help='Verbose mode')
+parser.add_argument('-c', '--cont', dest='continuous', action='store_true', default=False, help='Enable continuous mode (batched by default)')
 parser.add_argument('-r', '--race',    dest='race', action='store_true', default=False, help='Check for race conditions')
-parser.add_argument('-R', '--random',  dest='random', action='store_true', default=False, help='Run tests randomized')
 parser.add_argument('-a', '--archive',    dest='archive', action='store_true', default=False, help='Enable archive mode, where all logs are saved')
 parser.add_argument('-l', '--loop',    dest='loop', action='store_true', default=False, help='Loop the testing forever')
 parser.add_argument('-g', '--growth', dest='growth', type=int, default=1, help='Growth ratio of iterations/epoch')
@@ -39,6 +36,7 @@ class color:
     DARKCYAN    = '\033[36m'
     BLUE        = '\033[94m'
     GREEN       = '\033[92m'
+    GRASS       = '\033[32m'
     ORANGE      = '\033[93m'
     YELLOW      = '\033[33m'
     RED         = '\033[91m'
@@ -47,22 +45,49 @@ class color:
     UNDERLINE   = '\033[4m'
     END         = '\033[0m'
 
-verbose = False
+verbose = 0
+util_file = None
+VERBOSE_FILE = 'util.go'
+exit = Value('i', 0)
 
-
-def restore_files():
-    print(color.GREEN+'Restoring files'+color.END)
-    for file in VERBOSE_FILES:
-        copyfile(file+BACKUP_EXT, file)
-        # os.remove(file+BACKUP_EXT)
-
+def set_level(level):
+    vfile = re.sub(r"Debug = \d", f"Debug = {level}", util_file)
+    with open(VERBOSE_FILE, 'w') as f:
+        print(vfile, file=f)
 
 def signal_handler(signal, frame):
-    print(color.RED+'Killed In Action'+color.END)
-    if verbose:
-        restore_files()
+    with exit.get_lock():
+        if exit.value == 0:
+            exit.value = 1
+            print(color.RED+'Killed In Action'+color.END)
+            # if verbose > 0:
+                # set_level(0)
+                # print(color.GRASS+'Restoring util.go'+color.END)
     sys.exit(1)
 
+
+def run_test(test, j, testpath, race=False):
+    with open(testpath / f"{j}.txt", 'w') as f:
+        test_cmd = ['go', 'test', f'-run={test}']
+        if race:
+            test_cmd.append('-race')
+
+        p = subprocess.Popen(test_cmd, stdout=f, stderr=f)
+        return j, p
+
+def p_run_test(args):
+    j, p = run_test(*args)
+    p.wait()
+    return j, p.returncode
+
+
+def post_run_test(test, j, rc, failed, testpath, archive=False):
+    if not archive and rc == 0:
+        os.remove(testpath / f"{j}.txt")
+
+    if rc != 0:
+        failed.append(j)
+        print(color.ORANGE + f"Test {test} failed at iteration {j}" + color.END)
 
 if __name__ == '__main__':
     signal.signal(signal.SIGINT, signal_handler)
@@ -71,20 +96,11 @@ if __name__ == '__main__':
     N = args.iter
 
     verbose = args.verbose
-    if verbose:
-        for file in VERBOSE_FILES:
-            copyfile(file, file+BACKUP_EXT)
-
-        for file in VERBOSE_FILES:
-            copyfile(file+VERBOSE_EXT, file)
-
-    if args.random:
-        print(color.YELLOW+"Setting Time Based Random Seed"+color.END)
-        with open("test_test.go", 'r') as f:
-            lines = f.readlines()
-        with open("test_test.go", 'w') as f:
-            lines = lines[:RANDOM_INSERT_LINE]+[RANDOM_SEED_LINE]+lines[RANDOM_INSERT_LINE:]
-            print("".join(lines), file=f)
+    if verbose > 0:
+        print(color.YELLOW+f'Verbose Level: {verbose}'+color.END)
+        with open(VERBOSE_FILE, 'r') as f:
+            util_file = f.read()
+        set_level(verbose)
 
     while True:
         start = time.time()
@@ -100,44 +116,30 @@ if __name__ == '__main__':
             testpath = out / test
             testpath.mkdir(parents=True, exist_ok=True)
 
-            assigned = 0
             failed = []
 
-            with tqdm(total=N) as pbar:
+            if not args.continuous:
+                with tqdm(total=N) as pbar:
+                    assigned = 0
+                    while assigned < N:
 
-                while assigned < N:
+                        to_assign = range(assigned, min(assigned+max_processes, N))
+                        processes = [run_test(test, j, testpath, args.race) for j in to_assign]
+                        assigned += len(processes)
 
-                    processes = []
-
-                    for j in range(assigned, min(assigned+max_processes, N)):
-                        with open(testpath / f"{j}.txt", 'w') as f:
-                            test_cmd = ['go', 'test', f'-run={test}']
-                            if args.race:
-                                test_cmd.append('-race')
-
-                            p = subprocess.Popen(test_cmd, stdout=f, stderr=f)
-                        processes.append((j, p))
-
-                    assigned += len(processes)
-
-                    [p.wait() for j, p in processes]
-
-                    failed_now = [j for j, p in processes if p.returncode != 0]
-                    failed.extend(failed_now)
-
-                    if not args.archive:
                         for j, p in processes:
-                            if j not in failed_now:
-                                os.remove(testpath / f"{j}.txt")
+                            p.wait()
+                            post_run_test(test, j, p.returncode, failed, testpath, args.archive)
 
-                    for j in failed_now:
-                        print(color.ORANGE + f"Test {test} failed at iteration {j}" + color.END)
+                        pbar.update(len(processes))
 
-                    pbar.update(len(processes))
 
-                    if len(failed) > 0:
-                        with open(testpath / "failed.txt", 'w') as f:
-                            f.writelines([f"{i}.txt\n" for i in sorted(failed)])
+            else:
+                with Pool(processes=args.num_workers) as pool:
+                    params = [ (test, i, testpath, args.race) for i in range(N) ]
+                    for j, rc in tqdm(pool.imap_unordered(p_run_test, params), total=N):
+                        post_run_test(test, j, rc, failed, testpath, args.archive)
+
 
             fail = len(failed)
             if fail == 0:
@@ -146,6 +148,8 @@ if __name__ == '__main__':
                     os.rmdir(testpath)
             else:
                 print(color.RED + f"Test {test} FAILED {fail}/{N} times" + color.END)
+                with open(testpath / "failed.txt", 'w') as f:
+                    f.writelines([f"{i}.txt\n" for i in sorted(failed)])
 
         m = len(args.tests)
         totaltime = time.time() - start
@@ -153,8 +157,11 @@ if __name__ == '__main__':
 
         if not args.loop:
             break
-        N *= args.growth
-        print(color.CYAN + color.BOLD + f"\nIncreasing iterations to {N}" + color.END)
+        if args.growth > 1:
+            N *= args.growth
+            print(color.CYAN + color.BOLD + f"Increasing iterations to {N}" + color.END)
+        print()
 
-    if verbose:
-        restore_files()
+    # if verbose > 0:
+        # set_level(0)
+        # print(color.GRASS+'Restoring util.go'+color.END)
