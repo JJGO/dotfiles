@@ -20,11 +20,11 @@ parser = argparse.ArgumentParser(description='Run DSE go tests in parallel')
 
 parser.add_argument('-o', '--output',  dest='out', default='logs', help='Output path to use for logs')
 parser.add_argument('-v', '--verbose', dest='verbose', action='count', default=0, help='Verbose mode')
-parser.add_argument('-c', '--cont', dest='continuous', action='store_true', default=False, help='Enable continuous mode (batched by default)')
+parser.add_argument('-c', '--cont',    dest='continuous', action='store_true', default=False, help='Enable continuous mode (batched by default)')
 parser.add_argument('-r', '--race',    dest='race', action='store_true', default=False, help='Check for race conditions')
-parser.add_argument('-a', '--archive',    dest='archive', action='store_true', default=False, help='Enable archive mode, where all logs are saved')
+parser.add_argument('-a', '--archive', dest='archive', action='store_true', default=False, help='Enable archive mode, where all logs are saved')
 parser.add_argument('-l', '--loop',    dest='loop', action='store_true', default=False, help='Loop the testing forever')
-parser.add_argument('-g', '--growth', dest='growth', type=int, default=1, help='Growth ratio of iterations/epoch')
+parser.add_argument('-g', '--growth',  dest='growth', type=int, default=1, help='Growth ratio of iterations/epoch')
 parser.add_argument('-P', '--workers', dest='num_workers', type=int, default=1, help='Number of parallel tests')
 parser.add_argument('-n', '--iter',    dest='iter', default=100, type=int, help='Number of iterations to run')
 parser.add_argument(dest='tests', nargs='*', default=None, help="Test(s) to run")
@@ -45,24 +45,24 @@ class color:
     UNDERLINE   = '\033[4m'
     END         = '\033[0m'
 
+
 verbose = 0
 util_file = None
 VERBOSE_FILE = 'util.go'
 exit = Value('i', 0)
+
 
 def set_level(level):
     vfile = re.sub(r"Debug = \d", f"Debug = {level}", util_file)
     with open(VERBOSE_FILE, 'w') as f:
         print(vfile, file=f)
 
+
 def signal_handler(signal, frame):
     with exit.get_lock():
         if exit.value == 0:
             exit.value = 1
             print(color.RED+'Killed In Action'+color.END)
-            # if verbose > 0:
-                # set_level(0)
-                # print(color.GRASS+'Restoring util.go'+color.END)
     sys.exit(1)
 
 
@@ -74,6 +74,7 @@ def run_test(test, j, testpath, race=False):
 
         p = subprocess.Popen(test_cmd, stdout=f, stderr=f)
         return j, p
+
 
 def p_run_test(args):
     j, p = run_test(*args)
@@ -89,6 +90,7 @@ def post_run_test(test, j, rc, failed, testpath, archive=False):
         failed.append(j)
         print(color.ORANGE + f"Test {test} failed at iteration {j}" + color.END)
 
+
 if __name__ == '__main__':
     signal.signal(signal.SIGINT, signal_handler)
     args = parser.parse_args()
@@ -96,11 +98,11 @@ if __name__ == '__main__':
     N = args.iter
 
     verbose = args.verbose
-    if verbose > 0:
-        print(color.YELLOW+f'Verbose Level: {verbose}'+color.END)
-        with open(VERBOSE_FILE, 'r') as f:
-            util_file = f.read()
-        set_level(verbose)
+    # if verbose > 0:
+    print(color.YELLOW+f'Verbose Level: {verbose}'+color.END)
+    with open(VERBOSE_FILE, 'r') as f:
+        util_file = f.read()
+    set_level(verbose)
 
     while True:
         start = time.time()
@@ -133,13 +135,11 @@ if __name__ == '__main__':
 
                         pbar.update(len(processes))
 
-
             else:
                 with Pool(processes=args.num_workers) as pool:
-                    params = [ (test, i, testpath, args.race) for i in range(N) ]
+                    params = [(test, i, testpath, args.race) for i in range(N)]
                     for j, rc in tqdm(pool.imap_unordered(p_run_test, params), total=N):
                         post_run_test(test, j, rc, failed, testpath, args.archive)
-
 
             fail = len(failed)
             if fail == 0:
@@ -161,7 +161,3 @@ if __name__ == '__main__':
             N *= args.growth
             print(color.CYAN + color.BOLD + f"Increasing iterations to {N}" + color.END)
         print()
-
-    # if verbose > 0:
-        # set_level(0)
-        # print(color.GRASS+'Restoring util.go'+color.END)
