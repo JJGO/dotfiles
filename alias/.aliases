@@ -1,7 +1,7 @@
 alias ga='git add'
 alias gs='git status'
 alias gu='git pull'
-alias ts='tig status'
+alias ts='toggl start'
 alias gg='git graph'
 
 alias hgrep='history -n 1 | grep'
@@ -10,7 +10,8 @@ alias rsub='rmate'
 
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 alias matlabc='matlab -nodesktop -nosplash'
-alias jc="jupyter nbconvert"
+alias jc="jupyter console"
+alias jco="jupyter nbconvert"
 alias jq='jupyter qtconsole --style monokai &'
 alias jn="jupyter notebook"
 alias jn-b="jupyter notebook --no-browser"
@@ -90,14 +91,14 @@ if command -v fzf > /dev/null; then
 
 fi
 
-# Comment below if not fzf and fasd
-unalias z
-# fasd & fzf change directory - jump using `fasd` if given argument, filter output of `fasd` using `fzf` else'
-z() {
-  [ $# -gt 0 ] && fasd_cd -d "$*" && return
-  local dir
-  dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
-}
+# # Comment below if not fzf and fasd
+# unalias z
+# # fasd & fzf change directory - jump using `fasd` if given argument, filter output of `fasd` using `fzf` else'
+# z() {
+#   [ $# -gt 0 ] && fasd_cd -d "$*" && return
+#   local dir
+#   dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+# }
 
 # Rename iterm Windows
 # $1 = type; 0 - both, 1 - tab, 2 - title
