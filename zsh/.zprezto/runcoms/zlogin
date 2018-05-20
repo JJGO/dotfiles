@@ -15,7 +15,8 @@
 } &!
 
 # Display system information
-archey
+# archey
+neofetch --ascii_bold off --colors "\033[94"
 # Print a random, hopefully interesting, adage.
 if (( $+commands[fortune] )); then
   if [[ -t 0 || -t 1 ]]; then
