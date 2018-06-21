@@ -7,7 +7,6 @@ alias gg='git graph'
 alias hgrep='history -n 1 | grep'
 alias rsub='rmate'
 
-
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 alias matlabc='matlab -nodesktop -nosplash'
 alias jc="jupyter console"
@@ -26,6 +25,8 @@ alias grepc="grep -P --color=always" #Color grep
 alias loco="/usr/local/bin/sl"
 alias dc="cd"
 alias crontab="VIM_CRONTAB=true crontab"
+
+alias cat='bat'
 
 alias ghostscript="/usr/local/bin/gs"
 
