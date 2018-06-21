@@ -1,7 +1,8 @@
 # Configuration file for ipython.
 
 c = get_config()
-c.InteractiveShellApp.matplotlib = 'inline'
+c.InteractiveShellApp.exec_lines = ['%load_ext autoreload', '%autoreload 2']
+c.InteractiveShellApp.matplotlib = 'notebook'
 
 c.InteractiveShellApp.exec_lines = [
     'import numpy as np',
@@ -9,9 +10,9 @@ c.InteractiveShellApp.exec_lines = [
     'import matplotlib.pyplot as plt',
     'import scipy',
     'from tqdm import tnrange, tqdm, tqdm_notebook',
-    'from IPython.display import Image',
-    'import sympy as sp',
-    'from sympy import init_printing',
+    # 'from IPython.display import Image',
+    # 'import sympy as sp',
+    # 'from sympy import init_printing',
 ]
 # c.InteractiveShell.editor = 'vim'
 # c.InteractiveShell.autoindent = True
