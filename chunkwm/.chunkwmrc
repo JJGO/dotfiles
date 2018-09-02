@@ -105,6 +105,7 @@ chunkc set window_use_cgs_move           0
 #
 
 chunkc set focused_border_color          0xff0f6288
+# chunkc set focused_border_color          0xffd38200
 chunkc set focused_border_width          5
 chunkc set focused_border_radius         0
 chunkc set focused_border_skip_floating  0
@@ -123,7 +124,7 @@ chunkc set ffm_standby_on_float          1
 
 chunkc core::load border.so
 chunkc core::load tiling.so
-chunkc core::load ffm.soå
+chunkc core::load ffm.so
 
 #
 # NOTE: sample rules for the tiling plugin

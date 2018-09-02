@@ -73,7 +73,8 @@
 cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
 
 # open qutebrowser
-cmd + shift - return : ~/Scripts/qtb.sh
+# cmd + shift - return : ~/Scripts/qtb.sh
+cmd + shift - return :  /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
 
 # close focused window
 alt - w : chunkc tiling::window --close
@@ -103,13 +104,13 @@ shift + cmd - k : chunkc tiling::window --warp north
 shift + cmd - l : chunkc tiling::window --warp east
 
 # make floating window fill screen
-shift + alt - up     : chunkc tiling::window --grid-layout 1:1:0:0:1:1
+# shift + alt - up     : chunkc tiling::window --grid-layout 1:1:0:0:1:1
 
 # make floating window fill left-half of screen
-shift + alt - left   : chunkc tiling::window --grid-layout 1:2:0:0:1:1
+# shift + alt - left   : chunkc tiling::window --grid-layout 1:2:0:0:1:1
 
 # make floating window fill right-half of screen
-shift + alt - right  : chunkc tiling::window --grid-layout 1:2:1:0:1:1
+# shift + alt - right  : chunkc tiling::window --grid-layout 1:2:1:0:1:1
 
 # fast focus desktop
 cmd + alt - x : chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
@@ -141,8 +142,8 @@ shift + cmd - z : chunkc tiling::window --send-to-desktop prev; chunkc tiling::d
 shift + cmd - c : chunkc tiling::window --send-to-desktop next; chunkc tiling::desktop --focus next
 shift + cmd - 1 : chunkc tiling::window --send-to-desktop 1; chunkc tiling::desktop --focus 1
 shift + cmd - 2 : chunkc tiling::window --send-to-desktop 2; chunkc tiling::desktop --focus 2
-shift + cmd - 3 : chunkc tiling::window --send-to-desktop 3; chunkc tiling::desktop --focus 3
-shift + cmd - 4 : chunkc tiling::window --send-to-desktop 4; chunkc tiling::desktop --focus 4
+# shift + cmd - 3 : chunkc tiling::window --send-to-desktop 3; chunkc tiling::desktop --focus 3
+# shift + cmd - 4 : chunkc tiling::window --send-to-desktop 4; chunkc tiling::desktop --focus 4
 shift + cmd - 5 : chunkc tiling::window --send-to-desktop 5; chunkc tiling::desktop --focus 5
 shift + cmd - 6 : chunkc tiling::window --send-to-desktop 6; chunkc tiling::desktop --focus 6
 # shift + cmd - 7 : chunkc tiling::window --send-to-desktop 7; chunkc tiling::desktop --focus 7
