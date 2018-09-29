@@ -30,6 +30,9 @@ alias cat='bat'
 
 alias ghostscript="/usr/local/bin/gs"
 
+alias my-ip="curl ipinfo.io/ip 2> /dev/null"
+alias tb="nc termbin.com 9999"
+
 # For remote sublime text
 if ! command -v subl > /dev/null; then
     alias subl="rmate"
@@ -129,6 +132,8 @@ case "$(uname -s)" in
      alias jackett="mono --debug /Applications/Jackett/JackettConsole.exe"
      alias eject-duralumin="sync-duralumin && diskutil unmount /Volumes/DURALUMIN"
      alias "bu"="brew update && brew outdated | xargs brew upgrade  && brew cleanup -s"
+
+     alias backup-fotos="rclone copy -vc Pictures/Fotos aurora:Fotos "
 
      ;;
 
