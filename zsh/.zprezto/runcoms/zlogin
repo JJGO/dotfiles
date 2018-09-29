@@ -19,7 +19,8 @@ if [ -z $TMUX ]; then
     # Display system information
     # archey
     # neofetch --ascii_bold off # --colors "\033[94"
-    cal -3
+    # cal -3
+    curl "wttr.in/?0Qm&lang=es"
     # Print a random, hopefully interesting, adage.
     if (( $+commands[fortune] )); then
       if [[ -t 0 || -t 1 ]]; then
