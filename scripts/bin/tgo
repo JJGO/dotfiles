@@ -12,7 +12,6 @@ import subprocess
 import sys
 import time
 from multiprocessing import Pool, Value
-from shutil import copyfile
 from tqdm import tqdm
 
 
