@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+
+import subprocess
+import shutil
+import argparse
+import os
+
+devnull = os.devnull
+
+parser = argparse.ArgumentParser(description='Make ToC separate PDFs')
+parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', default=False, help='Verbose mode')
+parser.add_argument('file', help="File to use")
+
+
+class color:
+    MAGENTA     = '\033[95m'
+    CYAN        = '\033[96m'
+    DARKCYAN    = '\033[36m'
+    BLUE        = '\033[94m'
+    GREEN       = '\033[92m'
+    GRASS       = '\033[32m'
+    ORANGE      = '\033[93m'
+    YELLOW      = '\033[33m'
+    RED         = '\033[91m'
+    FADERED     = '\033[31m'
+    BOLD        = '\033[1m'
+    UNDERLINE   = '\033[4m'
+    END         = '\033[0m'
+
+
+if __name__ == '__main__':
+
+    args = parser.parse_args()
+
+    with open(args.file, 'r') as f:
+        s = f.read()
+
+    i = s.index('\\begin{document}')
+    head, tail = s[:i], s[i:]
+
+    lines = tail.split('\n')
+
+    commented_lines = lines[:]
+    input_lines = []
+    for i, l in enumerate(commented_lines):
+        if l.startswith('\\input'):
+            input_lines.append(i)
+            commented_lines[i] = f"% {l}"
+        elif l.startswith("\\newpage") or l.startswith('\\listoftodos'):
+            commented_lines[i] = f"% {l}"
+
+    subprocess.run(['mkdir', '-p', '../submission'])
+
+    for i in input_lines:
+        j = commented_lines[i].index('{')
+        name = commented_lines[i][j+1:-1]
+        print(color.ORANGE+f"Processing file {name}..."+color.END)
+        uncommented_lines = commented_lines[:]
+        uncommented_lines[i] = lines[i]
+
+        tex_file = head + "\n".join(uncommented_lines)
+        with open(f'/tmp/{name}.tex',  'w') as f:
+            print(tex_file, file=f)
+        cmd = ['latexmk', '-pdf', '-shell-escape', '-auxdir=aux', '-outdir=aux', f'/tmp/{name}.tex']
+        if args.verbose:
+            subprocess.run(cmd)
+        else:
+            with open(os.devnull, 'w') as devnull:
+                subprocess.run(cmd, stdout=devnull, stderr=devnull)
+        shutil.move(f'aux/{name}.pdf', f'../submission/jjgo_{name}.pdf')
+
+        print(color.GREEN+f"\rProcessed  file {name}"+color.END)
