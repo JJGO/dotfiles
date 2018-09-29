@@ -1,4 +1,5 @@
 #!/bin/bash
 
-set -x
 source ~/.env
+echo "Every week on $(date)"
+set -x

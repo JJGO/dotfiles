@@ -1,4 +1,7 @@
 #!/bin/bash
 
-set -x
 source ~/.env
+echo "Every five minutes on $(date)"
+set -x
+
+quit-telegram
