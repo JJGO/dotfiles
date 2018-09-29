@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+
+import argparse
+import re
+import pathlib
+import psutil
+import os
+
+DISABLE_FILE = pathlib.Path('/tmp/quit_telegram_disabled')
+
+parser = argparse.ArgumentParser(description='If open, quit telegram')
+parser.add_argument('-d', '--disable', dest='disable', type=str, help='Disable for XhYm', default=None)
+parser.add_argument('-f', '--force', dest='force', action='store_true')
+args = parser.parse_args()
+
+
+def close_telegram():
+    PROCNAME = "Telegram"
+
+    for proc in psutil.process_iter():
+        # check whether the process name matches
+        if proc.name() == PROCNAME:
+            proc.kill()
+
+
+if args.disable is not None:
+    n_periods = 0
+    for interval, size in zip('hm', [12, 0.2]):
+        match = re.search(f"\d+{interval}", args.disable)
+        if match is not None:
+            n_periods += int(match.group()[:-1]) * size
+
+    n_periods = int(n_periods)
+    with open(DISABLE_FILE, 'w') as f:
+        print(str(n_periods), file=f)
+
+else:
+
+    if DISABLE_FILE.exists():
+        with open(DISABLE_FILE, 'r+') as f:
+            n_periods = int(f.read().strip())
+            n_periods -= 1
+            if n_periods > 0 and not args.force:
+                f.seek(0)
+                print(str(n_periods), file=f)
+            else:
+                os.remove(DISABLE_FILE)
+                close_telegram()
+
+    else:
+        close_telegram()
