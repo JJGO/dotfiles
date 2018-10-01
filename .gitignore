@@ -8,3 +8,4 @@ ssh/.ssh/known_hosts2
 .secret-aliases
 python/.matplotlib/fontList.json
 .tmp-aliases
+ssh
