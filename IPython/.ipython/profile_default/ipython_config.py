@@ -10,6 +10,9 @@ c.InteractiveShellApp.exec_lines = [
     'import matplotlib.pyplot as plt',
     'import scipy',
     'from tqdm import tnrange, tqdm, tqdm_notebook',
+    'import h5py',
+    'import pathlib',
+    'import json'
     # 'from IPython.display import Image',
     # 'import sympy as sp',
     # 'from sympy import init_printing',
