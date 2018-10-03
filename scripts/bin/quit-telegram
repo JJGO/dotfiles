@@ -1,51 +1,76 @@
 #!/usr/bin/env python
 
 import argparse
+import datetime
 import re
 import pathlib
 import psutil
-import os
 
 DISABLE_FILE = pathlib.Path('/tmp/quit_telegram_disabled')
 
 parser = argparse.ArgumentParser(description='If open, quit telegram')
-parser.add_argument('-d', '--disable', dest='disable', type=str, help='Disable for XhYm', default=None)
+parser.add_argument('-d', '--disable', dest='disable', type=str, help='Disable for WdXhYmZs', default=None)
 parser.add_argument('-f', '--force', dest='force', action='store_true')
-args = parser.parse_args()
+
+regex = re.compile(r'((?P<days>\d+?)d)?((?P<hours>\d+?)h)?((?P<minutes>\d+?)m)?((?P<seconds>\d+?)s)?')
 
 
-def close_telegram():
+def parse_time(time_str):
+    parts = regex.match(time_str)
+    if not parts:
+        return
+    parts = parts.groupdict()
+    time_params = {}
+    for name, param in parts.items():
+        if param:
+            time_params[name] = int(param)
+    return datetime.timedelta(**time_params)
+
+
+def telegram_open():
     PROCNAME = "Telegram"
 
     for proc in psutil.process_iter():
         # check whether the process name matches
         if proc.name() == PROCNAME:
-            proc.kill()
+            return proc
+    return None
 
 
-if args.disable is not None:
-    n_periods = 0
-    for interval, size in zip('hm', [12, 0.2]):
-        match = re.search(f"\d+{interval}", args.disable)
-        if match is not None:
-            n_periods += int(match.group()[:-1]) * size
+if __name__ == '__main__':
+    args = parser.parse_args()
 
-    n_periods = int(n_periods)
-    with open(DISABLE_FILE, 'w') as f:
-        print(str(n_periods), file=f)
+    proc = telegram_open()
 
-else:
-
-    if DISABLE_FILE.exists():
-        with open(DISABLE_FILE, 'r+') as f:
-            n_periods = int(f.read().strip())
-            n_periods -= 1
-            if n_periods > 0 and not args.force:
-                f.seek(0)
-                print(str(n_periods), file=f)
-            else:
-                os.remove(DISABLE_FILE)
-                close_telegram()
+    if args.force:
+        proc.kill()
+        DISABLE_FILE.unlink() if DISABLE_FILE.exists() else None
 
     else:
-        close_telegram()
+        if args.disable is None:
+            user = False
+            args.disable = '4m50s'
+        else:
+            user = True
+
+        delta = parse_time(args.disable)
+        expiration_time = datetime.datetime.now() + delta
+
+        if DISABLE_FILE.exists():
+            with open(DISABLE_FILE, 'r+') as f:
+
+                if user:
+                    exp = expiration_time.strftime('%b %d %Y %I:%M%p')
+                    print(exp, file=f)
+
+                else:
+                    s = f.read().strip()
+                    old_expiration_time = datetime.datetime.strptime(s, '%b %d %Y %I:%M%p')
+                    if old_expiration_time < datetime.datetime.now():
+                        proc.kill()
+                        DISABLE_FILE.unlink()
+
+        elif proc is not None:
+            with open(DISABLE_FILE, 'w') as f:
+                exp = expiration_time.strftime('%b %d %Y %I:%M%p')
+                print(exp, file=f)
