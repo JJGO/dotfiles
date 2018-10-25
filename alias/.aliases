@@ -3,9 +3,12 @@ alias gs='git status'
 alias gu='git pull'
 alias ts='toggl start'
 alias gg='git graph'
+alias sr='screen -r'
 
 alias hgrep='history -n 1 | grep'
 alias rsub='rmate'
+
+alias ag='rg'
 
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 alias matlabc='matlab -nodesktop -nosplash'
