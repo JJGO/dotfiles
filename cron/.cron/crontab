@@ -18,8 +18,9 @@
 #=====================================================================#
 #  Min  |  Hour  |  Mday  |  Month  |  Wday  |  Command               #
 #=====================================================================#
-   */5     *        *        *         *        $HOME/.dotfiles/cron/every-five-minutes.sh >> /tmp/cronlog 2>&1
-   0       *        *        *         *        $HOME/.dotfiles/cron/every-hour.sh >> /tmp/cronlog 2>&1
-   0       1        *        *         *        $HOME/.dotfiles/cron/daily-nighttime.sh >> /tmp/cronlog 2>&1
-   0       0        *        *         5        $HOME/.dotfiles/cron/every-week.sh >> /tmp/cronlog 2>&1
+   */5     *        *        *         *        $HOME/.cron/every-five-minutes.sh >> /tmp/cronlog 2>&1
+   0       *        *        *         *        $HOME/.cron/every-hour.sh >> /tmp/cronlog 2>&1
+   0       9        *        *         *        $HOME/.cron/daily-morning.sh >> /tmp/cronlog 2>&1
+   0       1        *        *         *        $HOME/.cron/daily-nighttime.sh >> /tmp/cronlog 2>&1
+   0       0        *        *         5        $HOME/.cron/every-week.sh >> /tmp/cronlog 2>&1
 #=====================================================================#
