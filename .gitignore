@@ -1,11 +1,6 @@
 .DS_Store
 *rsa*
 
-k/
 imgur-album-downloader/
-ssh/.ssh/known_hosts
-ssh/.ssh/known_hosts2
-.secret-aliases
 python/.matplotlib/fontList.json
 .tmp-aliases
-ssh
