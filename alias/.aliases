@@ -138,6 +138,7 @@ case "$(uname -s)" in
 
      alias backup-fotos="rclone copy -vc Pictures/Fotos aurora:Fotos "
 
+     alias readlink="greadlink"
      ;;
 
    Linux)
