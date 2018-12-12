@@ -109,8 +109,17 @@ All
 """
 end
 
+# puts """
+# #{started != 0 && BAR_COLORS ? green(started) : started}/#{total}
+# ---
+# #{menus}
+# ---
+# #{all}
+# #{REFRESH}
+# """
+
 puts """
-#{started != 0 && BAR_COLORS ? green(started) : started}/#{total}
+#{started}/#{total}
 ---
 #{menus}
 ---

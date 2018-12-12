@@ -5,7 +5,8 @@
 # <bitbar.author.github>matryer</bitbar.author.github>
 # <bitbar.desc>Gets the current external IP address.</bitbar.desc>
 
-EXTERNAL_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
+# EXTERNAL_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
+EXTERNAL_IP=$(curl ipinfo.io/ip 2> /dev/null)
 
 if [ "$1" = "copy" ]; then
   # Copy the IP to clipboard
