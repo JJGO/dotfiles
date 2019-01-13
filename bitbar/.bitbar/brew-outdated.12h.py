@@ -27,10 +27,12 @@ FIXED_CASK = ['wifi-explorer', 'filebot']
 
 parser = argparse.ArgumentParser(description='Brew updater')
 parser.add_argument('-u', '--upgrade', dest='upgrade', action='store_true')
+parser.add_argument('-c', '--copy', dest='copy', default=None)
 parser.add_argument('formulas', nargs='*', default=None, help='Formulas to upgrade')
 
 
 def get_outdated():
+
     s = subprocess.check_output(BREW_UPDATE_CMD)
 
     outdated = subprocess.check_output(BREW_OUTDATED_CMD).decode()
@@ -48,6 +50,12 @@ def get_outdated():
         outdated_cask = []
 
     return outdated, outdated_cask
+
+
+def write_to_clipboard(output):
+    process = subprocess.Popen(
+        'pbcopy', env={'LANG': 'en_US.UTF-8'}, stdin=subprocess.PIPE)
+    process.communicate(output.encode('utf-8'))
 
 
 if __name__ == '__main__':
@@ -78,8 +86,14 @@ if __name__ == '__main__':
             if p != logfile:
                 os.remove(p)
 
+    elif args.copy is not None:
+        cmd = args.copy
+        cmd = cmd.replace('!', ' ')
+        write_to_clipboard(cmd)
+
     else:
         outdated, outdated_cask = get_outdated()
+
         if len(outdated+outdated_cask) > 0:
             print('U:{}'.format(len(outdated) + len(outdated_cask)))
         else:
@@ -92,8 +106,14 @@ if __name__ == '__main__':
             print('---')
             for formula in outdated:
                 print('{} | bash={} param1=--upgrade param2={} refresh=true terminal=false'.format(formula, SELF, formula))
+            cmd = 'brew upgrade ' + ' '.join(outdated)
+            cmd = cmd.replace(' ', '!')
+            print("Copy upgrade cmd | terminal=false bash={} param1=--copy param2={}".format(SELF, cmd))
 
         if len(outdated_cask) > 0:
             print('---')
             for cask in outdated_cask:
                 print(cask)
+            cmd = 'brew cask upgrade ' + ' '.join(outdated_cask)
+            cmd = cmd.replace(' ', '!')
+            print("Copy upgrade cask cmd | terminal=false bash={} param1=--copy param2={}".format(SELF, cmd))
