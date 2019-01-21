@@ -68,8 +68,8 @@ if command -v fzf > /dev/null; then
       BUFFER=$(\history -n 1 | fzf)
       CURSOR=$#BUFFER
   }
-  zle -N fzf-history
-  bindkey '^r' fzf-history
+  # zle -N fzf-history
+  # bindkey '^r' fzf-history
 
   fh() {
     print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
@@ -88,7 +88,7 @@ if command -v fzf > /dev/null; then
 
   v() {
     local file
-    file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vi "${file}" || return 1
+    file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vim "${file}" || return 1
   }
 
   #less on fuzzy find
