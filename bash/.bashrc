@@ -19,3 +19,5 @@ if [ -f ~/.bin/tmuxinator.bash ]; then
 fi
 
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
