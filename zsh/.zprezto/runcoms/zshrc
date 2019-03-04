@@ -22,7 +22,6 @@ fi
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-
-
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export COMP_KNOWN_HOSTS_WITH_HOSTFILE=""

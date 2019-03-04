@@ -42,6 +42,8 @@ zstyle ':prezto:load' pmodule \
   'osx' \
   'autosuggestions'
 
+zstyle ':completion:*:ssh:*' hosts off
+
 #
 # Autosuggestions
 #
