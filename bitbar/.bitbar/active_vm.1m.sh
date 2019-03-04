@@ -3,5 +3,7 @@ export vmFile="/Users/josejavier/Virtual Machines.localized/6858_Debian.vmwarevm
 NUM_VMS=$($HOME/bin/vm status | sed "s/Total running VMs: //" | head -n 1)
 
 if [ "$NUM_VMS" != "0" ]; then
+    echo "📀"
+    echo "---"
     echo "VM: $NUM_VMS"
 fi
