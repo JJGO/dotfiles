@@ -24,6 +24,7 @@ zstyle ':prezto:*:*' color 'yes'
 # Set the Zsh functions to load (man zshcontrib).
 # zstyle ':prezto:load' zfunction 'zargs' 'zmv'
 
+
 # Set the Prezto modules to load (browse modules).
 # The order matters.
 zstyle ':prezto:load' pmodule \
@@ -42,7 +43,11 @@ zstyle ':prezto:load' pmodule \
   'osx' \
   'autosuggestions'
 
-zstyle ':completion:*:ssh:*' hosts off
+#zstyle ':completion:*:ssh:*' hosts off
+#zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+
+zstyle ':prezto:module:completion:*:hosts' etc-host-ignores \
+  '0.0.0.0' '127.0.0.1'
 
 #
 # Autosuggestions
