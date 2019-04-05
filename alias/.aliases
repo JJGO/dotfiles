@@ -5,6 +5,8 @@ alias ts='toggl start'
 alias gg='git graph'
 alias sr='screen -r'
 
+alias spell='aspell check --dont-backup'
+
 alias sb='subl'
 
 alias hgrep='history -n 1 | grep'
