@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+import sys
+import magic
+import ffmpeg
+import pathlib
+from collections import Counter
+
+import numpy as np
+
+
+def video_details(path):
+    bitrates = []
+    sizes = []
+    resolutions = []
+    audio = []
+    subtitle = []
+
+    for file in path.iterdir():
+        if file.is_file() and 'video' in magic.from_file(file.as_posix(), mime=True):
+            probe = ffmpeg.probe(file.as_posix())
+
+            bitrates.append(int(probe['format']['bit_rate']))
+            sizes.append(int(probe['format']['size']))
+
+            video_stream = next((stream for stream in probe['streams'] if stream['codec_type'] == 'video'), None)
+            audio_streams = [stream for stream in probe['streams'] if stream['codec_type'] == 'audio']
+            sub_streams = [stream for stream in probe['streams'] if stream['codec_type'] == 'subtitle']
+
+            width = int(video_stream['width'])
+            height = int(video_stream['height'])
+
+            resolutions.append((width, height))
+
+            if len(audio_streams) > 0:
+                audio.append(len(audio_streams))
+            if len(sub_streams) > 0:
+                subtitle.append(len(sub_streams))
+
+    if len(bitrates) == 0:
+        return None
+
+    mean, std = np.mean(bitrates), np.std(bitrates)
+    non_outliers = np.logical_and(mean - 2*std < bitrates, bitrates < mean + 2*std)
+    bitrates = np.array(bitrates)[non_outliers]
+    sizes = np.array(sizes)[non_outliers]
+
+    # details = f"{path}"
+    details = ""
+    details += f"\n\tFiles {len(bitrates)}"
+
+    details += f"\n\tBitrate {np.mean(bitrates)/1024:.0f}kbps ± {np.std(bitrates)/np.mean(bitrates)*100:.2f}%"
+    details += f"\n\tSizes {np.mean(sizes)/1024**2:.0f}MB ± {np.std(sizes)/np.mean(sizes)*100:.2f}%"
+    details += f"\n\tResolution {Counter(resolutions).most_common(1)[0]}"
+    if len(audio) > 0:
+        details += f"\n\tAudio {Counter(audio).most_common(1)[0]}"
+    if len(subtitle) > 0:
+        details += f"\n\tSubs {Counter(subtitle).most_common(1)[0]}"
+    return details
+
+
+if __name__ == '__main__':
+
+    assert len(sys.argv) > 1
+
+    paths = [pathlib.Path(p) for p in sys.argv[1:]]
+
+    for path in paths:
+        for subdir in path.glob('**'):
+            print(subdir)
+            d = video_details(subdir)
+            if d is not None:
+                print(d)
+            print()
