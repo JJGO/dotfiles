@@ -5,6 +5,8 @@ alias ts='toggl start'
 alias gg='git graph'
 alias sr='screen -r'
 
+alias ncdu='ncdu --confirm-quit --color dark'
+
 alias spell='aspell check --dont-backup'
 
 alias sb='subl'
@@ -27,6 +29,7 @@ alias tab='open . -a iterm'
 alias diff='colordiff'
 alias yt="youtube-dl"
 alias yta="youtube-dl --extract-audio --audio-format mp3"
+alias ytad="youtube-dl --extract-audio --audio-format mp3 --write-description"
 alias doc2pdf="soffice --headless --convert-to pdf"
 alias ppt2pdf="soffice --headless --convert-to pdf"
 alias grepc="grep -P --color=always" #Color grep
@@ -187,3 +190,7 @@ function c() {
 alias ls=exa
 alias l="exa -1"
 alias la="exa -a"
+
+alias mosh="stt_both mosh && mosh"
+
+alias sep='tput cols | python -c "import sys; print(\"#\"*int(sys.stdin.read().strip()))"'
