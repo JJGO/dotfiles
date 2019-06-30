@@ -1,64 +1,89 @@
+function alias_if_exists() {
+  # Does the alias only if the aliased program is installed
+    if command -v $2 > /dev/null; then
+        alias "$1"="$2"
+    fi
+}
+
+
+# Better defaults
+alias ncdu='ncdu --confirm-quit --color dark'
+alias crontab="VIM_CRONTAB=true crontab"
+alias_if_exists 'diff' 'colordiff'
+alias_if_exists 'ag' 'rg'
+
+
+# Shortcuts
+
+## cd & ls
+alias dc="cd"
+alias ls=exa
+alias l="exa -1"
+alias la="exa -a"
+
+## Git
 alias ga='git add'
 alias gs='git status'
 alias gu='git pull'
-alias ts='toggl start'
 alias gg='git graph'
-alias sr='screen -r'
+  # Note that gs is also ghostscript
+alias ghostscript="/usr/local/bin/gs"
 
-alias ncdu='ncdu --confirm-quit --color dark'
-
-alias spell='aspell check --dont-backup'
-
-alias sb='subl'
-
-alias hgrep='history -n 1 | grep'
-alias rsub='rmate'
-
-alias clear-dnscache="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
-
-alias ag='rg'
-
-alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
-alias matlabc='matlab -nodesktop -nosplash'
+## Jupyter
 alias jc="jupyter console"
 alias jco="jupyter nbconvert"
-# alias jq='jupyter qtconsole --style monokai &'
 alias jn="jupyter notebook"
 alias jn-b="jupyter notebook --no-browser"
-alias tab='open . -a iterm'
-alias diff='colordiff'
+
+# Yotube-DL
 alias yt="youtube-dl"
 alias yta="youtube-dl --extract-audio --audio-format mp3"
 alias ytad="youtube-dl --extract-audio --audio-format mp3 --write-description"
-alias doc2pdf="soffice --headless --convert-to pdf"
-alias ppt2pdf="soffice --headless --convert-to pdf"
+
+## Misc
+alias my-ip="curl ipinfo.io/ip 2> /dev/null"
+alias sr='screen -r'
+alias sb='subl'
+alias tb="nc termbin.com 9999"
+alias spell='aspell check --dont-backup'
 alias grepc="grep -P --color=always" #Color grep
 
-alias loco="/usr/local/bin/sl"
-alias dc="cd"
-alias crontab="VIM_CRONTAB=true crontab"
 
-alias ghostscript="/usr/local/bin/gs"
+# Other
+alias clear-dnscache="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
+alias matlabc='matlab -nodesktop -nosplash'
+alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
+    # Create separator using current columns
+alias sep='tput cols | python -c "import sys; print(\"#\"*int(sys.stdin.read().strip()))"'
 
-alias my-ip="curl ipinfo.io/ip 2> /dev/null"
-alias tb="nc termbin.com 9999"
+# Rename terminal Windows
+  # $1 = type; 0 - both, 1 - tab, 2 - title
+  # rest = text
+setTerminalText () {
+    # echo works in bash & zsh
+    local mode=$1 ; shift
+    echo -ne "\033]$mode;$@\007"
+}
+stt_both  () { setTerminalText 0 $@; }
+stt_tab   () { setTerminalText 1 $@; }
+stt_title () { setTerminalText 2 $@; }
 
-# For remote sublime text
-if ! command -v subl > /dev/null; then
-    alias subl="rmate"
-fi
+tn () { stt_tab $@ && tmux new -s $@ }
+ta () { stt_tab $@ && tmux a -t $@ }
 
+###########################################################################################################################
 
 # SECRET ALIASES
 if [ -f ~/.secret-aliases ]; then
     source ~/.secret-aliases
 fi
 
-# TMP ALIASES (for local stuff)
-if [ -f ~/.tmp-aliases ]; then
-    source ~/.tmp-aliases
+# LOCAL ALIASES
+if [ -f ~/.local-aliases ]; then
+    source ~/.local-aliases
 fi
 
+###########################################################################################################################
 
 # Functions
 
@@ -105,6 +130,19 @@ if command -v fzf > /dev/null; then
 
 fi
 
+# Complete from google
+function auto() {
+    url='https://www.google.com/complete/search?client=hp&hl=en&xhr=t'
+    # NB: user-agent must be specified to get back UTF-8 data!
+    curl -H 'user-agent: Mozilla/5.0' -sSG --data-urlencode "q=$*" "$url" |
+        jq -r ".[1][][0]" |
+        sed 's,</\?b>,,g'
+}
+
+
+###########################################################################################################################
+
+
 # # Comment below if not fzf and fasd
 # unalias z
 # # fasd & fzf change directory - jump using `fasd` if given argument, filter output of `fasd` using `fzf` else'
@@ -114,20 +152,6 @@ fi
 #   dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
 # }
 
-# Rename iterm Windows
-# $1 = type; 0 - both, 1 - tab, 2 - title
-# rest = text
-setTerminalText () {
-    # echo works in bash & zsh
-    local mode=$1 ; shift
-    echo -ne "\033]$mode;$@\007"
-}
-stt_both  () { setTerminalText 0 $@; }
-stt_tab   () { setTerminalText 1 $@; }
-stt_title () { setTerminalText 2 $@; }
-
-tn () {stt_tab $@ && tmux new -s $@}
-ta () {stt_tab $@ && tmux a -t $@}
 
 
 # OS dependent aliases
@@ -143,9 +167,11 @@ case "$(uname -s)" in
      alias eject-duralumin="sync-duralumin && diskutil unmount /Volumes/DURALUMIN"
      alias "bu"="brew update && brew outdated | xargs brew upgrade  && brew cleanup -s"
 
-     alias backup-fotos="rclone copy -vc Pictures/Fotos aurora:Fotos "
+     alias backup-fotos="rclone copy -vc Pictures/Fotos aurora:Fotos"
 
      alias readlink="greadlink"
+
+     alias mosh="stt_both mosh && mosh"
      ;;
 
    Linux)
@@ -165,7 +191,7 @@ case "$(uname -s)" in
 esac
 
 
-# Global Alias (only zsh)
+# Shell dependent Alias (only zsh has global aliases)
 case $SHELL in
 */zsh)
    # assume Zsh
@@ -177,20 +203,3 @@ case $SHELL in
    # assume something else
 esac
 
-
-
-function c() {
-        url='https://www.google.com/complete/search?client=hp&hl=en&xhr=t'
-        # NB: user-agent must be specified to get back UTF-8 data!
-        curl -H 'user-agent: Mozilla/5.0' -sSG --data-urlencode "q=$*" "$url" |
-            jq -r ".[1][][0]" |
-            sed 's,</\?b>,,g'
-    }
-
-alias ls=exa
-alias l="exa -1"
-alias la="exa -a"
-
-alias mosh="stt_both mosh && mosh"
-
-alias sep='tput cols | python -c "import sys; print(\"#\"*int(sys.stdin.read().strip()))"'
