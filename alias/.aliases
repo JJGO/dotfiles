@@ -17,9 +17,11 @@ alias_if_exists 'ag' 'rg'
 
 ## cd & ls
 alias dc="cd"
-alias ls=exa
-alias l="exa -1"
-alias la="exa -a"
+if command -v exa > /dev/null; then
+  alias ls=exa
+  alias l="exa -1"
+  alias la="exa -a"
+fi
 
 ## Git
 alias ga='git add'
@@ -44,16 +46,14 @@ alias ytad="youtube-dl --extract-audio --audio-format mp3 --write-description"
 alias my-ip="curl ipinfo.io/ip 2> /dev/null"
 alias sr='screen -r'
 alias sb='subl'
-alias tb="nc termbin.com 9999"
+# alias tb="nc termbin.com 9999"
 alias spell='aspell check --dont-backup'
 alias grepc="grep -P --color=always" #Color grep
 
 
 # Other
-alias clear-dnscache="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
-alias matlabc='matlab -nodesktop -nosplash'
-alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
-    # Create separator using current columns
+# alias matlabc='matlab -nodesktop -nosplash'
+  # Create separator using current columns
 alias sep='tput cols | python -c "import sys; print(\"#\"*int(sys.stdin.read().strip()))"'
 
 # Rename terminal Windows
@@ -158,16 +158,15 @@ function auto() {
 case "$(uname -s)" in
 
    Darwin)
-     # echo 'Mac OS X'
+     # 'Mac OS X'
+
+     alias clear-dnscache="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
+     alias bu="brew update && brew outdated | xargs brew upgrade  && brew cleanup -s"
 
      alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome &"
      alias chromec="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary &"
 
-     alias jackett="mono --debug /Applications/Jackett/JackettConsole.exe"
-     alias eject-duralumin="sync-duralumin && diskutil unmount /Volumes/DURALUMIN"
-     alias "bu"="brew update && brew outdated | xargs brew upgrade  && brew cleanup -s"
-
-     alias backup-fotos="rclone copy -vc Pictures/Fotos aurora:Fotos"
+     alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 
      alias readlink="greadlink"
 
