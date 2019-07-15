@@ -7,38 +7,28 @@
 # Dont link DS_Store files
 find . -name ".DS_Store" -exec rm {} \;
 
-PROGRAMS=(alias bash env git latex mackup python scripts ssh stow tmux tmuxinator unison vim zsh)
+PROGRAMS=(alias aspell bash env git latex python scripts stow tmux tmuxinator vim zsh)
+
+function backup_if_exists() {
+    if [ -f $1 ];
+    then
+      mv $1 "$1.bk"
+    fi
+}
 
 # Clean common conflicts
-if [ -f ~/.bash_profile ];
-then
-  mv ~/.bash_profile ~/.bash_profile.bk
-fi
-
-if [ -f ~/.bashrc ];
-then
-  mv ~/.bashrc ~/.bashrc.bk
-fi
+backup_if_exists ~/.bash_profile
+backup_if_exists ~/.bashrc
+backup_if_exists ~/.gitconfig
 
 for f in ~/.zprezto/runcoms/z*
 do
     mv "$f" "$f.bk"
 done
 
-if [ -f ~/.gitconfig ];
-then
-  mv ~/.gitconfig ~/.gitconfig.bk
-fi
-
-
 for program in ${PROGRAMS[@]}; do
   stow -v $program
   echo "Configuring $program"
 done
-
-
-echo "Configuring Crotabs..."
-
-sudo crontab -u $USER $HOME/.cron/crontab
 
 echo "Done!"
