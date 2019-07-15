@@ -13,9 +13,6 @@ c.InteractiveShellApp.exec_lines = [
     'import h5py',
     'import pathlib',
     'import json'
-    # 'from IPython.display import Image',
-    # 'import sympy as sp',
-    # 'from sympy import init_printing',
 ]
 # c.InteractiveShell.editor = 'vim'
 # c.InteractiveShell.autoindent = True
