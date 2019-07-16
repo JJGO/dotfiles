@@ -14,12 +14,17 @@ function backup_if_exists() {
     then
       mv $1 "$1.bk"
     fi
+    if [ -d $1 ];
+    then
+      mv $1 "$1.bk"
+    fi
 }
 
 # Clean common conflicts
 backup_if_exists ~/.bash_profile
 backup_if_exists ~/.bashrc
 backup_if_exists ~/.gitconfig
+backup_if_exists ~/.tmux.conf
 
 for f in ~/.zprezto/runcoms/z*
 do

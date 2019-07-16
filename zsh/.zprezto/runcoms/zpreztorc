@@ -40,7 +40,6 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'syntax-highlighting' \
   'history-substring-search' \
-  'osx' \
   'autosuggestions'
 
 #zstyle ':completion:*:ssh:*' hosts off
