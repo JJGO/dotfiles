@@ -5,3 +5,4 @@ imgur-album-downloader/
 python/.matplotlib/fontList.json
 .tmp-aliases
 python/.matplotlib/fontlist-v300.json
+scripts/bin/fasd
