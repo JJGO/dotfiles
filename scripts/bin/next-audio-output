@@ -15,6 +15,7 @@ index = outputs.index(current_output)
 index = (index + 1) % len(outputs)
 
 return_code = subprocess.call([audiodevice, 'output', outputs[index] ])
+return_code = subprocess.call([audiodevice, 'system', outputs[index] ])
 subprocess.call(['/usr/local/bin/terminal-notifier', '-title', 'Audio Output',  '-message', outputs[index], '-ignoreDnD', '-group', '1080', '-execute','terminal-notifier -remove 1080'])
 print(outputs[index])
 assert return_code == 0
