@@ -5,6 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+clear 
+
 # Execute code that does not affect the current session in the background.
 {
   # Compile the completion dump to increase startup speed.
@@ -17,15 +19,15 @@
 # If we are not in a tmux session
 if [ -z $TMUX ]; then
     # Display system information
-    # archey
-    # neofetch --ascii_bold off # --colors "\033[94"
-    # cal -3
-    # curl "wttr.in/?0Qm&lang=es"
     # Print a random, hopefully interesting, adage.
     if (( $+commands[fortune] )); then
       if [[ -t 0 || -t 1 ]]; then
-        fortune -s | lolcat
-        print
+	 if command -v lolcat > /dev/null; then
+         	fortune -s | lolcat
+	 else
+                fortune -s
+         fi
+         print
       fi
     fi
 fi

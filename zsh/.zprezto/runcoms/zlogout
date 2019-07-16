@@ -7,8 +7,10 @@
 
 # Print the message.
 
+# MSG="See You Space Cowboy..."
+MSG="Bye"
 if command -V figlet > /dev/null; then
-    figlet -f slant "See You Space Cowboy..."
+    figlet -f slant $MSG
 else
-    echo "See You Space Cowboy..."
+    echo $MSG
 fi
