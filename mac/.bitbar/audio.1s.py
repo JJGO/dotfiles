@@ -23,11 +23,11 @@ def set_output(output):
 
 
 current_output = subprocess.check_output([audiodevice, 'output']).decode().strip('\n')
+outputs = subprocess.check_output([audiodevice, 'output', 'list']).decode().strip('\n')
 # index = outputs.index(current_output)
 
 
 if current_output in ['Display Audio', 'eqMac2']:
-    outputs = subprocess.check_output([audiodevice, 'output', 'list']).decode().strip('\n')
     for builtin in ['Headphones', 'Internal Speakers']:
         if builtin in outputs:
             current_output = set_output(builtin)
@@ -35,7 +35,9 @@ if current_output in ['Display Audio', 'eqMac2']:
     else:
         raise ValueError("Something funky is going on")
 
-# if current_output == 'DELL2518':
-
 if current_output == 'Internal Speakers':
     return_code = subprocess.call(['osascript', '-e', "set Volume 0"])
+
+# Home Desk
+if 'DELL U2717D' in outputs:
+    set_output('DELL U2717D')
