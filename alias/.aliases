@@ -49,7 +49,7 @@ alias sb='subl'
 # alias tb="nc termbin.com 9999"
 alias spell='aspell check --dont-backup'
 alias grepc="grep -P --color=always" #Color grep
-
+alias printpath='echo $PATH | sed "s/:/\\n/g"'
 
 # Other
 # alias matlabc='matlab -nodesktop -nosplash'
