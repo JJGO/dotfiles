@@ -1,0 +1,85 @@
+#!/usr/bin/env python
+
+import argparse
+import time
+from playsound import playsound
+import threading
+import subprocess
+import sys
+
+POMO_END_SOUND = "/Users/josejavier/dbm/misc/sounds/school_bells.mp3"
+
+
+parser = argparse.ArgumentParser(description='Pomodoro command line tool')
+
+parser.add_argument('-d', '--duration', dest='duration', type=int,   default=25, help='Minutes for pomodoro')
+parser.add_argument('-b', '--break',    dest='break_',   type=int,   default=5, help='Minutes for break')
+parser.add_argument('-l', '--loop',     dest='loop',     action='store_true', default=False, help='Minutes for break')
+parser.add_argument('-s', '--sound',    dest='sound',    type=str,   default=POMO_END_SOUND,  help='File to play at each end')
+parser.add_argument(dest='task',  nargs='?', default=None, help="Name of task")
+
+
+def countdown(minutes):
+
+    seconds = minutes * 60
+
+    for i in range(seconds):
+        m, s = i // 60, i % 60
+        print(f'\r{m:02d}:{s:02d}', end="")
+        time.sleep(1)
+
+    print('\rDone!')
+
+    # So next timer can start
+    t = threading.Thread(target=playsound, args=(POMO_END_SOUND,))
+    t.start()
+
+
+def toggl_stop(wait=False):
+    p = subprocess.Popen(['toggl', 'stop'])
+    if wait:
+        p.wait()
+
+
+def toggl_start(task):
+    if '@' in task:
+        task, project = task.split('@')
+        subprocess.Popen(['toggl', 'start', task, '-o', project])
+    else:
+        subprocess.Popen(['toggl', 'start', task])
+
+
+if __name__ == '__main__':
+
+    args = parser.parse_args()
+
+    while True:
+
+        print(f"Doing {args.task} for {args.duration}'")
+        if args.task is not None:
+            toggl_start(args.task)
+        try:
+            countdown(args.duration)
+        except KeyboardInterrupt:
+            print("\nStopping timer...")
+            toggl_stop(wait=True)
+            sys.exit(1)
+
+        if args.task is not None:
+            toggl_stop()
+
+        print(f"Break for {args.break_}'")
+        countdown(args.break_)
+
+        if not args.loop:
+            break
+
+
+# Proper use of toggl API wrapper
+# Proper handling on non-existant projects
+# SIGINT means
+# Server/Client Scheme?
+
+
+# Ctrl+C stop timer
+# Ctrl+\ cancel timer
