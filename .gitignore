@@ -7,3 +7,5 @@ python/.matplotlib/fontList.json
 python/.matplotlib/fontlist-v300.json
 scripts/bin/fasd
 local
+.stignore
+.stversions
