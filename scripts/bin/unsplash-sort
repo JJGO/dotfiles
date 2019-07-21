@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+
+import pathlib
+import shutil
+import sys
+from PIL import Image
+
+horz_dir = pathlib.Path('/Users/josejavier/dbm/misc/_Wallpapers/_Chill2')
+vert_dir = pathlib.Path('/Users/josejavier/dbm/misc/_Wallpapers/_VChill2')
+
+if __name__ == '__main__':
+
+    for f in pathlib.Path(sys.argv[1]).glob("*-unsplash.jpg"):
+        print(f"Moved {f.name}")
+        with Image.open(f.as_posix()) as im:
+            width, height = im.size
+        if height > width:
+            shutil.move(f.as_posix(), (vert_dir / f.name).as_posix())
+        else:
+            shutil.move(f.as_posix(), (horz_dir / f.name).as_posix())
