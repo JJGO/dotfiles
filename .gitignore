@@ -9,3 +9,4 @@ scripts/bin/fasd
 local
 .stignore
 .stversions
+scripts/bin/diff-so-fancy
