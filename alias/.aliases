@@ -123,6 +123,13 @@ if command -v fzf > /dev/null; then
     file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vim "${file}" || return 1
   }
 
+  if command -v subl > /dev/null; then
+    u() {
+      local file
+      file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && subl "${file}" || return 1
+    }
+  fi
+
   #less on fuzzy find
   fl() {
     less $(fzf)
