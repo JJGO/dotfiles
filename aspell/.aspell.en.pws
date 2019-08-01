@@ -1,4 +1,4 @@
-personal_ws-1.1 en 68 
+personal_ws-1.1 en 75 
 dimensionality
 encoding
 activations
@@ -10,8 +10,10 @@ MTD
 ACC
 kurtosis
 Keras
+José
 pathologies
 phonation
+Universidad
 LaTeX
 spectrogram
 cuDNN
@@ -21,6 +23,7 @@ overfit
 scikit
 encodings
 accelerometer
+Comillas
 hyperparameters
 autoencoder
 spectrograms
@@ -28,6 +31,7 @@ convolutional
 sigmoid
 mel
 hyperparameter
+EECS
 reproducibility
 RBF
 hyperfunction
@@ -35,6 +39,7 @@ librosa
 exchangeability
 backend
 Guttag
+Pontificia
 GRU
 maxpooling
 thresholded
@@ -54,6 +59,7 @@ quantization
 TensorFlow
 underfitting
 pre
+González
 Dugald
 Nonphonotraumatic
 embeddings
@@ -64,6 +70,7 @@ univariate
 adam
 AUROC
 phonotraumatic
+Wiens
 PCA
 autoencoders
 preprocessing
