@@ -63,13 +63,17 @@ if __name__ == '__main__':
         except KeyboardInterrupt:
             print("\nStopping timer...")
             toggl_stop(wait=True)
-            sys.exit(1)
+            sys.exit(0)
 
         if args.task is not None:
             toggl_stop()
 
-        print(f"Break for {args.break_}'")
-        countdown(args.break_)
+        if args.break_ > 0:
+            try:
+                print(f"Break for {args.break_}'")
+                countdown(args.break_)
+            except KeyboardInterrupt:
+                sys.exit(0)
 
         if not args.loop:
             break
