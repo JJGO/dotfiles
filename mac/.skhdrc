@@ -71,10 +71,13 @@
 
 # open terminal, blazingly fast compared to iTerm/Hyper
 cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
+# cmd - return : open -n /Applications/Alacritty.app
 
 # open qutebrowser
 # cmd + shift - return : ~/Scripts/qtb.sh
 cmd + shift - return :  /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
+
+cmd + ctrl - return : date -u +"~/Downloads/%Y%m%d%H%M%S.txt" | xargs subl -n
 
 # close focused window
 alt - w : chunkc tiling::window --close
@@ -170,7 +173,7 @@ shift + alt - d : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-windo
 
 # decrease region size
 shift + cmd - a : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge west
-shift + cmd - s : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge south
+# shift + cmd - s : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge south
 shift + cmd - w : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge north
 shift + cmd - d : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge east
 
