@@ -61,8 +61,9 @@ if __name__ == '__main__':
         try:
             countdown(args.duration)
         except KeyboardInterrupt:
-            print("\nStopping timer...")
-            toggl_stop(wait=True)
+            if args.task is not None:
+                print("\nStopping timer...")
+                toggl_stop(wait=True)
             sys.exit(0)
 
         if args.task is not None:
