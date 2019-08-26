@@ -7,7 +7,7 @@ function alias_if_exists() {
 
 
 # Better defaults
-alias ncdu='ncdu --confirm-quit --color dark'
+# alias ncdu='ncdu --confirm-quit --color dark'
 alias crontab="VIM_CRONTAB=true crontab"
 alias_if_exists 'diff' 'colordiff'
 alias_if_exists 'ag' 'rg'
