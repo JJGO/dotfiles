@@ -11,7 +11,7 @@ function alias_if_exists() {
 alias crontab="VIM_CRONTAB=true crontab"
 alias_if_exists 'diff' 'colordiff'
 alias_if_exists 'ag' 'rg'
-alias_if_exists 'vim' 'nvim'
+#alias_if_exists 'vim' 'nvim'
 
 # Shortcuts
 
@@ -28,6 +28,9 @@ alias ga='git add'
 alias gs='git status'
 alias gu='git pull'
 alias gg='git graph'
+unalias gd
+alias gd='git diff'
+alias gD='git ls-files'
   # Note that gs is also ghostscript
 alias ghostscript="/usr/local/bin/gs"
 
@@ -123,6 +126,13 @@ if command -v fzf > /dev/null; then
     file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vim "${file}" || return 1
   }
 
+  if command -v subl > /dev/null; then
+    u() {
+      local file
+      file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && subl "${file}" || return 1
+    }
+  fi
+
   #less on fuzzy find
   fl() {
     less $(fzf)
@@ -171,7 +181,7 @@ case "$(uname -s)" in
 
      alias readlink="greadlink"
 
-     alias mosh="stt_both mosh && mosh"
+     # alias mosh="stt_both mosh && mosh"
      ;;
 
    Linux)

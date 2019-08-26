@@ -5,7 +5,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-clear 
+clear
 
 # Execute code that does not affect the current session in the background.
 {
@@ -31,3 +31,9 @@ if [ -z $TMUX ]; then
       fi
     fi
 fi
+
+#if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [[ ! "$TERM" =~ xterm-kitty ]]; then
+#  exec tmux
+#fi
+
+export TERM=xterm-256color

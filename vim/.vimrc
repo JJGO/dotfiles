@@ -151,3 +151,9 @@ if $VIM_CRONTAB == "true"
     set nobackup
     set nowritebackup
 endif
+
+
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+

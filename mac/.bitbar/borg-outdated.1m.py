@@ -7,12 +7,12 @@
 # <bitbar.desc>Checks how many outdated repos there are.</bitbar.desc>
 
 
-import subprocess
-import os
 import datetime
+import json
+import os
 
 try:
-    from subprocess import DEVNULL # py3k
+    from subprocess import DEVNULL  # py3k
 except ImportError:
     DEVNULL = open(os.devnull, 'wb')
 
@@ -35,17 +35,13 @@ class color:
 
 BORG = '/usr/local/bin/borg'
 BORG_BACKUP = '/Users/josejavier/bin/backup-outdated'
-
-BORG_REPOS = {
-    'lion': 'lion-bk:/mnt/disk/cpm',
-    'syl':  '/Volumes/Data/cpm',
-    # 'iroh': 'iroh-bk:/mnt/holo/cpm',
-    'nal':  'nal-bk:/mnt/polar/borg/cpm',
-}
+BORG_REPOS = '/Users/josejavier/.borg_servers'
+with open(BORG_REPOS, 'r') as f:
+    BORG_REPOS = json.load(f)
 
 
 def outdated_days(last_version):
-    line = last_version#.strip().split('\n')[-1]
+    line = last_version  # .strip().split('\n')[-1]
     version = line.split(' ')[0]
     timestamp = version[version.index("-")+1:]
     date = timestamp.split('T')[0]
