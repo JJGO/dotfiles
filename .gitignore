@@ -10,3 +10,4 @@ local
 .stignore
 .stversions
 scripts/bin/diff-so-fancy
+scripts/bin/syncthing
