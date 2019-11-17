@@ -1,8 +1,8 @@
 # Configuration file for ipython.
 
 c = get_config()
-c.InteractiveShellApp.exec_lines = ['%load_ext autoreload', '%autoreload 2']
-c.InteractiveShellApp.matplotlib = 'notebook'
+#c.InteractiveShellApp.exec_lines = ['%load_ext autoreload', '%autoreload 2']
+c.InteractiveShellApp.matplotlib = 'inline'
 
 c.InteractiveShellApp.exec_lines = [
     'import numpy as np',
