@@ -3,3 +3,4 @@ test -r /Users/josejavier/.opam/opam-init/init.zsh && . /Users/josejavier/.opam/
 eval $(opam config env)
 
 alias vim=nvim
+export GRB_LICENSE_FILE=/Users/josejavier/.secret-dotfiles/gurobi.lic
