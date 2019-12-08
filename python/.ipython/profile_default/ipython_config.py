@@ -2,7 +2,7 @@
 
 c = get_config()
 c.InteractiveShellApp.exec_lines = ['%load_ext autoreload', '%autoreload 2']
-c.InteractiveShellApp.matplotlib = 'notebook'
+c.InteractiveShellApp.matplotlib = 'inline'
 
 c.InteractiveShellApp.exec_lines = [
     'import numpy as np',
@@ -12,9 +12,10 @@ c.InteractiveShellApp.exec_lines = [
     'from tqdm import tnrange, tqdm, tqdm_notebook',
     'import h5py',
     'import pathlib',
-    'import json'
+    'import json',
+    'from pprint import pprint'
 ]
-# c.InteractiveShell.editor = 'vim'
+c.InteractiveShell.editor = 'vim'
 # c.InteractiveShell.autoindent = True
 c.PromptManager.justify = True
 
