@@ -11,3 +11,4 @@ local
 .stversions
 scripts/bin/diff-so-fancy
 scripts/bin/syncthing
+python/.ipython/profile_default/history.sqlite
