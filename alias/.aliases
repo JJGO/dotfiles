@@ -23,6 +23,11 @@ if command -v exa > /dev/null; then
   alias la="exa -a"
 fi
 
+vm () {
+    # reverse mv
+    mv $2 $1
+}
+
 ## Git
 alias ga='git add'
 alias gs='git status'
