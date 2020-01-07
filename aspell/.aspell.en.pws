@@ -1,4 +1,4 @@
-personal_ws-1.1 en 129 
+personal_ws-1.1 en 134 
 ACC
 AUROC
 AlexNet
@@ -10,6 +10,7 @@ Caffe
 CaffeNet
 Comillas
 DenseNet
+Discretized
 Dugald
 ECCV
 EECS
@@ -88,10 +89,13 @@ invariants
 kurtosis
 librosa
 logarithmically
+macronutrients
 maxpooling
+mealplan
 mel
 minibatch
 mit
+multinomial
 nonzeros
 optimizers
 overfit
@@ -123,6 +127,7 @@ subnetworks
 thresholded
 tradeoff
 tradeoffs
+ultraprocessed
 underfitting
 underperforms
 univariate
