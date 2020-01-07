@@ -66,3 +66,7 @@ fi
 if [ -f ~/.env ]; then
     source ~/.env
 fi
+
+setopt HIST_IGNORE_SPACE
+alias jrnl=" jrnl"
+
