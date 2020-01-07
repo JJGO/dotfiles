@@ -11,7 +11,7 @@ function alias_if_exists() {
 alias crontab="VIM_CRONTAB=true crontab"
 alias_if_exists 'diff' 'colordiff'
 alias_if_exists 'ag' 'rg'
-#alias_if_exists 'vim' 'nvim'
+alias_if_exists 'vim' 'nvim'
 
 # Shortcuts
 
