@@ -1,159 +1,196 @@
-set nocompatible              " be iMproved, required
-set backspace=2
-filetype off                  " required
+" mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+" curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+" mkdir -p ~/.vim/bundle
+" git clone git://github.com/wikitopian/hardmode.git ~/.vim/bundle/hardmode
+" git clone http://github.com/sjl/gundo.vim.git ~/.vim/bundle/gundo
+" git clone https://github.com/kien/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim
+" git clone https://github.com/preservim/nerdcommenter.git ~/.vim/bundle/nerdcommenter
+" git clone --depth=1 https://github.com/vim-syntastic/syntastic.git ~/.vim/bundle/syntastic  
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+set nocompatible " VI compatible mode is disabled so that VIm things work
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Settings from https://dougblack.io/words/a-good-vimrc.html
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-Plugin 'user/L9', {'name': 'newL9'}
+" Colors
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+colorscheme molokai " Monokai-like colorscheme
+" colorscheme badwolf         " awesome colorscheme
+syntax enable           " enable syntax processing
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" Spaces & Tabs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set tabstop=4       " number of visual spaces per TAB
+set softtabstop=4   " number of spaces in tab when editing
+set expandtab       " tabs are spaces, mainly because of python
 
+" UI Config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set number              " show line numbers
+set showcmd             " show command in bottom bar
+set cursorline          " highlight current line
+filetype indent on      " load filetype-specific indent files
+set wildmenu            " visual autocomplete for command menu
+set showmatch           " highlight matching [{()}]
 
+" Leader Shortcuts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader=" "       " leader is comma
+" jk is escape
+inoremap jk <esc>
+" toggle gundo https://sjl.bitbucket.io/gundo.vim/
+nnoremap <leader>u :GundoToggle<CR>
+" edit vimrc/zshrc and load vimrc bindings
+nnoremap <leader>ev :vsp $MYVIMRC<CR>
+nnoremap <leader>ez :vsp ~/.zshrc<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+" save session,  After saving a Vim session, you can reopen it with vim -S.
+nnoremap <leader>s :mksession<CR>
 
-colorscheme molokai
-syntax enable
-set tabstop=4
-set softtabstop=4
-set expandtab
-set number
-set showcmd
-set cursorline
-"filetype indent on
-set lazyredraw
-set showmatch
-set incsearch
-set hlsearch
-set foldenable
-set mouse=a
+"Searching
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set incsearch           " search as characters are entered
+set hlsearch            " highlight matches
+" turn off search highlight
+"nnoremap <leader><space> :nohlsearch<CR>
 
-Plugin 'kien/ctrlp.vim'
-Plugin 'bling/vim-airline'
-" air-line
-let g:airline_powerline_fonts = 1
+" Folding
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set foldenable          " enable folding
+set foldlevelstart=10   " open most folds by default
+set foldnestmax=10      " 10 nested fold max
+" space open/closes folds
+" nnoremap <space> za
+set foldmethod=indent   " fold based on indent level
+" This is especially useful for me since I spend my days in Python.
+" Other acceptable values are marker, manual, expr, syntax, diff.
+" Run :help foldmethod to find out what each of those do.
 
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+" Movement
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
+" highlight last inserted text
+nnoremap gV `[v`]
+
+" CtrlP settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Order matching files top to bottom
+let g:ctrlp_match_window = 'bottom,order:ttb'
+" Always open files in new buffers
+let g:ctrlp_switch_buffer = 0
+" Lets us change the working directory during a Vim session and make CtrlP
+" respect that change.
+let g:ctrlp_working_path_mode = 0
+" Use rg to search instead
+" https://elliotekj.com/2016/11/22/setup-ctrlp-to-use-ripgrep-in-vim/
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
 endif
 
-" unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-
-" airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-Plugin 'scrooloose/nerdtree'
-map <C-n> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-Plugin 'easymotion/vim-easymotion'
-Plugin 'scrooloose/syntastic'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-surround'
-" Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plugin 'rizzatti/dash.vim'
+" Ignore files for completion
+set wildignore+=*/.git/*,*/tmp/*,*.swp
 
 
-if has("cscope")
-    set csprg=/usr/bin/cscope
-    set csto=0
-    set cst
-    set nocsverb
-    " add any database in current directory
-        if filereadable("cscope.out")
-                 cs add cscope.out
-                         " else add database pointed to by environment
-                             elseif $CSCOPE_DB != ""
-        cs add $CSCOPE_DB
+" Launch config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call pathogen#infect()                      " use pathogen
+
+"Tmux
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" allows cursor change in tmux mode
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+" These lines change the cursor from block cursor mode to vertical bar cursor mode when using tmux.
+" Without these lines, tmux always uses block cursor mode.
+
+" Backups
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"set backup
+"set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+"set backupskip=/tmp/*,/private/tmp/*
+"set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+"set writebackup
+
+" Custom Functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" toggle between number and relativenumber
+function! ToggleNumber()
+    if(&relativenumber == 1)
+        set norelativenumber
+        set number
+    else
+        set relativenumber
     endif
-endif
+endfunc
 
-nmap <C-\>s :cs find s =expand("")
-nmap <C-\>g :cs find g =expand("")
-nmap <C-\>c :cs find c =expand("")
-nmap <C-\>t :cs find t =expand("")
-nmap <C-\>e :cs find e =expand("")
-nmap <C-\>f :cs find f =expand("")
-nmap <C-\>i :cs find i ^=expand("")$
-nmap <C-\>d :cs find d =expand("")
-
-set nohlsearch
-
-" set guifont=Inconsolata\ for\ Powerline:h15
-" let g:Powerline_symbols = 'fancy'
-" set encoding=utf-8
-" set t_Co=256
-" set fillchars+=stl:\ ,stlnc:\
-" set term=xterm-256color
-" set termencoding=utf-8
-"
-" if has("gui_running")
-"     let s:uname = system("uname")
-"     if s:uname == "Darwin\n"
-"         set guifont=Inconsolata\ for\ Powerline:h15
-"     endif
-" endif
-
-set t_Co=256
+" strips trailing whitespace at the end of files. this
+" is called on buffer write in the autogroup above.
+function! <SID>StripTrailingWhitespaces()
+    " save last search & cursor position
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    let @/=_s
+    call cursor(l, c)
+endfunction
 
 
+nnoremap <leader>t :call ToggleNumber()<CR>
+nnoremap <leader>s :call <SID>StripTrailingWhitespaces()<CR>
 
-if $VIM_CRONTAB == "true"
-    set nobackup
-    set nowritebackup
-endif
+" Lose Bad Habits
+" http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" set mouse=a   " Enable mouse
 
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
+" Remove newbie crutches in Command Mode
+" cnoremap <Down> <Nop>
+" cnoremap <Left> <Nop>
+" cnoremap <Right> <Nop>
+" cnoremap <Up> <Nop>
+
+" Remove newbie crutches in Insert Mode
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+inoremap <Up> <Nop>
+
+" Remove newbie crutches in Normal Mode
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+nnoremap <Up> <Nop>
+
+" Remove newbie crutches in Visual Mode
+vnoremap <Down> <Nop>
+vnoremap <Left> <Nop>
+vnoremap <Right> <Nop>
+vnoremap <Up> <Nop>
+
+" Enable hard home so hjkl are disabled
+" autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+
+" Syntastic
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_python_checkers = ['pyflakes']
 
