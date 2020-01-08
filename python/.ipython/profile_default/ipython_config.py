@@ -15,7 +15,7 @@ c.InteractiveShellApp.exec_lines = [
     'import json',
     'from pprint import pprint'
 ]
-# c.InteractiveShell.editor = 'vim'
+c.InteractiveShell.editor = 'vim'
 # c.InteractiveShell.autoindent = True
 c.PromptManager.justify = True
 
