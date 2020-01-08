@@ -12,7 +12,8 @@ c.InteractiveShellApp.exec_lines = [
     'from tqdm import tnrange, tqdm, tqdm_notebook',
     'import h5py',
     'import pathlib',
-    'import json'
+    'import json',
+    'from pprint import pprint'
 ]
 # c.InteractiveShell.editor = 'vim'
 # c.InteractiveShell.autoindent = True
