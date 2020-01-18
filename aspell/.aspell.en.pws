@@ -1,4 +1,4 @@
-personal_ws-1.1 en 134 
+personal_ws-1.1 en 140 
 ACC
 AUROC
 AlexNet
@@ -42,6 +42,7 @@ RBF
 ReLU
 ResNet
 ResNets
+STDIN
 SciPy
 ShrinkBench
 TensorFlow
@@ -80,6 +81,7 @@ encoding
 encodings
 et
 exchangeability
+globbing
 hoc
 hyperfunction
 hyperparameter
@@ -90,6 +92,8 @@ kurtosis
 librosa
 logarithmically
 macronutrients
+manpage
+manpages
 maxpooling
 mealplan
 mel
@@ -124,6 +128,8 @@ subfields
 subfigure
 submatrices
 subnetworks
+substring
+sudo
 thresholded
 tradeoff
 tradeoffs
