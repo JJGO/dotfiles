@@ -6,6 +6,7 @@
 " git clone https://github.com/kien/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim
 " git clone https://github.com/preservim/nerdcommenter.git ~/.vim/bundle/nerdcommenter
 " git clone --depth=1 https://github.com/vim-syntastic/syntastic.git ~/.vim/bundle/syntastic  
+" git clone https://github.com/itchyny/lightline.vim ~/.vim/pack/plugins/start/lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible " VI compatible mode is disabled so that VIm things work
@@ -27,15 +28,29 @@ set expandtab       " tabs are spaces, mainly because of python
 " UI Config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set number              " show line numbers
+set relativenumber      " show relative numbering
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
 filetype indent on      " load filetype-specific indent files
 set wildmenu            " visual autocomplete for command menu
 set showmatch           " highlight matching [{()}]
+set laststatus=2        " Show the status line at the bottom
+set mouse+=a            " A necessary evil, mouse support
+set noerrorbells visualbell t_vb=    "Disable annoying error noises
+
+" Buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set hidden              " Allows having hidden buffers (not displayed in any window)
+
+" Insertion behaviour
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set backspace=indent,eol,start     " Make backspace behave in a more intuitive way
+nmap Q <Nop>                      
+" 'Q' in normal mode enters Ex mode. You almost never want this.
 
 " Leader Shortcuts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader=" "       " leader is comma
+let mapleader=" "       " leader is space
 " jk is escape
 inoremap jk <esc>
 " toggle gundo https://sjl.bitbucket.io/gundo.vim/
@@ -51,8 +66,15 @@ nnoremap <leader>s :mksession<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
-" turn off search highlight
-"nnoremap <leader><space> :nohlsearch<CR>
+set ignorecase          " Ignore case in searches by default
+set smartcase           " But make it case sensitive if an uppercase is entered
+nnoremap <leader>/ :nohlsearch<CR>   " turn off search highlight
+
+" Undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set undofile " Maintain undo history between sessions
+set undodir=~/.vim/undodir
+
 
 " Folding
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -183,4 +205,9 @@ vnoremap <Up> <Nop>
 
 
 let g:sneak#label = 1
+
+
+" Lightline
+" --INSERT-- is unncessary because of lightline
+set noshowmode
 
