@@ -10,7 +10,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # ALIASES
 if [ -f ~/.aliases ]; then
@@ -26,3 +25,15 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 export COMP_KNOWN_HOSTS_WITH_HOSTFILE=""
 
+
+
+# bindkey -v
+# bindkey -M viins '\e.' insert-last-word
+# bindkey "^R" history-incremental-search-backward
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source /Users/josejavier/Library/Preferences/org.dystroy.broot/launcher/bash/br
+
+# export HISTSIZE=1000000000
+# export SAVEHIST=$HISTSIZE
+# setopt EXTENDED_HISTORY
