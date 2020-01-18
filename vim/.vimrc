@@ -181,16 +181,6 @@ vnoremap <Up> <Nop>
 " Enable hard home so hjkl are disabled
 " autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 
-" Syntastic
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_python_checkers = ['pyflakes']
+let g:sneak#label = 1
 
