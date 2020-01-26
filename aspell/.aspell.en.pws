@@ -1,4 +1,4 @@
-personal_ws-1.1 en 140 
+personal_ws-1.1 en 154 
 ACC
 AUROC
 AlexNet
@@ -45,7 +45,9 @@ ResNets
 STDIN
 SciPy
 ShrinkBench
+StackOverflow
 TensorFlow
+Uncomment
 Universidad
 VGG
 VGGNet
@@ -54,6 +56,7 @@ accelerometer
 accuracies
 activations
 adam
+ahold
 al
 arXiv
 arrhythmias
@@ -61,17 +64,22 @@ articulators
 autoencoder
 autoencoders
 backend
+backgrounded
 backpropagation
 batchnorm
 benchmarking
+config
 confounder
 confounders
 convolutional
 csail
 cuDNN
+customizations
 dataset
 datasets
 dimensionality
+dotfile
+dotfiles
 downsamples
 downsampling
 durations
@@ -113,8 +121,10 @@ pre
 preprocessed
 preprocessing
 pretrained
+profiler
 quantization
 recommender
+recurse
 reimplementations
 reproducibility
 saliency
@@ -130,7 +140,11 @@ submatrices
 subnetworks
 substring
 sudo
+symlinks
+syscall
+syscalls
 thresholded
+tracebacks
 tradeoff
 tradeoffs
 ultraprocessed
