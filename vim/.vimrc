@@ -1,17 +1,9 @@
-" mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-" curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-" mkdir -p ~/.vim/bundle
-" git clone git://github.com/wikitopian/hardmode.git ~/.vim/bundle/hardmode
-" git clone http://github.com/sjl/gundo.vim.git ~/.vim/bundle/gundo
-" git clone https://github.com/kien/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim
-" git clone https://github.com/preservim/nerdcommenter.git ~/.vim/bundle/nerdcommenter
-" git clone --depth=1 https://github.com/vim-syntastic/syntastic.git ~/.vim/bundle/syntastic
-" git clone https://github.com/itchyny/lightline.vim ~/.vim/pack/plugins/start/lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible " VI compatible mode is disabled so that VIm things work
 
-" Settings from https://dougblack.io/words/a-good-vimrc.html
+" Settings from these blogposts
+" https://dougblack.io/words/a-good-vimrc.html
 
 " Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -58,7 +50,7 @@ map <C-x> <Nop>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader=" "       " leader is space
 " jk is escape
-inoremap jk <esc>
+"inoremap jk <esc>
 " edit vimrc/zshrc and load vimrc bindings
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
 nnoremap <leader>ez :vsp ~/.zshrc<CR>
@@ -247,11 +239,6 @@ nnoremap <Leader>nf :NERDTreeFind<CR>
 " Close vim if only window left is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" NERDCommenter
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
 
 " Vim Markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -310,7 +297,7 @@ map <Leader>t <Plug>(easymotion-t2)
 " ALE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>at :ALEToggle<CR>
-let g:ale_enabled = 1
+let g:ale_enabled = 0
 
 " Indentline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -329,7 +316,8 @@ nmap <leader>; :Buffers<CR>
 " Quick Save
 nmap <Leader>w :w<CR>
 nmap <Leader>q :q<CR>
-nmap <Leader>qq :qa!<CR>
+nmap <Leader>wq :wq<CR>
+"nmap <Leader>qq :qa!<CR>
 
 " Quick copy paste
 nmap <Leader>y "+y
@@ -349,9 +337,9 @@ nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 
 " Very magic by default
-nnoremap ? ?\v
-nnoremap / /\v
-cnoremap %s/ %sm/
+" nnoremap ? ?\v
+" nnoremap / /\v
+" cnoremap %s/ %sm/
 
 set ttyfast
 
@@ -365,4 +353,12 @@ let g:limelight_conceal_ctermfg = 'gray'
 "autocmd! User GoyoEnter Limelight
 "autocmd! User GoyoLeave Limelight!
 "
-"
+
+" Vim Signature
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <Leader>m :SignatureToggle<CR>
+let g:SignatureEnabledAtStartup = 0
+
+" Vim Startify
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:startify_custom_header =[]
