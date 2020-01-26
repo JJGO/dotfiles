@@ -37,3 +37,18 @@ source /Users/josejavier/Library/Preferences/org.dystroy.broot/launcher/bash/br
 # export HISTSIZE=1000000000
 # export SAVEHIST=$HISTSIZE
 # setopt EXTENDED_HISTORY
+
+# Remap clear-screen since ^L is taken by tmux-vim
+bindkey "^O" clear-screen 
+bindkey "^L" end-of-line
+
+# Disable right prompt for lecture recording
+RPROMPT=
+
+# Alt left/right moves words
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
+
+# Alt up/down goes to beggining/end of line
+bindkey "^[[1;3A" beginning-of-line
+bindkey "^[[1;3B" end-of-line
