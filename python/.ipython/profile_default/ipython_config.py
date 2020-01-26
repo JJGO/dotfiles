@@ -2,7 +2,7 @@
 
 c = get_config()
 #c.InteractiveShellApp.exec_lines = ['%load_ext autoreload', '%autoreload 2']
-c.InteractiveShellApp.matplotlib = 'inline'
+#c.InteractiveShellApp.matplotlib = 'inline'
 
 c.InteractiveShellApp.exec_lines = [
     'import numpy as np',
