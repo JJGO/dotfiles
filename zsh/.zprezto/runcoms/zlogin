@@ -23,17 +23,17 @@ if [ -z $TMUX ]; then
     if (( $+commands[fortune] )); then
       if [[ -t 0 || -t 1 ]]; then
 	 if command -v lolcat > /dev/null; then
-         	fortune -s | lolcat
+         	#fortune -s | lolcat
 	 else
-                fortune -s
+            #    fortune -s
          fi
          print
       fi
     fi
+    export TERM=xterm-256color
 fi
 
 #if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [[ ! "$TERM" =~ xterm-kitty ]]; then
 #  exec tmux
 #fi
 
-export TERM=xterm-256color
