@@ -39,7 +39,7 @@ alias ga='git add'
 alias gs='git status'
 alias gu='git pull'
 alias gg='git graph'
-unalias gd
+# unalias gd
 alias gd='git diff'
 alias gD='git ls-files'
   # Note that gs is also ghostscript
