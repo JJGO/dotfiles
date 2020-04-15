@@ -4,8 +4,10 @@ import argparse
 import time
 from playsound import playsound
 import threading
+import urllib.parse
 import subprocess
 import sys
+
 
 POMO_END_SOUND = "/Users/josejavier/dbm/misc/sounds/school_bells.mp3"
 
@@ -43,6 +45,7 @@ def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=
     if iteration == total:
         print()
 
+
 def countdown(minutes):
 
     seconds = minutes * 60
@@ -60,7 +63,6 @@ def countdown(minutes):
     t.start()
 
 
-
 def toggl_stop(wait=False):
     p = subprocess.Popen(['toggl', 'stop'])
     if wait:
@@ -75,13 +77,22 @@ def toggl_start(task):
         subprocess.Popen(['toggl', 'start', task])
 
 
+def alert(msg):
+    print(msg)
+    if sys.platform == 'darwin':
+        msg = urllib.parse.quote(msg)
+        subprocess.run(['open', '-g', f'hammerspoon://alert?msg={msg}'])
+    else:
+        print(f"Alert not implemented for platform {sys.platform}")
+
+
 if __name__ == '__main__':
 
     args = parser.parse_args()
 
     while True:
 
-        print(f"Doing {args.task} for {args.duration}'")
+        alert(f"Doing {args.task} for {args.duration}")
         if args.task is not None:
             toggl_start(args.task)
         try:
@@ -97,7 +108,7 @@ if __name__ == '__main__':
 
         if args.break_ > 0:
             try:
-                print(f"Break for {args.break_}'")
+                alert(f"Break for {args.break_}'")
                 countdown(args.break_)
             except KeyboardInterrupt:
                 sys.exit(0)

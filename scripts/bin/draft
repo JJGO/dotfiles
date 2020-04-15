@@ -1,0 +1,2 @@
+#/usr/bin/env bash
+date -u +"~/Downloads/%Y%m%d%H%M%S.txt" | xargs subl -n
