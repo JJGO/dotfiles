@@ -102,6 +102,19 @@ fi
 ###########################################################################################################################
 
 # Functions
+# Like a local wormhole
+function snd() {
+    mkdir -p /tmp/passage
+    /bin/cp $1 /tmp/passage
+    /bin/rm /tmp/passage/last &>/dev/null || true
+    echo $1 > /tmp/passage/last
+}
+
+function rcv() {
+    file=$(cat /tmp/passage/last)
+    /bin/cp -i "/tmp/passage/$file" $file
+    /bin/rm "/tmp/passage/$file"
+}
 
 # fzf
 if command -v fzf > /dev/null; then
