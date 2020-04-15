@@ -68,8 +68,10 @@ alias printpath='echo $PATH | sed "s/:/\\n/g"'
 # Other
 # alias matlabc='matlab -nodesktop -nosplash'
   # Create separator using current columns
-alias sep='tput cols | python -c "import sys; print(\"#\"*int(sys.stdin.read().strip()))"'
+alias sep='tput cols | python -c "import sys; print(\"=\"*int(sys.stdin.read().strip()))"'
+alias rg="sep; rg"
 
+alias clock='watch -n 0.1 "date +"%H:%M:%S" | toilet -f bigmono9"' # -f future
 # Rename terminal Windows
   # $1 = type; 0 - both, 1 - tab, 2 - title
   # rest = text
