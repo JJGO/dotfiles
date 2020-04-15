@@ -204,10 +204,10 @@ case "$(uname -s)" in
      alias chromec="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary &"
 
      alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
-
      alias readlink="greadlink"
 
-     # alias mosh="stt_both mosh && mosh"
+     alias mvf='mv "$(pfs)"' # Move current finder selection
+
      ;;
 
    Linux)
