@@ -19,6 +19,9 @@ function clickMenuItem(app, item)
 end
 
 require("autoreload")
+-- hs.loadSpoon("ReloadConfiguration")
+-- spoon.ReloadConfiguration:start()
+
 require("keyboard")
 require("yabai")
 require("auto-audio")
