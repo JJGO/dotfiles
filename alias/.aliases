@@ -12,6 +12,7 @@ alias crontab="VIM_CRONTAB=true crontab"
 alias_if_exists 'diff' 'colordiff'
 alias_if_exists 'ag' 'rg'
 alias_if_exists 'vim' 'nvim'
+alias_if_exists 'fdupes' 'jdupes'
 
 # MacOS GNUs
 for i in awk cat chgrp chmod chown chroot cut date df du echo egrep env false fgrep find grep join kill link ln logname ls make mkdir mknod mktemp mv nice nohup paste perf printf pwd readlink realpath rm rmdir sed sort split tac tail tar tee test touch tr true truncate tty uniq unlink unzip uptime users who whoami yes zip; do
