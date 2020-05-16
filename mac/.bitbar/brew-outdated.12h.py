@@ -23,7 +23,7 @@ CASK_UPGRADE = [BREW, 'cask', 'upgrade']
 BREW_CLEANUP = [BREW, 'cleanup', '-s']
 
 FIXED_FORMULA = ['mkvtoolnix']
-FIXED_CASK = ['wifi-explorer', 'filebot']
+FIXED_CASK = ['wifi-explorer', 'filebot', 'eqmac']
 
 parser = argparse.ArgumentParser(description='Brew updater')
 parser.add_argument('-u', '--upgrade', dest='upgrade', action='store_true')
