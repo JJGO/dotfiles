@@ -20,7 +20,7 @@ function chooseAudio()
         return
     end
 
-    outOrder = {"WH-1000XM3", "DELL U3219Q", "DELL U2717D", "DELL U2518D"}
+    outOrder = {"WH-1000XM3", "RC-BT", "DELL U3219Q", "DELL U2717D", "DELL U2518D"}
 
     for i = 1, #outOrder do
         if contains(outOrder[i]) then
@@ -36,6 +36,7 @@ end
 
 function audioCallback(msg)
     if msg == "dev#" then
+        print("Choosing Audio")
         chooseAudio()
     end
 end
