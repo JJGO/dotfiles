@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+import urllib.parse
+import sys
+import subprocess
+
+if __name__ == '__main__':
+    msg = " ".join(sys.argv[1:])
+    if msg == "":
+        msg = "Done!"
+    msg = urllib.parse.quote(msg)
+    subprocess.run(['open', '-g', f'hammerspoon://alert?msg={msg}'])
+
