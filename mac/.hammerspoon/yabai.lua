@@ -24,6 +24,7 @@ bindCmd({"shift", "cmd"}, "l", "/usr/local/bin/yabai -m window --warp east")
 
 -- balance size of windows
 bindCmd({"shift", "alt"}, "0", "/usr/local/bin/yabai -m space --balance")
+bindCmd({"alt"}, "b", "/usr/local/bin/yabai -m space --balance")
 
 -- make floating window fill screen
 -- bindCmd({ "shift", "alt" - up}, " ", "/usr/local/bin/yabai -m window --grid 1:1:0:0:1:1")
@@ -130,7 +131,7 @@ bindCmd({"shift", "alt"}, "f", "/usr/local/bin/yabai -m window --toggle native-f
 bindCmd({"shift", "alt"}, "b", "/usr/local/bin/yabai -m window --toggle border")
 
 -- toggle window split type
--- bindCmd({ "alt"}, "e", "/usr/local/bin/yabai -m window --toggle split")
+bindCmd({ "alt"}, "w", "/usr/local/bin/yabai -m window --toggle split")
 
 -- float / unfloat window and center on screen
 bindCmd({"alt"}, "t", "/usr/local/bin/yabai -m window --toggle float;\
@@ -146,3 +147,15 @@ bindCmd({"alt"}, "p", "/usr/local/bin/yabai -m window --toggle sticky;\
 -- change layout of desktop
 bindCmd({"ctrl", "alt"}, "a", "/usr/local/bin/yabai -m space --layout bsp")
 bindCmd({"ctrl", "alt"}, "d", "/usr/local/bin/yabai -m space --layout float")
+
+-- create desktop and follow focus - uses jq for parsing json (brew install jq)
+bindCmd({"cmd", "alt"}, "n", '/usr/local/bin/yabai -m space --create && \
+index="$(/usr/local/bin/yabai -m query --spaces --display | /usr/local/bin/jq \'map(select(."native-fullscreen" == 0))[-1].index\')" && \
+/usr/local/bin/yabai -m space --focus "${index}"')
+
+-- create desktop, move window and follow focus - uses jq for parsing json (brew install jq)
+bindCmd({"ctrl", "cmd"}, "n", '/usr/local/bin/yabai -m space --create && \
+index=$(/usr/local/bin/yabai -m query --spaces --display | /usr/local/bin/jq \'map(select(."native-fullscreen" == 0))[-1].index\') && \
+/usr/local/bin/yabai -m window --space "${index}" && \
+/usr/local/bin/yabai -m space --focus "${index}"')
+
