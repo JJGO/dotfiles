@@ -1,0 +1,22 @@
+set completion-ignore-case on
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+
+# set editing-mode vi
+# set keymap vi-insert
+
+$if mode=vi
+"\C-a": beginning-of-line
+"\C-e": end-of-line
+"\C-l": clear-screen
+"\C-n": next-history
+"\C-p": previous-history
+"\C-w": backward-kill-word
+
+"\e.": yank-last-arg
+"\e_": yank-last-arg
+$endif
+
+# Alt left/right moves words
+"^[[1;3C": forward-word
+"^[[1;3D": backward-word
