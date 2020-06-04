@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 function alias_if_exists() {
   # Does the alias only if the aliased program is installed
     if command -v $2 > /dev/null; then
@@ -70,7 +71,7 @@ alias printpath='echo $PATH | sed "s/:/\\n/g"'
 # alias matlabc='matlab -nodesktop -nosplash'
   # Create separator using current columns
 alias sep='tput cols | python -c "import sys; print(\"=\"*int(sys.stdin.read().strip()))"'
-alias rg="sep; rg"
+alias rg="sep; rg -u"
 
 alias clock='watch -n 0.1 "date +"%H:%M:%S" | toilet -f bigmono9"' # -f future
 # Rename terminal Windows
@@ -199,7 +200,7 @@ case "$(uname -s)" in
      # 'Mac OS X'
 
      alias clear-dnscache="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
-     alias bu="brew update && brew outdated | xargs brew upgrade  && brew cleanup -s"
+     alias bu="brew update && brew outdated | xargs brew upgrade  && brew cleanup -s --prune=0"
 
      alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome &"
      alias chromec="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary &"
