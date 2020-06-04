@@ -3,6 +3,7 @@
 c = get_config()
 #c.InteractiveShellApp.exec_lines = ['%load_ext autoreload', '%autoreload 2']
 #c.InteractiveShellApp.matplotlib = 'inline'
+c.HistoryManager.hist_file='/tmp/ipython_hist.sqlite' #changes history file writing to tmp folder
 
 c.InteractiveShellApp.exec_lines = [
     'import numpy as np',
@@ -12,6 +13,7 @@ c.InteractiveShellApp.exec_lines = [
     'import pathlib',
     'import json',
     'import yaml',
+    'import h5py',
     'from pprint import pprint'
 ]
 # c.InteractiveShell.editor = 'vim'
