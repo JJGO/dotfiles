@@ -2,20 +2,140 @@
 
 set nocompatible " VI compatible mode is disabled so that VIm things work
 
-" Settings from these blogposts
-" https://dougblack.io/words/a-good-vimrc.html
+call plug#begin()
+
+
+" Load plugins
+" Per file editor config
+Plug 'ciaranm/securemodelines'
+Plug 'editorconfig/editorconfig-vim'
+
+
+
+" Search
+Plug 'romainl/vim-cool'               " Disables highlight when search is done
+Plug 'haya14busa/incsearch.vim'       " Better incremental search
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }  " FZF plugin, makes Ctrl-P unnecessary
+Plug 'junegunn/fzf.vim'
+" Plug 'airblade/vim-rooter'
+
+" Movement
+Plug 'justinmk/vim-sneak'
+Plug 'easymotion/vim-easymotion'
+Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'wikitopian/hardmode'            " Disable arrow keys and similar
+
+" Text Manipulation
+Plug 'tpope/vim-sensible'             " Some better defaults
+Plug 'tpope/vim-unimpaired'           " Pairs of mappings
+Plug 'tpope/vim-surround'             " Surround with parentheses & co
+Plug 'joom/vim-commentary'            " To comment stuff out
+Plug 'terryma/vim-multiple-cursors'   " Multiple cursors like sublime
+Plug 'godlygeek/tabular'              " For alignment
+Plug 'foosoft/vim-argwrap'            " convert lists of arguments into blocks of arguments
+Plug 'tpope/vim-endwise'              " Ends control flow indentifiers
+Plug 'tpope/vim-repeat'               " Adds repeat thorugh . to other packages
+Plug 'tpope/vim-speeddating'          " Dates in vim
+
+" GUI enhancements
+Plug 'itchyny/lightline.vim'          " Better Status Bar
+Plug 'mhinz/vim-startify'             " Better start screen
+Plug 'scrooloose/nerdtree'            " File explorer
+Plug 'sjl/gundo.vim'                  " Undo Tree
+Plug 'majutsushi/tagbar'              " Pane with tags
+Plug 'machakann/vim-highlightedyank'  " Highlight yanks
+Plug 'andymass/vim-matchup'           " Highlight corresponding blocks e.g. if - fi in bash
+Plug 'kshenoy/vim-signature'          " Show marks in the gutter
+Plug 'yggdroot/indentline'            " Shows indentation levels
+Plug 'tpope/vim-eunuch'               " Unix helpers
+" Git GUI
+Plug 'airblade/vim-gitgutter'         " Git gutter
+Plug 'tpope/vim-fugitive'             " Git interface
+Plug 'xuyuanp/nerdtree-git-plugin'    " Show status of files in NerdTree
+" Tmux GUI
+Plug 'roxma/vim-tmux-clipboard'
+Plug 'christoomey/vim-tmux-navigator'
+
+
+" Autocomplete
+Plug 'ervandew/supertab'
+" Semantic language support
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Syntactic language support
+Plug 'w0rp/ale'                        " Linting engine
+Plug 'plasticboy/vim-markdown'         " Markdown support
+Plug 'cespare/vim-toml'                " TOML support
+Plug 'stephpy/vim-yaml'                " YAML support
+Plug 'elzr/vim-json'                   " Better JSON support
+Plug 'rust-lang/rust.vim'              " Rust support
+Plug 'glench/vim-jinja2-syntax'        " Jinja2 support
+Plug 'lervag/vimtex'                   " Latex support
+Plug 'pearofducks/ansible-vim'         " Ansible support
+Plug 'mechatroner/rainbow_csv'         " CSV color coding
+Plug 'ap/vim-css-color'                " CSS colors
+Plug 'luochen1990/rainbow'             " Rainbow parentheses
+Plug 'vim-pandoc/vim-pandoc'           " Pandoc support
+Plug 'vim-pandoc/vim-pandoc-syntax'    " Pandoc syntax
+Plug 'chrisbra/colorizer'              " Colorize color codes
+" Plug 'vim-python/python-syntax'
+Plug 'sentientmachine/pretty-vim-python'
+
+" Colorschemes
+" Plug 'tomasr/molokai'                  " Monokai and friends
+" Plug 'sickill/vim-monokai'
+" Plug 'patstockwell/vim-monokai-tasty'
+" Plug 'erichdongubler/vim-sublime-monokai'
+Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-vim'         " Base16 themes
+" Plug 'flazz/vim-colorschemes'          " Bunch of color schemes
+Plug 'gerw/vim-hilinktrace'            " Syntax Highlighting Tracer
+
+" Writing
+Plug 'junegunn/goyo.vim'               " Distraction free mode
+Plug 'junegunn/limelight.vim'          " Focus on current paragraph
+Plug 'rhysd/vim-grammarous'            " GrammarCheck using LanguageTool
+Plug 'ron89/thesaurus_query.vim'       " Synonym query
+
+" Other
+Plug 'wakatime/vim-wakatime'           " Wakatime time tracking
+call plug#end()
+
 
 " Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" if exists('+termguicolors')
+  " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  " set termguicolors
+" endif
+syntax on           " enable syntax processing
 let g:molokai_original = 1
-colorscheme molokai " Monokai-like colorscheme
-" colorscheme badwolf         " awesome colorscheme
-syntax enable           " enable syntax processing
+
+
+" colorscheme molokai " Monokai-like colorscheme
+" let g:vim_monokai_tasty_italic = 1
+" colorscheme vim-monokai-tasty
+" colorscheme monojai
+" colorscheme solarized8_dark
+colorscheme molokai
+" colorscheme gruvbox
+" let islate=$ISLATE
+"         colorscheme sublimemonokai
+
+" if islate == '1'
+"         " colorscheme gruvbox
+"         colorscheme molojai
+" else
+"         colorscheme sublimemonokai
+" endif
 
 " Spaces & Tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set tabstop=4       " number of visual spaces per TAB
 set softtabstop=4   " number of spaces in tab when editing
+set shiftwidth=4    " Insert 4 spaces on a tab
 set expandtab       " tabs are spaces, mainly because of python
 
 " UI Config
@@ -33,11 +153,13 @@ set mouse+=a            " A necessary evil, mouse support
 set noerrorbells visualbell t_vb=    "Disable annoying error noises
 set splitbelow          " Open new vertical split bottom
 set splitright          " Open new horizontal splits right
+set linebreak           " Have lines wrap instead of continue off-screen
+set scrolloff=12        " Keep cursor in approximately the middle of the screen
 " Buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set hidden              " Allows having hidden buffers (not displayed in any window)
 
-" Sensible stuff 
+" Sensible stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set backspace=indent,eol,start     " Make backspace behave in a more intuitive way
 nmap Q <Nop>
@@ -123,7 +245,8 @@ let g:ctrlp_show_hidden = 1
 
 " Launch config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call pathogen#infect()                      " use pathogen
+" call pathogen#infect()                      " use pathogen
+" Helptags
 
 " GUndo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -240,22 +363,6 @@ nnoremap <Leader>nf :NERDTreeFind<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
-" Vim Markdown
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:markdown_fenced_languages = [
-    \ 'bash=sh',
-    \ 'c',
-    \ 'coffee',
-    \ 'erb=eruby',
-    \ 'javascript',
-    \ 'json',
-    \ 'perl',
-    \ 'python',
-    \ 'ruby',
-    \ 'yaml',
-    \ 'go',
-\]
-let g:vim_markdown_conceal = 2
 
 " FZF
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -314,9 +421,9 @@ nmap <leader>; :Buffers<CR>
 
 
 " Quick Save
-nmap <Leader>w :w<CR>
+nmap <Leader>w :call <SID>StripTrailingWhitespaces()<CR>:w<CR>
 nmap <Leader>q :q<CR>
-nmap <Leader>wq :wq<CR>
+nmap <Leader>wq :call <SID>StripTrailingWhitespaces()<CR>:wq<CR>
 "nmap <Leader>qq :qa!<CR>
 
 " Quick copy paste
@@ -335,6 +442,8 @@ nnoremap <silent> N Nzz
 nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
+nnoremap <C-o> <C-o>zz
+nnoremap <C-i> <C-i>zz
 
 " Very magic by default
 " nnoremap ? ?\v
@@ -362,3 +471,85 @@ let g:SignatureEnabledAtStartup = 0
 " Vim Startify
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:startify_custom_header =[]
+
+nnoremap <Leader>` :Startify<CR>
+
+
+
+autocmd BufNewFile,BufRead *.yml.j2 set syntax=yaml
+
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+vnoremap <Tab> >
+vnoremap <S-Tab> <
+
+nnoremap K :move-2<CR>==
+nnoremap J :move+<CR>==
+xnoremap K :move-2<CR>gv=gv
+xnoremap J :move'>+<CR>gv=gv
+
+set modeline
+
+" Spellcheck Keyboard shorcut
+" https://vim.fandom.com/wiki/Toggle_spellcheck_with_function_keys
+nnoremap <F5> :setlocal spell! spelllang=en_us<CR>
+
+
+"" Markdown config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" https://secluded.site/vim-as-a-markdown-editor/
+"
+" Treat all .md files as markdown
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+
+" Highlight the line the cursor is on
+autocmd FileType markdown set cursorline
+
+" Set spell check to British English
+autocmd FileType markdown setlocal spell spelllang=en_us
+
+" Here’s a short crash course in Vim spelling commands:
+
+"     [s to search for misspelled words above the cursor
+"     ]s to search for misspelled words below the cursor
+"     z= to see replacement suggestions
+"     zg to add the word to your dictionary
+
+nnoremap <C-g> :Goyo<CR>
+
+autocmd FileType markdown Goyo
+
+" Vim Markdown
+let g:markdown_fenced_languages = [
+    \ 'bash=sh',
+    \ 'c',
+    \ 'coffee',
+    \ 'erb=eruby',
+    \ 'javascript',
+    \ 'json',
+    \ 'perl',
+    \ 'python',
+    \ 'ruby',
+    \ 'yaml',
+    \ 'go',
+\]
+
+" Configuration for vim-markdown
+let g:vim_markdown_conceal = 2
+let g:vim_markdown_conceal_code_blocks = 0
+let g:vim_markdown_math = 1
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_autowrite = 1
+let g:vim_markdown_edit_url_in = 'tab'
+let g:vim_markdown_follow_anchor = 1
+
+" Vim thesaurus
+let g:tq_language=['en']
+let g:tq_enabled_backends=["mthesaur_txt", "datamuse_com"]
+let g:tq_online_backends_timeout = 0.4
+
+let g:tq_mthesaur_file="~/.vim/bundle/thesaurus_query.vim/mthesaur.txt"
