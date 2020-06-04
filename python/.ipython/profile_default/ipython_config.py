@@ -8,14 +8,13 @@ c.InteractiveShellApp.exec_lines = [
     'import numpy as np',
     'import pandas as pd',
     'import matplotlib.pyplot as plt',
-    'import scipy',
-    'from tqdm import tnrange, tqdm, tqdm_notebook',
-    'import h5py',
+    'from tqdm import tqdm, tqdm_notebook',
     'import pathlib',
     'import json',
+    'import yaml',
     'from pprint import pprint'
 ]
-c.InteractiveShell.editor = 'vim'
+# c.InteractiveShell.editor = 'vim'
 # c.InteractiveShell.autoindent = True
 c.PromptManager.justify = True
 
@@ -65,7 +64,7 @@ c.PromptManager.justify = True
 
 # Enable GUI event loop integration with any of ('glut', 'gtk', 'gtk3', 'osx',
 # 'pyglet', 'qt', 'qt5', 'tk', 'wx').
-c.InteractiveShellApp.gui = "qt5"
+# IMPORTANT FIXME c.InteractiveShellApp.gui = "qt5"
 
 # Should variables loaded at startup (by startup files, exec_lines, etc.) be
 # hidden from tools like %who?
