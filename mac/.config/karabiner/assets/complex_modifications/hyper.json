@@ -1,0 +1,319 @@
+{
+  "title": "Hyper Key mods",
+  "rules": [
+    {
+      "description": "Hyper+HJKL to arrows",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_alt",
+                "right_command",
+                "right_control"
+              ],
+              "optional": "any"
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_alt",
+                "right_command",
+                "right_control"
+              ],
+              "optional": "any"
+            }
+          },
+          "to": [
+            {
+              "key_code": "down_arrow"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_alt",
+                "right_command",
+                "right_control"
+              ],
+              "optional": "any"
+            }
+          },
+          "to": [
+            {
+              "key_code": "up_arrow"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_alt",
+                "right_command",
+                "right_control"
+              ],
+              "optional": "any"
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper+YUIO to Nav",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "y",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_alt",
+                "right_command",
+                "right_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "home"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "o",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_alt",
+                "right_command",
+                "right_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "end"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "i",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_alt",
+                "right_command",
+                "right_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "page_up"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "u",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_alt",
+                "right_command",
+                "right_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "page_down"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper+Backspace to Del",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "delete_or_backspace",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_alt",
+                "right_command",
+                "right_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "delete_forward"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper+,./ to volume",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "comma",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_alt",
+                "right_command",
+                "right_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "mute"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "period",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_alt",
+                "right_command",
+                "right_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "volume_decrement"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "slash",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_alt",
+                "right_command",
+                "right_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "volume_increment"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Hyper+0-= to media",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "0",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_alt",
+                "right_command",
+                "right_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "rewind"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "hyphen",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_alt",
+                "right_command",
+                "right_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "play_or_pause"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "equal_sign",
+            "modifiers": {
+              "mandatory": [
+                "right_shift",
+                "right_alt",
+                "right_command",
+                "right_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "fastforward"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
