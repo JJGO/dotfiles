@@ -7,7 +7,8 @@
 # Dont link DS_Store files
 find . -name ".DS_Store" -exec rm {} \;
 
-PROGRAMS=(alias aspell bash env git latex python scripts stow tmux tmuxinator vim zsh)
+# PROGRAMS=(alias aspell bash env git latex python scripts stow tmux vim zsh)
+PROGRAMS=(alias aspell bash env git latex python scripts stow tmux vim zsh mac terminal)
 
 function backup_if_exists() {
     if [ -f $1 ];
