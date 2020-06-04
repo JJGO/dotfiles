@@ -82,21 +82,21 @@ font:
   normal:
     # family: Menlo
     # The `style` can be specified to pick a specific face.
-    family: MesloLGS NF    
+    family: MesloLGS NF
     style: Regular
 
   # Italic font face
   bold:
     # family: Menlo
     # The `style` can be specified to pick a specific face.
-    family: MesloLGS NF    
+    family: MesloLGS NF
     style: Bold
 
   # Italic font face
   italic:
     # family: Menlo
     # The `style` can be specified to pick a specific face.
-    family: MesloLGS NF    
+    family: MesloLGS NF
     style: Italic
 
   # Point size
