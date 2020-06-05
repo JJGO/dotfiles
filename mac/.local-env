@@ -1,5 +1,0 @@
-# opam configuration
-test -r /Users/josejavier/.opam/opam-init/init.zsh && . /Users/josejavier/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-eval $(opam config env)
-
-export GRB_LICENSE_FILE=/Users/josejavier/.secret-dotfiles/licenses/gurobi.lic
