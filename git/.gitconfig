@@ -1,12 +1,11 @@
-[filter "media"]
-	required = true
-	clean = git media clean %f
-	smudge = git media smudge %f
 [user]
 	name = Jose Javier
 	email = josejavier.gonzalez.ortiz@gmail.com
 [push]
 	default = simple
+[pull]
+    rebase = false
+    ff = only
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore_global
@@ -44,3 +43,7 @@
     old = red bold
     new = green bold
     whitespace = red reverse
+[filter "media"]
+    required = true
+    clean = git media clean %f
+    smudge = git media smudge %f
