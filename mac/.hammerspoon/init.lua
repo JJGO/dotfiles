@@ -18,14 +18,27 @@ function clickMenuItem(app, item)
     app:selectMenuItem(item)
 end
 
-require("autoreload")
+function file_exists(name)
+   local f=io.open(name,"r")
+   if f~=nil then io.close(f) return true else return false end
+end
+
+function require_if_exists(file)
+    if file_exists(file .. ".lua") then
+        print(" #### Loading " .. file)
+        require(file)
+    end
+end
+
+require_if_exists("autoreload")
 -- hs.loadSpoon("ReloadConfiguration")
 -- spoon.ReloadConfiguration:start()
 
-require("keyboard")
-require("yabai")
-require("auto-audio")
-require("cpm-backup")
-require("zoom-mute")
-require("multidisplay-black")
+require_if_exists("keyboard")
+require_if_exists("yabai")
+require_if_exists("auto-audio")
+require_if_exists("cpm-backup")
+require_if_exists("cpm-backup2")
+require_if_exists("zoom-mute")
+require_if_exists("multidisplay-black")
 
