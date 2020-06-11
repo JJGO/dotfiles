@@ -24,7 +24,7 @@ function openSublime()
 end
 function openVimr()
     d = os.date("%Y%m%d%H%M%S")
-    file = "/Users/josejavier/Downloads/" .. d .. ".md"
+    file = os.getenv("HOME") .. "/Downloads/" .. d .. ".md"
     os.execute("/usr/local/bin/vimr " .. file)
 end
 

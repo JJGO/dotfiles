@@ -20,7 +20,7 @@ function chooseAudio()
         return
     end
 
-    outOrder = {"WH-1000XM3", "RC-BT", "DELL U3219Q", "DELL U2717D", "DELL U2518D"}
+    outOrder = {"WH-1000XM3", "RC-BT", "External Headphones", "DELL U3219Q", "DELL U2717D", "DELL U2518D", "MacBook Pro Speakers"}
 
     for i = 1, #outOrder do
         if contains(outOrder[i]) then
