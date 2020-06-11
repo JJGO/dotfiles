@@ -520,7 +520,7 @@ autocmd FileType markdown setlocal spell spelllang=en_us
 
 nnoremap <C-g> :Goyo<CR>
 
-autocmd FileType markdown Goyo
+" autocmd FileType markdown Goyo
 
 " Vim Markdown
 let g:markdown_fenced_languages = [
