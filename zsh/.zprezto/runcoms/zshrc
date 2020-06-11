@@ -40,7 +40,6 @@ export COMP_KNOWN_HOSTS_WITH_HOSTFILE=""
 # bindkey "^R" history-incremental-search-backward
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source /Users/josejavier/Library/Preferences/org.dystroy.broot/launcher/bash/br
 
 # export HISTSIZE=1000000000
 # export SAVEHIST=$HISTSIZE
@@ -61,7 +60,9 @@ bindkey "^[[1;3D" backward-word
 bindkey "^[[1;3A" beginning-of-line
 bindkey "^[[1;3B" end-of-line
 
-source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+if [ -f $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ]; then
+  source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
