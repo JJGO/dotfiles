@@ -53,6 +53,7 @@ Plug 'airblade/vim-gitgutter'         " Git gutter
 Plug 'tpope/vim-fugitive'             " Git interface
 Plug 'xuyuanp/nerdtree-git-plugin'    " Show status of files in NerdTree
 " Tmux GUI
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'christoomey/vim-tmux-navigator'
 
