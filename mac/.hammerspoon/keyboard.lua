@@ -52,9 +52,6 @@ hs.hotkey.bind(hyper, "S", function() hs.application.launchOrFocus("Spotify") en
 -- Provides a keyboard based window switcher (instead of app switcher)
 hs.hotkey.bind({"cmd", "alt"}, "tab", function() hs.hints.windowHints() end)
 
--- Paste my email
-hs.hotkey.bind(hyper, "E", function() hs.eventtap.keyStrokes("josejavier.gonzalez.ortiz@gmail.com") end)
-
 -- Hyper+F makes toggles app zoom
 hs.hotkey.bind(hyper, "F", function() hs.window.focusedWindow():toggleZoom() end)
 
