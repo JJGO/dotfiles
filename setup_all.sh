@@ -27,6 +27,8 @@ backup_if_exists ~/.bashrc
 backup_if_exists ~/.gitconfig
 backup_if_exists ~/.tmux.conf
 
+mkdir -p ~/.vim/undodir
+
 for f in ~/.zprezto/runcoms/z*
 do
     mv "$f" "$f.bk"
