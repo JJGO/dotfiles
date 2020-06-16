@@ -3,13 +3,15 @@
 syntax on
 filetype plugin indent on
 
-let g:python_host_prog = '/Users/josejavier/.pyenv/versions/2.7.14/bin/python'
-let g:python3_host_prog = '/Users/josejavier/.pyenv/versions/3.8.2/bin/python'
+let g:python3_host_prog = '~/.neovim/py3/bin/python'
+let g:node_host_prog = '~/.neovim/node/bin/neovim-node-host'
 
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 " Live preview of substituion
 set inccommand=nosplit
+
+" Load vim config
 source ~/.vimrc
 
 ""Let the input go up and the search list go down
