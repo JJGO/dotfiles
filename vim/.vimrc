@@ -468,9 +468,9 @@ nnoremap <Leader>os :setlocal spell! spelllang=en_us<CR>
 
 " `  `v  `z  rv  -- edit vimrc/zshrc and load vimrc bindings
 nnoremap <Leader>` :Startify<CR>
-nnoremap <Leader>`v :vsp $MYVIMRC<CR>
+nnoremap <Leader>`v :vsp ~/.vimrc<CR> "$MYVIMRC<CR>
 nnoremap <Leader>`z :vsp ~/.zshrc<CR>
-nnoremap <Leader>rv :source $MYVIMRC<CR>
+nnoremap <Leader>rv :source ~/.vimrc<CR>  "$MYVIMRC<CR>
 
 " S    --  save session,  After saving a Vim session, you can reopen it with vim -S.
 nnoremap <Leader>S :mksession<CR>
