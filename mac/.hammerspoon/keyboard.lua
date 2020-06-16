@@ -63,3 +63,7 @@ hs.hotkey.bind({"ctrl", "shift"}, "escape", function() os.execute("pmset display
 
 -- Ctrl+Cmd+Alt + P -- Toggle Caps Lock
 hs.hotkey.bind({"ctrl", "cmd", "alt"}, "P", function() hs.hid.capslock.toggle() end)
+
+-- Capture OCR to clipboard
+hs.hotkey.bind({"ctrl", "cmd", "alt"}, "O", function() os.execute("~/bin/ocr") end)
+
