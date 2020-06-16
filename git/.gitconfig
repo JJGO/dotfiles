@@ -5,7 +5,6 @@
 	default = simple
 [pull]
     rebase = false
-    ff = only
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore_global
