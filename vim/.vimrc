@@ -114,16 +114,19 @@ call plug#end()
 " Colorscheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
+if has('gui_running')
+    colorscheme molokai
+elseif &t_Co < 256
+    colorscheme molokai
+    set nocursorline " looks bad in this mode
+else
+    set background=dark
+    let g:molokai_original = 0
+    colorscheme molokai
+    " customized colors
 endif
+
 syntax on           " enable syntax processing
-
-let g:molokai_original = 0
-colorscheme molokai
-
 
 " Spaces & Tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
