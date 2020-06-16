@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 set -x
 # Install neovim itself
 # TODO
