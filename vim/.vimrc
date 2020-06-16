@@ -2,15 +2,15 @@
 
 set nocompatible " VI compatible mode is disabled so that VIm things work
 
+" =============================================================================
+"   PLUGINS
+" =============================================================================
 call plug#begin()
-
 
 " Load plugins
 " Per file editor config
 Plug 'ciaranm/securemodelines'
 Plug 'editorconfig/editorconfig-vim'
-
-
 
 " Search
 Plug 'romainl/vim-cool'               " Disables highlight when search is done
@@ -25,6 +25,10 @@ Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'wikitopian/hardmode'            " Disable arrow keys and similar
 
+" Copy pasting
+" TODO Figure out easyclip family
+" Plug 'svermeulen/vim-yoink'
+
 " Text Manipulation
 Plug 'tpope/vim-sensible'             " Some better defaults
 Plug 'tpope/vim-unimpaired'           " Pairs of mappings
@@ -33,7 +37,7 @@ Plug 'joom/vim-commentary'            " To comment stuff out
 Plug 'terryma/vim-multiple-cursors'   " Multiple cursors like sublime
 Plug 'godlygeek/tabular'              " For alignment
 Plug 'foosoft/vim-argwrap'            " convert lists of arguments into blocks of arguments
-Plug 'tpope/vim-endwise'              " Ends control flow indentifiers
+" Interacts with coc Plug 'tpope/vim-endwise'              " Ends control flow indentifiers
 Plug 'tpope/vim-repeat'               " Adds repeat thorugh . to other packages
 Plug 'tpope/vim-speeddating'          " Dates in vim
 
@@ -59,7 +63,7 @@ Plug 'christoomey/vim-tmux-navigator'
 
 
 " Autocomplete
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 " Semantic language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -79,18 +83,19 @@ Plug 'luochen1990/rainbow'             " Rainbow parentheses
 Plug 'vim-pandoc/vim-pandoc'           " Pandoc support
 Plug 'vim-pandoc/vim-pandoc-syntax'    " Pandoc syntax
 Plug 'chrisbra/colorizer'              " Colorize color codes
-" Plug 'vim-python/python-syntax'
-Plug 'sentientmachine/pretty-vim-python'
+Plug 'liuchengxu/vista.vim'
+Plug 'vim-python/python-syntax'
+" Plug 'sentientmachine/pretty-vim-python'
 
 " Colorschemes
+Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-vim'         " Base16 themes
+Plug 'gerw/vim-hilinktrace'            " Syntax Highlighting Tracer
 " Plug 'tomasr/molokai'                  " Monokai and friends
 " Plug 'sickill/vim-monokai'
 " Plug 'patstockwell/vim-monokai-tasty'
 " Plug 'erichdongubler/vim-sublime-monokai'
-Plug 'morhetz/gruvbox'
-Plug 'chriskempson/base16-vim'         " Base16 themes
 " Plug 'flazz/vim-colorschemes'          " Bunch of color schemes
-Plug 'gerw/vim-hilinktrace'            " Syntax Highlighting Tracer
 
 " Writing
 Plug 'junegunn/goyo.vim'               " Distraction free mode
@@ -102,35 +107,23 @@ Plug 'ron89/thesaurus_query.vim'       " Synonym query
 Plug 'wakatime/vim-wakatime'           " Wakatime time tracking
 call plug#end()
 
+" =============================================================================
+"  EDITOR SETTINGS
+" =============================================================================
 
-" Colors
+" Colorscheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" if exists('+termguicolors')
-  " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  " set termguicolors
-" endif
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 syntax on           " enable syntax processing
-let g:molokai_original = 1
 
-
-" colorscheme molokai " Monokai-like colorscheme
-" let g:vim_monokai_tasty_italic = 1
-" colorscheme vim-monokai-tasty
-" colorscheme monojai
-" colorscheme solarized8_dark
+let g:molokai_original = 0
 colorscheme molokai
-" colorscheme gruvbox
-" let islate=$ISLATE
-"         colorscheme sublimemonokai
 
-" if islate == '1'
-"         " colorscheme gruvbox
-"         colorscheme molojai
-" else
-"         colorscheme sublimemonokai
-" endif
 
 " Spaces & Tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -156,6 +149,9 @@ set splitbelow          " Open new vertical split bottom
 set splitright          " Open new horizontal splits right
 set linebreak           " Have lines wrap instead of continue off-screen
 set scrolloff=12        " Keep cursor in approximately the middle of the screen
+set updatetime=100      " Some plugins require fast updatetime
+set ttyfast             " Improve redrawing
+
 " Buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set hidden              " Allows having hidden buffers (not displayed in any window)
@@ -169,18 +165,6 @@ map <C-a> <Nop>   " Unbind for tmux
 map <C-x> <Nop>
 
 
-" Leader Shortcuts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader=" "       " leader is space
-" jk is escape
-"inoremap jk <esc>
-" edit vimrc/zshrc and load vimrc bindings
-nnoremap <leader>ev :vsp $MYVIMRC<CR>
-nnoremap <leader>ez :vsp ~/.zshrc<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
-" save session,  After saving a Vim session, you can reopen it with vim -S.
-nnoremap <leader>s :mksession<CR>
-
 "Searching
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set incsearch           " search as characters are entered
@@ -190,6 +174,8 @@ set smartcase           " But make it case sensitive if an uppercase is entered
 " turn off search highlight
 vnoremap <C-h> :nohlsearch<cr>
 nnoremap <C-h> :nohlsearch<cr>
+" Ignore files for completion
+set wildignore+=*/.git/*,*/tmp/*,*.swp
 
 " Undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -217,47 +203,43 @@ nnoremap k gk
 " highlight last inserted text
 nnoremap gV `[v`]
 
-" CtrlP settings
+" Jump to start and end of line using the home row keys
+map H ^
+map L $
+
+" (Shift)Tab (de)indents code
+vnoremap <Tab> >
+vnoremap <S-Tab> <
+
+" Capital JK move code lines/blocks up & down
+" TODO improve functionality
+nnoremap K :move-2<CR>==
+nnoremap J :move+<CR>==
+xnoremap K :move-2<CR>gv=gv
+xnoremap J :move'>+<CR>gv=gv
+
+" Search results centered please
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
+nnoremap <C-o> <C-o>zz
+nnoremap <C-i> <C-i>zz
+
+" Very magic by default
+" nnoremap ? ?\v
+" nnoremap / /\v
+" cnoremap %s/ %sm/
+
+
+" Leader
+let mapleader=" "       " leader is space
+
+" Tmux
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Order matching files top to bottom
-let g:ctrlp_match_window = 'bottom,order:ttb'
-" Always open files in new buffers
-let g:ctrlp_switch_buffer = 0
-" Lets us change the working directory during a Vim session and make CtrlP
-" respect that change.
-let g:ctrlp_working_path_mode = 0
-" Use rg to search instead
-" https://elliotekj.com/2016/11/22/setup-ctrlp-to-use-ripgrep-in-vim/
-if executable('rg')
-  set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
-endif
-
-" Ignore files for completion
-set wildignore+=*/.git/*,*/tmp/*,*.swp
-
-" CtrlP buffer remap
-" nnoremap ; :CtrlPBuffer<CR>
-
-" show hidden files
-let g:ctrlp_show_hidden = 1
-
-
-" Launch config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" call pathogen#infect()                      " use pathogen
-" Helptags
-
-" GUndo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <Leader>u :GundoToggle<CR>
-if has('python3')
-    let g:gundo_prefer_python3 = 1
-endif
-
-"Tmux
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" These lines change the cursor from block cursor mode to vertical bar cursor mode when using tmux.
+" Without these lines, tmux always uses block cursor mode.
 " allows cursor change in tmux mode
 if exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -266,44 +248,7 @@ else
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
-" These lines change the cursor from block cursor mode to vertical bar cursor mode when using tmux.
-" Without these lines, tmux always uses block cursor mode.
 
-" Backups
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set backup
-"set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-"set backupskip=/tmp/*,/private/tmp/*
-"set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-"set writebackup
-
-" Custom Functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" toggle between number and relativenumber
-function! ToggleNumber()
-    if(&relativenumber == 1)
-        set norelativenumber
-        set number
-    else
-        set relativenumber
-    endif
-endfunc
-
-" strips trailing whitespace at the end of files. this
-" is called on buffer write in the autogroup above.
-function! <SID>StripTrailingWhitespaces()
-    " save last search & cursor position
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    let @/=_s
-    call cursor(l, c)
-endfunction
-
-
-nnoremap <leader>t :call ToggleNumber()<CR>
-nnoremap <leader>s :call <SID>StripTrailingWhitespaces()<CR>
 
 " Lose Bad Habits
 " http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
@@ -336,46 +281,83 @@ vnoremap <Up> <Nop>
 " Enable hard home so hjkl are disabled
 " autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 
+" Filetype configs
+autocmd BufNewFile,BufRead *.yml.j2 set syntax=yaml   "Jinja yml (mostly for Ansible) gets linted as yaml
+
+
+" =============================================================================
+"   CUSTOM FUNCTIONS
+" =============================================================================
+
+" toggle between number and relativenumber
+function! ToggleNumber()
+    if(&relativenumber == 1)
+        set norelativenumber
+        set number
+    else
+        set relativenumber
+    endif
+endfunc
+
+" strips trailing whitespace at the end of files. this
+" is called on buffer write in the autogroup above.
+function! <SID>StripTrailingWhitespaces()
+    " save last search & cursor position
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+" =============================================================================
+"   PLUGIN CONFIG
+" =============================================================================
+
+"Conquer of Completion
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:coc_node_path = '~/.neovim/node/bin/node'
+source ~/.vim/coc.vim
+
+" META: Disabled by default
+let g:gitgutter_enabled = 0          " vim-gitgutter
+let g:ale_enabled = 0                " ale
+let g:indentLine_enabled = 0         " indentline
+let g:SignatureEnabledAtStartup = 0  " vim-signature
+let g:startify_custom_header =[]     " Disable startify header
 
 " Lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " --INSERT-- is unncessary because of lightline
 set noshowmode
 
+" Lightline mods for CoC compatibility
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'filename': 'LightlineFilename',
+      \   'cocstatus': 'coc#status'
+      \ },
+      \ }
+function! LightlineFilename()
+  return expand('%:t') !=# '' ? @% : '[No Name]'
+endfunction
 
-" Tagbar
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <F8> :TagbarToggle<CR>
-nnoremap <Leader>tb :TagbarToggle<CR>
-
-
-" Vim GitGutter
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set updatetime=100
-map <Leader>gi :GitGutterToggle<CR>
-let g:gitgutter_enabled = 0
-
-" NERDTree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <F7> :NERDTreeToggle<CR>
-nnoremap <Leader>nt :NERDTreeToggle<CR>
-nnoremap <Leader>nf :NERDTreeFind<CR>
-" Close vim if only window left is NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-
-
-" FZF
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set rtp+=/usr/local/opt/fzf
+" Use autocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 " Easymotion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <Leader> <Plug>(easymotion-prefix)
-
 " Use uppercase target labels and type as a lower case
 let g:EasyMotion_use_upper = 1
 let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
+" Turn on case-insensitive feature
+let g:EasyMotion_smartcase = 1
+map <Leader> <Plug>(easymotion-prefix)
 
 " incsearch
 map / <Plug>(incsearch-forward)
@@ -386,48 +368,63 @@ map g/ <Plug>(incsearch-stay)
 map z/ <Plug>(incsearch-easymotion-/)
 map z? <Plug>(incsearch-easymotion-?)
 map zg/ <Plug>(incsearch-easymotion-stay)
-map <Leader>/ <Plug>(incsearch-easymotion-/)
-map <Leader>? <Plug>(incsearch-easymotion-?)
-map <Leader>g/ <Plug>(incsearch-easymotion-stay)
 
-" vim-sneak behaviour through easymotion
-nmap s <Plug>(easymotion-overwin-f2)
-
-" Turn on case-insensitive feature
-let g:EasyMotion_smartcase = 1
-
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>t <Plug>(easymotion-t2)
-
-
-" ALE
+" Minor Configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>at :ALEToggle<CR>
-let g:ale_enabled = 0
+" * Gundo
+if has('python3')
+    let g:gundo_prefer_python3 = 1
+endif
 
-" Indentline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:indentLine_enabled = 0
+" * NERDTree
+" Close vim if only window left is NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Argwrap
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <Leader>ar :ArgWrap<CR>
+" * FZF
+set rtp+=/usr/local/opt/fzf
+let g:fzf_layout = { 'down': '~20%' }
 
-" FZF.vim
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" * Limelight
+let g:limelight_conceal_ctermfg = 'gray'
+"autocmd! User GoyoEnter Limelight
+"autocmd! User GoyoLeave Limelight!
+
+
+" * SuperTab
+" Tab goes down instead of up
+" let g:SuperTabDefaultCompletionType = "<c-n>"
+
+
+
+" =============================================================================
+"   CUSTOM SHORTCUTS  (LEADER, FN, &c)
+" =============================================================================
+
+" Modifiers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <C-g> :Goyo<CR>
 map <C-p> :Files<CR>
-nmap <leader>; :Buffers<CR>
+map <C-h> :History:<CR>
 
+" Leader
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  ;  --   FZF
+nmap <Leader>; :Buffers<CR>
 
-" Quick Save
+"  <Space>  --  <leader><leader> toggles between buffers
+nnoremap <Leader><Leader> <c-^>
+
+"  - |     --  Split with leader
+nnoremap <Leader>- :sp<CR>
+nnoremap <Leader>\| :vsp<CR>
+
+"  w wq q   --  Quick Save
 nmap <Leader>w :call <SID>StripTrailingWhitespaces()<CR>:w<CR>
 nmap <Leader>q :q<CR>
 nmap <Leader>wq :call <SID>StripTrailingWhitespaces()<CR>:wq<CR>
-"nmap <Leader>qq :qa!<CR>
 
-" Quick copy paste
+"  y d p P   --  Quick copy paste into system clipboard
 nmap <Leader>y "+y
 nmap <Leader>d "+d
 vmap <Leader>y "+y
@@ -437,120 +434,93 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 
-" Search results centered please
-nnoremap <silent> n nzz
-nnoremap <silent> N Nzz
-nnoremap <silent> * *zz
-nnoremap <silent> # #zz
-nnoremap <silent> g* g*zz
-nnoremap <C-o> <C-o>zz
-nnoremap <C-i> <C-i>zz
+"  e g h   -- FZF
+nnoremap <Leader>g :Rg<CR>
+nnoremap <Leader>e :Files<CR>
+nnoremap <Leader>h :History<CR>
 
-" Very magic by default
-" nnoremap ? ?\v
-" nnoremap / /\v
-" cnoremap %s/ %sm/
+"  s j k t / ? g/   -- EasyMotion
+nmap s <Plug>(easymotion-overwin-f2)   " vim-sneak behaviour through easymotion
 
-set ttyfast
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>t <Plug>(easymotion-t2)
 
-" Split with leader
-nnoremap <Leader>- :sp<CR>
-nnoremap <Leader>\| :vsp<CR>
+map <Leader>/ <Plug>(incsearch-easymotion-/)
+map <Leader>? <Plug>(incsearch-easymotion-?)
+map <Leader>g/ <Plug>(incsearch-easymotion-stay)
 
+"  u    -- Undo Tree toggle show
+nnoremap <Leader>u :GundoToggle<CR>
 
-let g:limelight_conceal_ctermfg = 'gray'
+"  oa oe og om on ot os    --  Miscellaneous toggles
+nnoremap <Leader>oa :ALEToggle<CR>
+nnoremap <Leader>oe :NERDTreeToggle<CR>
+nnoremap <Leader>og :GitGutterToggle<CR>
+nnoremap <Leader>om :SignatureToggle<CR>
+nnoremap <Leader>on :call ToggleNumber()<CR>
+nnoremap <Leader>ot :TagbarToggle<CR>
+nnoremap <Leader>os :setlocal spell! spelllang=en_us<CR>
+" nnoremap <Leader>nf :NERDTreeFind<CR>
 
-"autocmd! User GoyoEnter Limelight
-"autocmd! User GoyoLeave Limelight!
-"
-
-" Vim Signature
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <Leader>m :SignatureToggle<CR>
-let g:SignatureEnabledAtStartup = 0
-
-" Vim Startify
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:startify_custom_header =[]
-
+" `  `v  `z  rv  -- edit vimrc/zshrc and load vimrc bindings
 nnoremap <Leader>` :Startify<CR>
+nnoremap <Leader>`v :vsp $MYVIMRC<CR>
+nnoremap <Leader>`z :vsp ~/.zshrc<CR>
+nnoremap <Leader>rv :source $MYVIMRC<CR>
+
+" S    --  save session,  After saving a Vim session, you can reopen it with vim -S.
+nnoremap <Leader>S :mksession<CR>
+
+" aw    -- ArgWrap
+nnoremap <Leader>aw :ArgWrap<CR>
+
+
+" rn f a ac af   -- Conquer of Completion
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if exists('g:coc_custom_config')
+    " Symbol renaming.
+    nmap <leader>rn <Plug>(coc-rename)
+
+    " Formatting selected code.
+    xmap <leader>f  <Plug>(coc-format-selected)
+    nmap <leader>f  <Plug>(coc-format-selected)
+    " Applying codeAction to the selected region.
+    " Example: `<leader>aap` for current paragraph
+    xmap <leader>a  <Plug>(coc-codeaction-selected)
+    nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+    " Remap keys for applying codeAction to the current buffer.
+    nmap <leader>ac  <Plug>(coc-codeaction)
+    " Apply AutoFix to problem on the current line.
+    nmap <leader>af  <Plug>(coc-fix-current)
+
+endif
+
+" nnoremap <Leader>s :call <SID>StripTrailingWhitespaces()<CR>
+
+" FN
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Spellcheck Keyboard shorcut (https://vim.fandom.com/wiki/Toggle_spellcheck_with_function_keys)
+map <F5> :setlocal spell! spelllang=en_us<CR>
+map <F7> :NERDTreeToggle<CR>
+map <F8> :TagbarToggle<CR>
+
+" Syntax Highlighting Debugging
+" map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+" \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+" \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+
+" =============================================================================
+"   LOCAL CONFIG
+" =============================================================================
+
+" local customizations in ~/.vimrc_local
+let $LOCALFILE=expand("~/.vimrc_local")
+if filereadable($LOCALFILE)
+    source $LOCALFILE
+endif
 
 
 
-autocmd BufNewFile,BufRead *.yml.j2 set syntax=yaml
-
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-vnoremap <Tab> >
-vnoremap <S-Tab> <
-
-nnoremap K :move-2<CR>==
-nnoremap J :move+<CR>==
-xnoremap K :move-2<CR>gv=gv
-xnoremap J :move'>+<CR>gv=gv
-
-set modeline
-
-" Spellcheck Keyboard shorcut
-" https://vim.fandom.com/wiki/Toggle_spellcheck_with_function_keys
-nnoremap <F5> :setlocal spell! spelllang=en_us<CR>
-
-
-"" Markdown config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" https://secluded.site/vim-as-a-markdown-editor/
-"
-" Treat all .md files as markdown
-autocmd BufNewFile,BufRead *.md set filetype=markdown
-
-" Highlight the line the cursor is on
-autocmd FileType markdown set cursorline
-
-" Set spell check to British English
-autocmd FileType markdown setlocal spell spelllang=en_us
-
-" Here’s a short crash course in Vim spelling commands:
-
-"     [s to search for misspelled words above the cursor
-"     ]s to search for misspelled words below the cursor
-"     z= to see replacement suggestions
-"     zg to add the word to your dictionary
-
-nnoremap <C-g> :Goyo<CR>
-
-" autocmd FileType markdown Goyo
-
-" Vim Markdown
-let g:markdown_fenced_languages = [
-    \ 'bash=sh',
-    \ 'c',
-    \ 'coffee',
-    \ 'erb=eruby',
-    \ 'javascript',
-    \ 'json',
-    \ 'perl',
-    \ 'python',
-    \ 'ruby',
-    \ 'yaml',
-    \ 'go',
-\]
-
-" Configuration for vim-markdown
-let g:vim_markdown_conceal = 2
-let g:vim_markdown_conceal_code_blocks = 0
-let g:vim_markdown_math = 1
-let g:vim_markdown_toml_frontmatter = 1
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_strikethrough = 1
-let g:vim_markdown_autowrite = 1
-let g:vim_markdown_edit_url_in = 'tab'
-let g:vim_markdown_follow_anchor = 1
-
-" Vim thesaurus
-let g:tq_language=['en']
-let g:tq_enabled_backends=["mthesaur_txt", "datamuse_com"]
-let g:tq_online_backends_timeout = 0.4
-
-let g:tq_mthesaur_file="~/.vim/bundle/thesaurus_query.vim/mthesaur.txt"
