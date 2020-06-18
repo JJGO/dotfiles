@@ -20,7 +20,7 @@ Plug 'junegunn/fzf.vim'
 " Plug 'airblade/vim-rooter'
 
 " Movement
-Plug 'justinmk/vim-sneak'
+" Plug 'justinmk/vim-sneak'
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'wikitopian/hardmode'            " Disable arrow keys and similar
@@ -45,7 +45,8 @@ Plug 'tpope/vim-speeddating'          " Dates in vim
 Plug 'itchyny/lightline.vim'          " Better Status Bar
 Plug 'mhinz/vim-startify'             " Better start screen
 Plug 'scrooloose/nerdtree'            " File explorer
-Plug 'sjl/gundo.vim'                  " Undo Tree
+" Plug 'sjl/gundo.vim'                  " Undo Tree
+Plug 'simnalamburt/vim-mundo'         " Gundo fork
 Plug 'majutsushi/tagbar'              " Pane with tags
 Plug 'machakann/vim-highlightedyank'  " Highlight yanks
 Plug 'andymass/vim-matchup'           " Highlight corresponding blocks e.g. if - fi in bash
@@ -362,6 +363,9 @@ let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 let g:EasyMotion_smartcase = 1
 map <Leader> <Plug>(easymotion-prefix)
 
+" vim-sneak behaviour through easymotion
+nmap s <Plug>(easymotion-overwin-f2)
+
 " incsearch
 map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
@@ -443,7 +447,6 @@ nnoremap <Leader>e :Files<CR>
 nnoremap <Leader>h :History<CR>
 
 "  s j k t / ? g/   -- EasyMotion
-nmap s <Plug>(easymotion-overwin-f2)   " vim-sneak behaviour through easymotion
 
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
@@ -454,7 +457,8 @@ map <Leader>? <Plug>(incsearch-easymotion-?)
 map <Leader>g/ <Plug>(incsearch-easymotion-stay)
 
 "  u    -- Undo Tree toggle show
-nnoremap <Leader>u :GundoToggle<CR>
+" nnoremap <Leader>u :GundoToggle<CR>
+nnoremap <Leader>u :MundoToggle<CR>
 
 "  oa oe og om on ot os    --  Miscellaneous toggles
 nnoremap <Leader>oa :ALEToggle<CR>
@@ -473,7 +477,7 @@ nnoremap <Leader>`z :vsp ~/.zshrc<CR>
 nnoremap <Leader>rv :source ~/.vimrc<CR>  "$MYVIMRC<CR>
 
 " S    --  save session,  After saving a Vim session, you can reopen it with vim -S.
-nnoremap <Leader>S :mksession<CR>
+" nnoremap <Leader>S :mksession<CR>
 
 " aw    -- ArgWrap
 nnoremap <Leader>aw :ArgWrap<CR>
