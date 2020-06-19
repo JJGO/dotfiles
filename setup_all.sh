@@ -9,15 +9,17 @@ find . -name ".DS_Store" -exec rm {} \;
 
 PROGRAMS=(alias bash env git python scripts stow tmux vim zsh)
 # PROGRAMS=(alias aspell bash env git latex python scripts stow tmux vim zsh mac terminal)
+OLD_DOTFILES="dotfile_bk_$(date -u +"%Y%m%d%H%M%S")"
+mkdir $OLD_DOTFILES
 
 function backup_if_exists() {
     if [ -f $1 ];
     then
-      mv $1 "$1.bk"
+      mv $1 $OLD_DOTFILES
     fi
     if [ -d $1 ];
     then
-      mv $1 "$1.bk"
+      mv $1 $OLD_DOTFILES
     fi
 }
 
@@ -31,7 +33,7 @@ mkdir -p ~/.vim/undodir
 
 for f in ~/.zprezto/runcoms/z*
 do
-    mv "$f" "$f.bk"
+    mv "$f" $OLD_DOTFILES
 done
 
 for program in ${PROGRAMS[@]}; do
