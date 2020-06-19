@@ -72,7 +72,7 @@ if [[ ! -d $NVIM/py3 ]]; then
     PIP=$NVIM/py3/bin/pip
     $PIP install neovim
     $PIP install 'python-language-server[all]'
-    $PIP instal pylint isort jedi flake8
+    $PIP install pylint isort jedi flake8
     $PIP install black yapf
 fi
 
