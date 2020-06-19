@@ -318,41 +318,46 @@ endfunction
 " =============================================================================
 "   PLUGIN CONFIG
 " =============================================================================
-
-"Conquer of Completion
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:coc_node_path = '~/.neovim/node/bin/node'
-source ~/.vim/coc.vim
-
+"
 " META: Disabled by default
 let g:gitgutter_enabled = 0          " vim-gitgutter
 let g:ale_enabled = 0                " ale
 let g:indentLine_enabled = 0         " indentline
 let g:SignatureEnabledAtStartup = 0  " vim-signature
 let g:startify_custom_header =[]     " Disable startify header
-
+"
 " Lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " --INSERT-- is unncessary because of lightline
 set noshowmode
 
-" Lightline mods for CoC compatibility
-let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'filename': 'LightlineFilename',
-      \   'cocstatus': 'coc#status'
-      \ },
-      \ }
-function! LightlineFilename()
-  return expand('%:t') !=# '' ? @% : '[No Name]'
-endfunction
+"Conquer of Completion
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if isdirectory("~/.vim/plugged/coc.nvim")
 
-" Use autocmd to force lightline update.
-autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+    let g:coc_custom_config = '1'
+    let g:coc_node_path = '~/.neovim/node/bin/node'
+
+    source ~/.vim/coc.vim
+    " Use autocmd to force lightline update.
+    autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
+    " Lightline mods for CoC compatibility
+    let g:lightline = {
+          \ 'active': {
+          \   'left': [ [ 'mode', 'paste' ],
+          \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+          \ },
+          \ 'component_function': {
+          \   'filename': 'LightlineFilename',
+          \   'cocstatus': 'coc#status'
+          \ },
+          \ }
+    function! LightlineFilename()
+      return expand('%:t') !=# '' ? @% : '[No Name]'
+    endfunction
+
+endif
 
 " Easymotion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
