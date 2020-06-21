@@ -106,6 +106,9 @@ Plug 'ron89/thesaurus_query.vim'       " Synonym query
 
 " Other
 Plug 'wakatime/vim-wakatime'           " Wakatime time tracking
+
+
+Plug 'liuchengxu/vim-which-key'
 call plug#end()
 
 " =============================================================================
@@ -423,6 +426,10 @@ map <C-h> :History:<CR>
 
 " Leader
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" <Nothing> -- vim-which-key
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+
 "  ;  --   FZF
 nmap <Leader>; :Buffers<CR>
 
