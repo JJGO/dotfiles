@@ -80,7 +80,7 @@ Plug 'lervag/vimtex'                   " Latex support
 Plug 'pearofducks/ansible-vim'         " Ansible support
 Plug 'mechatroner/rainbow_csv'         " CSV color coding
 Plug 'ap/vim-css-color'                " CSS colors
-Plug 'luochen1990/rainbow'             " Rainbow parentheses
+Plug 'frazrepo/vim-rainbow'                " Rainbow parentheses
 Plug 'vim-pandoc/vim-pandoc'           " Pandoc support
 Plug 'vim-pandoc/vim-pandoc-syntax'    " Pandoc syntax
 Plug 'chrisbra/colorizer'              " Colorize color codes
@@ -325,6 +325,8 @@ let g:ale_enabled = 0                " ale
 let g:indentLine_enabled = 0         " indentline
 let g:SignatureEnabledAtStartup = 0  " vim-signature
 let g:startify_custom_header =[]     " Disable startify header
+" Enabled by default
+let g:rainbow_active = 1
 "
 " Lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -465,12 +467,13 @@ map <Leader>g/ <Plug>(incsearch-easymotion-stay)
 " nnoremap <Leader>u :GundoToggle<CR>
 nnoremap <Leader>u :MundoToggle<CR>
 
-"  oa oe og om on ot os    --  Miscellaneous toggles
+"  oa oe og om on op ot os    --  Miscellaneous toggles
 nnoremap <Leader>oa :ALEToggle<CR>
 nnoremap <Leader>oe :NERDTreeToggle<CR>
 nnoremap <Leader>og :GitGutterToggle<CR>
 nnoremap <Leader>om :SignatureToggle<CR>
 nnoremap <Leader>on :call ToggleNumber()<CR>
+nnoremap <Leader>op :RainbowToggle<CR>
 nnoremap <Leader>ot :TagbarToggle<CR>
 nnoremap <Leader>os :setlocal spell! spelllang=en_us<CR>
 " nnoremap <Leader>nf :NERDTreeFind<CR>
