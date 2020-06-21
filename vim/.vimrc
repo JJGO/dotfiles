@@ -93,8 +93,9 @@ Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'         " Base16 themes
 Plug 'gerw/vim-hilinktrace'            " Syntax Highlighting Tracer
 " Plug 'tomasr/molokai'                  " Monokai and friends
-" Plug 'sickill/vim-monokai'
-" Plug 'patstockwell/vim-monokai-tasty'
+" Plug 'crusoexia/vim-monokai'
+" Plug 'phanviet/vim-monokai-pro'
+Plug 'patstockwell/vim-monokai-tasty'
 " Plug 'erichdongubler/vim-sublime-monokai'
 " Plug 'flazz/vim-colorschemes'          " Bunch of color schemes
 
@@ -117,17 +118,26 @@ call plug#end()
 
 " Colorscheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:molokai_original = 0
 
 if has('gui_running')
-    colorscheme molokai
+    colorscheme base16-gruvbox-dark-hard
+elseif exists("+termguicolors")
+    set termguicolors
+    " The commands below are needed for tmux + termguicolors
+    " This is only necessary if you use "set termguicolors".
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+    " fixes glitch? in colors when using vim with tmux
+    set background=dark
+    set t_Co=256
+
+    colorscheme vim-monokai-tasty
+
 elseif &t_Co < 256
     colorscheme molokai
     set nocursorline " looks bad in this mode
-else
-    set background=dark
-    let g:molokai_original = 0
-    colorscheme molokai
-    " customized colors
 endif
 
 syntax on           " enable syntax processing
