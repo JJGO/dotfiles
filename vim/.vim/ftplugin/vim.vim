@@ -1,4 +1,4 @@
-" colorscheme molokai
+colorscheme molokai
 
 " function! Highlight(group, fg, bg, style)
 "   exec "hi " . a:group
