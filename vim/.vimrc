@@ -140,6 +140,9 @@ elseif &t_Co < 256
     set nocursorline " looks bad in this mode
 endif
 
+
+let g:python_highlight_all = 1
+
 syntax on           " enable syntax processing
 
 " Spaces & Tabs
@@ -348,7 +351,7 @@ set noshowmode
 
 "Conquer of Completion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if isdirectory("~/.vim/plugged/coc.nvim")
+if isdirectory($HOME . "/.vim/plugged/coc.nvim")
 
     let g:coc_custom_config = '1'
     let g:coc_node_path = '~/.neovim/node/bin/node'
