@@ -11,12 +11,14 @@
 [color]
 	ui = auto
 [merge]
-    tool = vimdiff
+    tool = nvim  #vimdiff
     conflictstyle = diff3
     prompt = false
-; [mergetool "sublime"]
-;     cmd = "subl -w $MERGED"
-;     trustExitCode = false
+[mergetool "nvim"]
+    cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+# automatically launch merge tool without displaying a prompt
+[mergetool]
+  prompt = false
 [alias]
     graph = log --all --graph --pretty=format:'%C(auto)%h%C(auto)%d %s %C(dim white)(%aN, %ar)'
     graph2 = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m"
