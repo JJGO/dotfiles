@@ -70,6 +70,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Syntactic language support
 Plug 'w0rp/ale'                        " Linting engine
+Plug 'maximbaz/lightline-ale'          " Lightline + Ale
 Plug 'plasticboy/vim-markdown'         " Markdown support
 Plug 'cespare/vim-toml'                " TOML support
 Plug 'stephpy/vim-yaml'                " YAML support
@@ -356,6 +357,8 @@ if isdirectory($HOME . "/.vim/plugged/coc.nvim")
     let g:coc_custom_config = '1'
     let g:coc_node_path = '~/.neovim/node/bin/node'
 
+    let g:vista_default_executive = 'coc'
+
     source ~/.vim/coc.vim
     " Use autocmd to force lightline update.
     autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
@@ -364,17 +367,49 @@ if isdirectory($HOME . "/.vim/plugged/coc.nvim")
     let g:lightline = {
           \ 'active': {
           \   'left': [ [ 'mode', 'paste' ],
-          \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+          \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified', 'fugitive' ] ],
+          \   'right': [ [ 'lineinfo' ],
+		  \              [ 'percent' ],
+		  \              [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok', 'filetype', 'fileencoding'] ]
           \ },
           \ 'component_function': {
           \   'filename': 'LightlineFilename',
-          \   'cocstatus': 'coc#status'
+          \   'cocstatus': 'coc#status',
+          \   'currentfunction': 'CocCurrentFunction'
           \ },
           \ }
     function! LightlineFilename()
       return expand('%:t') !=# '' ? @% : '[No Name]'
     endfunction
 
+    function! CocCurrentFunction()
+        return get(b:, 'coc_current_function', '')
+    endfunction
+
+
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_infos': 'lightline#ale#infos',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_infos': 'lightline#ale#infos',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+
+" Nerdfont indicators
+" let g:lightline#ale#indicator_checking = "\uf110"
+" let g:lightline#ale#indicator_infos = "\uf129"
+" let g:lightline#ale#indicator_warnings = "\uf071"
+" let g:lightline#ale#indicator_errors = "\uf05e"
+" let g:lightline#ale#indicator_ok = "\uf00c"
+"
 endif
 
 " Easymotion
@@ -494,7 +529,7 @@ nnoremap <Leader>og :GitGutterToggle<CR>
 nnoremap <Leader>om :SignatureToggle<CR>
 nnoremap <Leader>on :call ToggleNumber()<CR>
 nnoremap <Leader>op :RainbowToggle<CR>
-nnoremap <Leader>ot :TagbarToggle<CR>
+nnoremap <Leader>ot :Vista!!<CR>
 nnoremap <Leader>os :setlocal spell! spelllang=en_us<CR>
 " nnoremap <Leader>nf :NERDTreeFind<CR>
 
@@ -539,7 +574,7 @@ endif
 " Spellcheck Keyboard shorcut (https://vim.fandom.com/wiki/Toggle_spellcheck_with_function_keys)
 map <F5> :setlocal spell! spelllang=en_us<CR>
 map <F7> :NERDTreeToggle<CR>
-map <F8> :TagbarToggle<CR>
+map <F8> :Vista!!<CR>
 
 " Syntax Highlighting Debugging
 " map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
