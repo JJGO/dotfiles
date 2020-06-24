@@ -20,7 +20,7 @@ Plug 'junegunn/fzf.vim'
 " Plug 'airblade/vim-rooter'
 
 " Movement
-" Plug 'justinmk/vim-sneak'
+Plug 'justinmk/vim-sneak'
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'wikitopian/hardmode'            " Disable arrow keys and similar
@@ -356,6 +356,7 @@ if isdirectory($HOME . "/.vim/plugged/coc.nvim")
 
     let g:coc_custom_config = '1'
     let g:coc_node_path = '~/.neovim/node/bin/node'
+    let g:coc_disable_startup_warning = 1
 
     let g:vista_default_executive = 'coc'
 
@@ -420,9 +421,6 @@ let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
 map <Leader> <Plug>(easymotion-prefix)
-
-" vim-sneak behaviour through easymotion
-nmap s <Plug>(easymotion-overwin-f2)
 
 " incsearch
 map / <Plug>(incsearch-forward)
@@ -509,10 +507,13 @@ nnoremap <Leader>e :Files<CR>
 nnoremap <Leader>h :History<CR>
 
 "  s j k t / ? g/   -- EasyMotion
-
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>t <Plug>(easymotion-t2)
+
+" vim-sneak behaviour through easymotio
+map <Leader>s <Plug>(easymotion-f2)
+nmap <Leader>s <Plug>(easymotion-overwin-f2)
 
 map <Leader>/ <Plug>(incsearch-easymotion-/)
 map <Leader>? <Plug>(incsearch-easymotion-?)
