@@ -182,7 +182,8 @@ set hidden              " Allows having hidden buffers (not displayed in any win
 set backspace=indent,eol,start     " Make backspace behave in a more intuitive way
 nmap Q <Nop>
 " 'Q' in normal mode enters Ex mode. You almost never want this.
-map <C-a> <Nop>   " Unbind for tmux
+" Unbind for tmux
+map <C-a> <Nop>
 map <C-x> <Nop>
 
 
