@@ -502,23 +502,30 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 
-"  e g h   -- FZF
+"  e g H -- FZF
 nnoremap <Leader>g :Rg<CR>
 nnoremap <Leader>e :Files<CR>
-nnoremap <Leader>h :History<CR>
+nnoremap <Leader>H :History:<CR>
 
-"  s j k t / ? g/   -- EasyMotion
+" hjkl  s j k t / ? g/   -- EasyMotion
+map <Leader>h <Plug>(easymotion-linebackward)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
-map <Leader>t <Plug>(easymotion-t2)
+map <Leader>l <Plug>(easymotion-lineforward)
 
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
 " vim-sneak behaviour through easymotio
+map <Leader>t <Plug>(easymotion-t2)
+nmap <Leader>t <Plug>(easymotion-overwin-t2)
 map <Leader>s <Plug>(easymotion-f2)
 nmap <Leader>s <Plug>(easymotion-overwin-f2)
 
 map <Leader>/ <Plug>(incsearch-easymotion-/)
 map <Leader>? <Plug>(incsearch-easymotion-?)
 map <Leader>g/ <Plug>(incsearch-easymotion-stay)
+
 
 "  u    -- Undo Tree toggle show
 " nnoremap <Leader>u :GundoToggle<CR>
@@ -548,15 +555,15 @@ nnoremap <Leader>rv :source ~/.vimrc<CR>  "$MYVIMRC<CR>
 nnoremap <Leader>aw :ArgWrap<CR>
 
 
-" rn f a ac af   -- Conquer of Completion
+" rn F a ac af   -- Conquer of Completion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 if exists('g:coc_custom_config')
     " Symbol renaming.
     nmap <leader>rn <Plug>(coc-rename)
 
     " Formatting selected code.
-    xmap <leader>f  <Plug>(coc-format-selected)
-    nmap <leader>f  <Plug>(coc-format-selected)
+    xmap <leader>F  <Plug>(coc-format-selected)
+    nmap <leader>F  <Plug>(coc-format-selected)
     " Applying codeAction to the selected region.
     " Example: `<leader>aap` for current paragraph
     xmap <leader>a  <Plug>(coc-codeaction-selected)
