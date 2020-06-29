@@ -210,6 +210,9 @@ case "$(uname -s)" in
        alias_if_exists "$i" "g$i"
      done
      alias_if_exists "id" "/usr/local/bin/gid"
+     alias rm="/usr/local/bin/grm -i"
+     alias mv="/usr/local/bin/gmv -i"
+     alias cp="/usr/local/bin/gcp -i"
      # alias_if_exists "ls" "/usr/local/bin/gls"
      ;;
 
