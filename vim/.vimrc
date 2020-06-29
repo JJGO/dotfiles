@@ -92,7 +92,7 @@ Plug 'vim-python/python-syntax'
 " Colorschemes
 Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'         " Base16 themes
-Plug 'gerw/vim-hilinktrace'            " Syntax Highlighting Tracer
+" Plug 'gerw/vim-hilinktrace'            " Syntax Highlighting Tracer
 " Plug 'tomasr/molokai'                  " Monokai and friends
 " Plug 'crusoexia/vim-monokai'
 " Plug 'phanviet/vim-monokai-pro'
@@ -345,7 +345,8 @@ let g:SignatureEnabledAtStartup = 0  " vim-signature
 let g:startify_custom_header =[]     " Disable startify header
 " Enabled by default
 let g:rainbow_active = 1
-"
+
+
 " Lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " --INSERT-- is unncessary because of lightline
@@ -459,7 +460,10 @@ let g:limelight_conceal_ctermfg = 'gray'
 " Tab goes down instead of up
 " let g:SuperTabDefaultCompletionType = "<c-n>"
 
-
+" GitGutter
+nmap ghs <Plug>(GitGutterStageHunk)
+nmap ghu <Plug>(GitGutterUndoHunk)
+nmap ghp <Plug>(GitGutterPreviewHunk)
 
 " =============================================================================
 "   CUSTOM SHORTCUTS  (LEADER, FN, &c)
@@ -544,9 +548,9 @@ nnoremap <Leader>os :setlocal spell! spelllang=en_us<CR>
 
 " `  `v  `z  rv  -- edit vimrc/zshrc and load vimrc bindings
 nnoremap <Leader>` :Startify<CR>
-nnoremap <Leader>`v :vsp ~/.vimrc<CR> "$MYVIMRC<CR>
 nnoremap <Leader>`z :vsp ~/.zshrc<CR>
-nnoremap <Leader>rv :source ~/.vimrc<CR>  "$MYVIMRC<CR>
+nnoremap <Leader>`v :vsp ~/.vimrc<CR>
+nnoremap <Leader>rv :source ~/.vimrc<CR>
 
 " S    --  save session,  After saving a Vim session, you can reopen it with vim -S.
 " nnoremap <Leader>S :mksession<CR>
