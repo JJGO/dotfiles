@@ -550,25 +550,43 @@ nnoremap <Leader>rv :source ~/.vimrc<CR>
 nnoremap <Leader>aw :ArgWrap<CR>
 
 
-" rn F a ac af   -- Conquer of Completion
+" rn F a ac af U -- Conquer of Completion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 if exists('g:coc_custom_config')
     " Symbol renaming.
     nmap <leader>rn <Plug>(coc-rename)
 
+    nmap <Leader>! :<C-u>CocList diagnostics<CR>
+
+    " TODO figure out
     " Formatting selected code.
-    xmap <leader>F  <Plug>(coc-format-selected)
-    nmap <leader>F  <Plug>(coc-format-selected)
+    " xmap <leader>F  <Plug>(coc-format-selected)
+    " nmap <leader>F  <Plug>(coc-format-selected)
     " Applying codeAction to the selected region.
     " Example: `<leader>aap` for current paragraph
-    xmap <leader>a  <Plug>(coc-codeaction-selected)
-    nmap <leader>a  <Plug>(coc-codeaction-selected)
+    " xmap <leader>a  <Plug>(coc-codeaction-selected)
+    " nmap <leader>a  <Plug>(coc-codeaction-selected)
 
     " Remap keys for applying codeAction to the current buffer.
-    nmap <leader>ac  <Plug>(coc-codeaction)
+    " nmap <leader>ac  <Plug>(coc-codeaction)
     " Apply AutoFix to problem on the current line.
-    nmap <leader>af  <Plug>(coc-fix-current)
+    " nmap <leader>af  <Plug>(coc-fix-current)
 
+    """"""""""""" Coc-Git
+    " Undo git chunk (closest to linewise undo)
+    nmap <Leader>U :CocCommand git.chunkUndo<CR>
+    " " navigate chunks of current buffer
+    nmap [c <Plug>(coc-git-prevchunk)
+    nmap ]c <Plug>(coc-git-nextchunk)
+    " show chunk diff at current position
+    nmap gs <Plug>(coc-git-chunkinfo)
+    " show commit contains current position
+    nmap gc <Plug>(coc-git-commit)
+    " " create text object for git chunks
+    omap ig <Plug>(coc-git-chunk-inner)
+    xmap ig <Plug>(coc-git-chunk-inner)
+    omap ag <Plug>(coc-git-chunk-outer)
+    xmap ag <Plug>(coc-git-chunk-outer)
 endif
 
 " nnoremap <Leader>s :call <SID>StripTrailingWhitespaces()<CR>
