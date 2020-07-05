@@ -321,30 +321,28 @@ function! ToggleNumber()
     endif
 endfunc
 
-" strips trailing whitespace at the end of files. this
-" is called on buffer write in the autogroup above.
-function! <SID>StripTrailingWhitespaces()
-    " save last search & cursor position
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    let @/=_s
-    call cursor(l, c)
-endfunction
-
 " =============================================================================
 "   PLUGIN CONFIG
 " =============================================================================
 "
 " META: Disabled by default
 let g:gitgutter_enabled = 0          " vim-gitgutter
-let g:ale_enabled = 0                " ale
 let g:indentLine_enabled = 0         " indentline
 let g:SignatureEnabledAtStartup = 0  " vim-signature
 let g:startify_custom_header =[]     " Disable startify header
 " Enabled by default
 let g:rainbow_active = 1
+
+
+" ALE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set this variable to 1 to fix files when you save them.
+let g:ale_enabled = 1
+let g:ale_lint_on_save = 1
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+    \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \}
 
 
 " Lightline
@@ -406,13 +404,6 @@ let g:lightline.component_expand = {
       \  'linter_ok': 'lightline#ale#ok',
       \ }
 
-" Nerdfont indicators
-" let g:lightline#ale#indicator_checking = "\uf110"
-" let g:lightline#ale#indicator_infos = "\uf129"
-" let g:lightline#ale#indicator_warnings = "\uf071"
-" let g:lightline#ale#indicator_errors = "\uf05e"
-" let g:lightline#ale#indicator_ok = "\uf00c"
-"
 endif
 
 " Easymotion
@@ -492,9 +483,9 @@ nnoremap <Leader>- :sp<CR>
 nnoremap <Leader>\| :vsp<CR>
 
 "  w wq q   --  Quick Save
-nmap <Leader>w :call <SID>StripTrailingWhitespaces()<CR>:w<CR>
+nmap <Leader>w :w<CR>
 nmap <Leader>q :q<CR>
-nmap <Leader>wq :call <SID>StripTrailingWhitespaces()<CR>:wq<CR>
+nmap <Leader>wq :wq<CR>
 
 "  y d p P   --  Quick copy paste into system clipboard
 nmap <Leader>y "+y
@@ -604,6 +595,3 @@ let $LOCALFILE=expand("~/.vimrc_local")
 if filereadable($LOCALFILE)
     source $LOCALFILE
 endif
-
-
-
