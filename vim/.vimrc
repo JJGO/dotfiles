@@ -321,6 +321,16 @@ function! ToggleNumber()
     endif
 endfunc
 
+" To apply the macro to all lines you need a little trick I learned from Drew Neil’s
+" awesome book practical vim. Add the following script (visual-at.vim) to your vim
+" configuration. This allows you to visually select a section and then hit @ to run a
+" macro on all lines. Only lines which match will change. Without this script the
+" macro would stop at lines which don’t match the macro.
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 " =============================================================================
 "   PLUGIN CONFIG
 " =============================================================================
