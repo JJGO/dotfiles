@@ -526,7 +526,7 @@ vmap <Leader>P "+P
 "  e g H -- FZF
 nnoremap <Leader>g :Rg<CR>
 nnoremap <Leader>e :Files<CR>
-nnoremap <Leader>H :History:<CR>
+nnoremap <Leader>H :History<CR>
 
 " hjkl  s j k t / ? g/   -- EasyMotion
 map <Leader>h <Plug>(easymotion-linebackward)
