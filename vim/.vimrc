@@ -601,6 +601,8 @@ if exists('g:coc_custom_config')
     """"""""""""" Coc-Git
     " Undo git chunk (closest to linewise undo)
     nmap <Leader>U :CocCommand git.chunkUndo<CR>
+    " Toggle GitGutter
+    nmap <Leader>og :CocCommand git.toggleGutters<CR>
     " " navigate chunks of current buffer
     nmap [c <Plug>(coc-git-prevchunk)
     nmap ]c <Plug>(coc-git-nextchunk)

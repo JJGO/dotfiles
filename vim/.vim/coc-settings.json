@@ -1,3 +1,4 @@
 {
-    "jedi.startupMessage": false
+    "jedi.startupMessage": false,
+    "git.enableGutters": false
 }
