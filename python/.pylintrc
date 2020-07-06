@@ -142,7 +142,8 @@ disable=print-statement,
         invalid-name,
         missing-function-docstring,
         missing-class-docstring,
-        missing-module-docstring
+        missing-module-docstring,
+        line-too-long
 
 
 # Enable the message, report, category or checker with the given id(s). You can
