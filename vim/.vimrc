@@ -552,8 +552,9 @@ map <Leader>g/ <Plug>(incsearch-easymotion-stay)
 " nnoremap <Leader>u :GundoToggle<CR>
 nnoremap <Leader>u :MundoToggle<CR>
 
-"  oa oe og om on op ot os    --  Miscellaneous toggles
+"  oa oc oe og om on op ot os    --  Miscellaneous toggles
 nnoremap <Leader>oa :ALEToggle<CR>
+nnoremap <Leader>oc :ColorToggle<CR>
 nnoremap <Leader>oe :NERDTreeToggle<CR>
 nnoremap <Leader>og :GitGutterToggle<CR>
 nnoremap <Leader>om :SignatureToggle<CR>
