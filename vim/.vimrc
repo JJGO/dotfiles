@@ -312,7 +312,7 @@ autocmd BufNewFile,BufRead *.yml.j2 set syntax=yaml   "Jinja yml (mostly for Ans
 " =============================================================================
 
 " toggle between number and relativenumber
-function! ToggleNumber()
+function! ToggleLineNumber()
     if(&relativenumber == 1)
         set norelativenumber
         set number
@@ -320,6 +320,18 @@ function! ToggleNumber()
         set relativenumber
     endif
 endfunc
+
+function! ToggleALEFix()
+    if(g:ale_fix_on_save == 1)
+        let g:ale_fix_on_save = 0
+    else
+        let g:ale_fix_on_save = 1
+    endif
+endfunc
+
+command! LineNumberToggle call ToggleLineNumber()
+command! ALEfixToggle call ToggleALEFix()
+
 
 " To apply the macro to all lines you need a little trick I learned from Drew Neil’s
 " awesome book practical vim. Add the following script (visual-at.vim) to your vim
@@ -554,13 +566,14 @@ map <Leader>g/ <Plug>(incsearch-easymotion-stay)
 " nnoremap <Leader>u :GundoToggle<CR>
 nnoremap <Leader>u :MundoToggle<CR>
 
-"  oa oc oe og om on op ot os    --  Miscellaneous toggles
+"  oa oc oe ofog om on op ot os    --  Miscellaneous toggles
 nnoremap <Leader>oa :ALEToggle<CR>
 nnoremap <Leader>oc :ColorToggle<CR>
 nnoremap <Leader>oe :NERDTreeToggle<CR>
+nnoremap <Leader>of :ALEfixToggle<CR>
 nnoremap <Leader>og :GitGutterToggle<CR>
 nnoremap <Leader>om :SignatureToggle<CR>
-nnoremap <Leader>on :call ToggleNumber()<CR>
+nnoremap <Leader>on :LineNumberToggle<CR>
 nnoremap <Leader>op :RainbowToggle<CR>
 nnoremap <Leader>ot :Vista!!<CR>
 nnoremap <Leader>os :setlocal spell! spelllang=en_us<CR>
