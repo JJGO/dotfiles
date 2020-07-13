@@ -61,6 +61,7 @@ Plug 'xuyuanp/nerdtree-git-plugin'    " Show status of files in NerdTree
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'christoomey/vim-tmux-navigator'
+" VIM Ui
 
 
 " Autocomplete
@@ -329,6 +330,20 @@ function! ToggleALEFix()
     endif
 endfunc
 
+function! ToggleZoom(toggle)
+  if exists("t:restore_zoom") && (t:restore_zoom.win != winnr() || a:toggle == v:true)
+      exec t:restore_zoom.cmd
+      unlet t:restore_zoom
+  elseif a:toggle
+      let t:restore_zoom = { 'win': winnr(), 'cmd': winrestcmd() }
+      vert resize | resize
+  endi
+endfunction
+augroup restorezoom
+    au WinEnter * silent! :call ToggleZoom(v:false)
+augroup END
+
+
 command! LineNumberToggle call ToggleLineNumber()
 command! ALEfixToggle call ToggleALEFix()
 
@@ -578,6 +593,10 @@ nnoremap <Leader>op :RainbowToggle<CR>
 nnoremap <Leader>ot :Vista!!<CR>
 nnoremap <Leader>os :setlocal spell! spelllang=en_us<CR>
 " nnoremap <Leader>nf :NERDTreeFind<CR>
+
+
+"  z   -- Toggle Pane Zoom
+nnoremap <silent> <Leader>+ :call ToggleZoom(v:true)<CR>
 
 " `  `v  `z  rv  -- edit vimrc/zshrc and load vimrc bindings
 nnoremap <Leader>` :Startify<CR>
