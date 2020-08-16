@@ -1,4 +1,4 @@
--- Automatically choose the preferred audio using Hyper+' or whenever a
+-- Automatically choose the preferred audio using Hyper+apostrophe or whenever a
 -- audio line changed
 
 function chooseAudio()
@@ -41,7 +41,6 @@ function audioCallback(msg)
     end
 end
 
-hs.audiodevice.watcher.setCallback(audioCallback)
-hs.audiodevice.watcher.start()
+-- hs.audiodevice.watcher.setCallback(audioCallback)
+-- hs.audiodevice.watcher.start()
 hs.hotkey.bind(hyper, "'", chooseAudio)
-
