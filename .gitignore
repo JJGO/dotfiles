@@ -14,3 +14,4 @@ scripts/bin/syncthing
 python/.ipython/profile_default/history.sqlite
 vim/.vim/plugged
 vim/.vim/undodir
+vim/.vim/spell
