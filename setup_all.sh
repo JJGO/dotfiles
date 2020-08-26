@@ -37,7 +37,7 @@ do
 done
 
 for program in ${PROGRAMS[@]}; do
-  stow -v $program
+  stow -v --target=$HOME $program
   echo "Configuring $program"
 done
 
