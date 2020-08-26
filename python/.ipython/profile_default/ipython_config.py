@@ -14,7 +14,8 @@ c.InteractiveShellApp.exec_lines = [
     'import json',
     'import yaml',
     'import h5py',
-    'from pprint import pprint'
+    'from pprint import pprint',
+    '%loadext yamlmagic'
 ]
 # c.InteractiveShell.editor = 'vim'
 # c.InteractiveShell.autoindent = True
