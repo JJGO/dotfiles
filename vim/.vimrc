@@ -511,6 +511,9 @@ nmap ghs <Plug>(GitGutterStageHunk)
 nmap ghu <Plug>(GitGutterUndoHunk)
 nmap ghp <Plug>(GitGutterPreviewHunk)
 
+" vimtex
+let g:tex_flavor = "latex"
+
 " =============================================================================
 "   CUSTOM SHORTCUTS  (LEADER, FN, &c)
 " =============================================================================
