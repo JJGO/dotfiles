@@ -61,8 +61,8 @@ alias sb='subl'
 # alias tb="nc termbin.com 9999"
 alias spell='aspell check --dont-backup'
 alias grepc="grep -P --color=always" #Color grep
-alias printpath='echo $PATH | sed "s/:/\\n/g"'
 
+alias printpath='echo $PATH | sed "s/:/\\n/g"'
 # Other
 # alias matlabc='matlab -nodesktop -nosplash'
   # Create separator using current columns
@@ -147,7 +147,11 @@ if command -v fzf > /dev/null; then
 
   v() {
     local file
-    file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vim "${file}" || return 1
+    if [[ -f $1 ]]; then
+        vim $1
+    else
+        file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vim "${file}" || return 1
+    fi
   }
 
   if command -v subl > /dev/null; then
@@ -246,4 +250,3 @@ case $SHELL in
    # assume something else
    ;;
 esac
-
