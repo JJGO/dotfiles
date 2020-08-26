@@ -97,5 +97,5 @@ fi
 
 for crate in bat fd-find ripgrep
 do
-    $HOME/.cargo/bin/cargo install $crate
+    $HOME/.cargo/bin/cargo install --force $crate
 done
