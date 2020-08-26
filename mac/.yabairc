@@ -40,8 +40,8 @@ yabai -m rule --add app="System Preferences" manage=off
 yabai -m rule --add app="Inkscape" manage=off
 yabai -m rule --add app="Plex Media Player" manage=off
 yabai -m rule --add app="Plex" manage=off
+yabai -m rule --add app="Plexamp" manage=off
 yabai -m rule --add app="iStat Menus Status" manage=off
 yabai -m rule --add app="iStatMenusAgent" manage=off
 
 echo "yabai configuration loaded.."
-
