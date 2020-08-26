@@ -64,6 +64,11 @@ if [ -f $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 
   source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 fi
 
+# https://github.com/marlonrichert/zsh-autocomplete
+# if [ -f $HOME/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh ]; then
+#   source $HOME/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# fi
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
