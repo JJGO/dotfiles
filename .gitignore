@@ -12,3 +12,5 @@ local
 scripts/bin/diff-so-fancy
 scripts/bin/syncthing
 python/.ipython/profile_default/history.sqlite
+vim/.vim/plugged
+vim/.vim/undodir
