@@ -1,0 +1,5 @@
+{
+    "python.jediEnabled": false,
+    "python.pythonPath": "~/.neovim/py3/bin/python",
+    "git.enableGutters": true
+}
