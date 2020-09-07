@@ -6,6 +6,7 @@ c = get_config()
 c.HistoryManager.hist_file='/tmp/ipython_hist.sqlite' #changes history file writing to tmp folder
 
 c.InteractiveShellApp.exec_lines = [
+    'import torch',
     'import numpy as np',
     'import pandas as pd',
     'import matplotlib.pyplot as plt',
