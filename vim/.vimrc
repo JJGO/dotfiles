@@ -330,6 +330,14 @@ function! ToggleALEFix()
     endif
 endfunc
 
+function! TogglePrettyJson()
+    if( line('$') == 1)
+        %!python -m json.tool
+    else
+        %j
+    endif
+endfunction
+
 function! ToggleZoom(toggle)
   if exists("t:restore_zoom") && (t:restore_zoom.win != winnr() || a:toggle == v:true)
       exec t:restore_zoom.cmd
@@ -337,7 +345,7 @@ function! ToggleZoom(toggle)
   elseif a:toggle
       let t:restore_zoom = { 'win': winnr(), 'cmd': winrestcmd() }
       vert resize | resize
-  endi
+  endif
 endfunction
 augroup restorezoom
     au WinEnter * silent! :call ToggleZoom(v:false)
@@ -394,8 +402,8 @@ set noshowmode
 if isdirectory($HOME . "/.vim/plugged/coc.nvim")
 
     let g:coc_custom_config = '1'
-    let g:coc_node_path = '~/.neovim/node/bin/node'
-    let g:coc_disable_startup_warning = 1
+    let g:coc_node_path = $HOME . '/.neovim/node/bin/node'
+    " let g:coc_disable_startup_warning = 1
 
     let g:vista_default_executive = 'coc'
 
@@ -589,6 +597,7 @@ nnoremap <Leader>oa :ALEToggle<CR>
 nnoremap <Leader>oc :ColorToggle<CR>
 nnoremap <Leader>oe :NERDTreeToggle<CR>
 nnoremap <Leader>of :ALEfixToggle<CR>
+nnoremap <Leader>oj :call TogglePrettyJson()<CR>
 nnoremap <Leader>og :GitGutterToggle<CR>
 nnoremap <Leader>om :SignatureToggle<CR>
 nnoremap <Leader>on :LineNumberToggle<CR>
