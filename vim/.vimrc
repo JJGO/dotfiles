@@ -381,9 +381,11 @@ let g:rainbow_active = 1
 
 " ALE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set this variable to 1 to fix files when you save them.
 let g:ale_enabled = 1
+" For quick startup
+let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1
+" Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
