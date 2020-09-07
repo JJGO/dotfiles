@@ -5,18 +5,19 @@ c = get_config()
 #c.InteractiveShellApp.matplotlib = 'inline'
 c.HistoryManager.hist_file='/tmp/ipython_hist.sqlite' #changes history file writing to tmp folder
 
-c.InteractiveShellApp.exec_lines = [
-    'import numpy as np',
-    'import pandas as pd',
-    'import matplotlib.pyplot as plt',
-    'from tqdm import tqdm, tqdm_notebook',
-    'import pathlib',
-    'import json',
-    'import yaml',
-    'import h5py',
-    'from pprint import pprint',
-    '%loadext yamlmagic'
-]
+# c.InteractiveShellApp.exec_lines = [
+#     'import numpy as np',
+#     'import pandas as pd',
+#     'import matplotlib.pyplot as plt',
+#     'from tqdm.autonotebook import tqdm',
+#     'import pathlib',
+#     'import json',
+#     'import yaml',
+#     'import h5py',
+#     'from pprint import pprint',
+#     '%loadext yamlmagic',
+#     'tqdm.pandas()'
+# ]
 # c.InteractiveShell.editor = 'vim'
 # c.InteractiveShell.autoindent = True
 c.PromptManager.justify = True
