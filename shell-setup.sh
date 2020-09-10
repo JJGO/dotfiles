@@ -70,6 +70,7 @@ mkdir -p $NVIM
 if [[ ! -d $NVIM/py3 ]]; then
     python3 -m venv $NVIM/py3
     PIP=$NVIM/py3/bin/pip
+    $PIP install --upgrade pip
     $PIP install neovim
     $PIP install 'python-language-server[all]'
     $PIP install pylint isort jedi flake8
