@@ -36,6 +36,7 @@ Plug 'tpope/vim-surround'             " Surround with parentheses & co
 Plug 'joom/vim-commentary'            " To comment stuff out
 Plug 'terryma/vim-multiple-cursors'   " Multiple cursors like sublime
 Plug 'godlygeek/tabular'              " For alignment
+Plug 'junegunn/vim-easy-align'        " Easier alignment
 Plug 'foosoft/vim-argwrap'            " convert lists of arguments into blocks of arguments
 " Interacts with coc Plug 'tpope/vim-endwise'              " Ends control flow indentifiers
 Plug 'tpope/vim-repeat'               " Adds repeat thorugh . to other packages
@@ -45,6 +46,8 @@ Plug 'tpope/vim-speeddating'          " Dates in vim
 Plug 'itchyny/lightline.vim'          " Better Status Bar
 Plug 'mhinz/vim-startify'             " Better start screen
 Plug 'scrooloose/nerdtree'            " File explorer
+" Plug 'ryanoasis/vim-devicons'         " Nice filetype icons (slow)
+
 " Plug 'sjl/gundo.vim'                  " Undo Tree
 Plug 'simnalamburt/vim-mundo'         " Gundo fork
 Plug 'majutsushi/tagbar'              " Pane with tags
@@ -57,6 +60,7 @@ Plug 'tpope/vim-eunuch'               " Unix helpers
 Plug 'airblade/vim-gitgutter'         " Git gutter
 Plug 'tpope/vim-fugitive'             " Git interface
 Plug 'xuyuanp/nerdtree-git-plugin'    " Show status of files in NerdTree
+Plug 'tveskag/nvim-blame-line'        " Add git blame on line
 " Tmux GUI
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
@@ -70,9 +74,12 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Syntactic language support
+" Plug 'nvim-treesitter/nvim-treesitter' " LSP syntax highlighting - (Note:
+" needs neovim >= 0.5)
 Plug 'w0rp/ale'                        " Linting engine
 Plug 'maximbaz/lightline-ale'          " Lightline + Ale
 Plug 'plasticboy/vim-markdown'         " Markdown support
+Plug 'mzlogin/vim-markdown-toc'        " Markdown TOC builder
 Plug 'cespare/vim-toml'                " TOML support
 Plug 'stephpy/vim-yaml'                " YAML support
 Plug 'elzr/vim-json'                   " Better JSON support
@@ -86,6 +93,8 @@ Plug 'frazrepo/vim-rainbow'                " Rainbow parentheses
 Plug 'vim-pandoc/vim-pandoc'           " Pandoc support
 Plug 'vim-pandoc/vim-pandoc-syntax'    " Pandoc syntax
 Plug 'chrisbra/colorizer'              " Colorize color codes
+" Plug 'norcalli/nvim-colorizer.lua'     " Faster colorzier (only neovim,
+" reconsider)
 Plug 'liuchengxu/vista.vim'
 Plug 'vim-python/python-syntax'
 " Plug 'sentientmachine/pretty-vim-python'
@@ -100,6 +109,7 @@ Plug 'chriskempson/base16-vim'         " Base16 themes
 Plug 'patstockwell/vim-monokai-tasty'
 " Plug 'erichdongubler/vim-sublime-monokai'
 " Plug 'flazz/vim-colorschemes'          " Bunch of color schemes
+Plug 'sainnhe/sonokai'                 " Monokai Pro-like scheme
 
 " Writing
 Plug 'junegunn/goyo.vim'               " Distraction free mode
@@ -136,6 +146,8 @@ elseif exists("+termguicolors")
     set t_Co=256
 
     colorscheme vim-monokai-tasty
+    " colorscheme sonokai
+    " let g:sonokai_style = 'shusia'
 
 elseif &t_Co < 256
     colorscheme molokai
@@ -522,6 +534,13 @@ nmap ghp <Plug>(GitGutterPreviewHunk)
 " vimtex
 let g:tex_flavor = "latex"
 
+" vim-easy-align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 " =============================================================================
 "   CUSTOM SHORTCUTS  (LEADER, FN, &c)
 " =============================================================================
@@ -594,6 +613,7 @@ nnoremap <Leader>u :MundoToggle<CR>
 
 "  oa oc oe ofog om on op ot os    --  Miscellaneous toggles
 nnoremap <Leader>oa :ALEToggle<CR>
+nnoremap <Leader>ob :ToggleBlameLine<CR>
 nnoremap <Leader>oc :ColorToggle<CR>
 nnoremap <Leader>oe :NERDTreeToggle<CR>
 nnoremap <Leader>of :ALEfixToggle<CR>
