@@ -21,5 +21,3 @@ fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 HISTIGNORE="$HISTIGNORE:jrnl *"
-
-source /Users/josejavier/Library/Preferences/org.dystroy.broot/launcher/bash/br
