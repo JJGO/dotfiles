@@ -17,7 +17,7 @@ BREW = '/usr/local/bin/brew'
 
 BREW_UPDATE_CMD = [BREW, 'update']
 BREW_OUTDATED_CMD = [BREW, 'outdated']
-CASK_OUTDATED_CMD = [BREW, 'cask', 'outdated']
+CASK_OUTDATED_CMD = [BREW, 'outdated', '--cask']
 BREW_UPGRADE = [BREW, 'upgrade']
 CASK_UPGRADE = [BREW, 'cask', 'upgrade']
 BREW_CLEANUP = [BREW, 'cleanup', '-s']
