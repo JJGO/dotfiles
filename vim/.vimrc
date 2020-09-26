@@ -154,6 +154,10 @@ elseif &t_Co < 256
     set nocursorline " looks bad in this mode
 endif
 
+" if &diff
+"     colorscheme foobar
+" endif
+
 
 let g:python_highlight_all = 1
 
@@ -573,6 +577,7 @@ nnoremap <Leader>\| :vsp<CR>
 nmap <Leader>w :w<CR>
 nmap <Leader>q :q<CR>
 nmap <Leader>wq :wq<CR>
+nmap <Leader>Q :q!<CR>
 
 "  y d p P   --  Quick copy paste into system clipboard
 nmap <Leader>y "+y
