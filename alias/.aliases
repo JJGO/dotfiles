@@ -54,7 +54,7 @@ alias jn-b="jupyter notebook --no-browser"
 # Yotube-DL
 alias yt="youtube-dl"
 alias yta="youtube-dl --extract-audio --audio-format mp3"
-alias ytad="youtube-dl --extract-audio --audio-format mp3 --write-description"
+alias ytad="youtube-dl --extract-audio --audio-format mp3 --write-description --add-metadata"
 
 ## Misc
 alias my-ip="curl ipinfo.io/ip 2> /dev/null"
