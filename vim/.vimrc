@@ -357,6 +357,14 @@ function! TogglePrettyJson()
     endif
 endfunction
 
+function! ToggleColorColumn()
+    if &colorcolumn == ""
+        set colorcolumn=88
+    else
+        set colorcolumn=
+    endif
+endfunction
+
 function! ToggleZoom(toggle)
   if exists("t:restore_zoom") && (t:restore_zoom.win != winnr() || a:toggle == v:true)
       exec t:restore_zoom.cmd
@@ -373,6 +381,7 @@ augroup END
 
 command! LineNumberToggle call ToggleLineNumber()
 command! ALEfixToggle call ToggleALEFix()
+command! ColorColumnToggle call ToggleColorColumn()
 
 
 " To apply the macro to all lines you need a little trick I learned from Drew Neil’s
@@ -629,6 +638,7 @@ nnoremap <Leader>oe :NERDTreeToggle<CR>
 nnoremap <Leader>of :ALEfixToggle<CR>
 nnoremap <Leader>oj :call TogglePrettyJson()<CR>
 nnoremap <Leader>og :GitGutterToggle<CR>
+nnoremap <Leader>ol :ColorColumnToggle<CR>
 nnoremap <Leader>om :SignatureToggle<CR>
 nnoremap <Leader>on :LineNumberToggle<CR>
 nnoremap <Leader>op :RainbowToggle<CR>
