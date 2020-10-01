@@ -1,0 +1,8 @@
+#!/usr/bin/osascript
+# vim: set filetype=applescript:
+
+if not output muted of (get volume settings) then
+    local v
+    set v to output volume of (get volume settings)
+    set volume output volume v
+end if
