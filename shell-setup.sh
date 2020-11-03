@@ -24,6 +24,7 @@ fi
 # DIFF-SO-FANCY
 if [[ ! -f $HOME/bin/diff-so-fancy ]]; then
     curl -o $HOME/bin/diff-so-fancy https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
+    chmod +x $HOME/bin/diff-so-fancy
 fi
 
 
