@@ -221,6 +221,9 @@ case "$(uname -s)" in
      alias mv="/usr/local/bin/gmv -i"
      alias cp="/usr/local/bin/gcp -i"
      # alias_if_exists "ls" "/usr/local/bin/gls"
+     alias veracrypt="/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt --text"
+     alias sudoedit="sudo -E vim"
+     alias casks=brews
      ;;
 
    Linux)
