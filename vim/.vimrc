@@ -128,7 +128,21 @@ Plug 'liuchengxu/vim-which-key'
 call plug#end()
 
 if isdirectory($HOME . "/.vim/plugged/coc.nvim")
-    call coc#add_extension('coc-json', 'coc-jedi', 'coc-highlight', 'coc-prettier', 'coc-yank', 'coc-explorer', 'coc-git', 'coc-rls',  'coc-tabnine', 'coc-sh', 'coc-vimlsp', 'coc-yaml', 'coc-go', 'coc-highlight')
+    call coc#add_extension(
+       \'coc-explorer',
+       \'coc-git',
+       \'coc-go',
+       \'coc-highlight',
+       \'coc-highlight',
+       \'coc-jedi',
+       \'coc-json',
+       \'coc-prettier',
+       \'coc-rls',
+       \'coc-sh',
+       \'coc-tabnine',
+       \'coc-vimlsp',
+       \'coc-yaml',
+     \)
 endif
 
 " =============================================================================
