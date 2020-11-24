@@ -19,10 +19,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 
-# ALIASES
-if [ -f ~/.aliases ]; then
-    source ~/.aliases
-fi
 
 # Tmuxinator completions
 if [ -f ~/.bin/tmuxinator.zsh ]; then
@@ -92,4 +88,9 @@ unset __conda_setup
 # Environment setup
 if [ -f ~/.env ]; then
     source ~/.env
+fi
+
+# ALIASES
+if [ -f ~/.aliases ]; then
+    source ~/.aliases
 fi
