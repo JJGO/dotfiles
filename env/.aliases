@@ -31,6 +31,10 @@ mvr () {
     mv $2 $1
 }
 
+alias cf='cd $(fd -t d | fzf)'
+
+
+
 ## Git
 alias ga='git add'
 alias gs='git status'
