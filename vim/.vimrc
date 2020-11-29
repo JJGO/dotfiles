@@ -514,6 +514,8 @@ let g:lightline.component_expand = {
     "   endif
     " endfunction
     " autocmd TextChanged,CursorMoved * call EasyMotionCoc()
+    
+   nnoremap <silent> <space>Y  :<C-u>CocList -A --normal yank<cr> 
 
 endif
 
@@ -772,6 +774,7 @@ endif
 autocmd BufRead *.plot set filetype=gnuplot
 autocmd BufRead *.md set filetype=markdown
 autocmd BufRead *.tex set filetype=tex
+autocmd BufRead *.rss set filetype=xml
 
 " =============================================================================
 "   LOCAL CONFIG
