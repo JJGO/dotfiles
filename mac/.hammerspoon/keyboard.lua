@@ -25,7 +25,7 @@ end
 function openVimr()
     d = os.date("%Y%m%d%H%M%S")
     file = os.getenv("HOME") .. "/Downloads/" .. d .. ".md"
-    os.execute("/usr/local/bin/vimr " .. file)
+    os.execute("cd $HOME/Downloads; /usr/local/bin/vimr " .. file)
 end
 
 -- ⌘ + ⏎ Opens New Terminal
@@ -66,4 +66,3 @@ hs.hotkey.bind({"ctrl", "cmd", "alt"}, "P", function() hs.hid.capslock.toggle() 
 
 -- Capture OCR to clipboard
 hs.hotkey.bind({"ctrl", "cmd", "alt"}, "O", function() os.execute("~/bin/ocr") end)
-
