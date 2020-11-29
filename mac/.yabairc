@@ -36,12 +36,12 @@ yabai -m external_bar all:20:0 # doesn't seem to be working yet
 yabai -m config top_paddign 36
 
 # Do not manage certain applications
-yabai -m rule --add app="System Preferences" manage=off
+# yabai -m rule --add app="System Preferences" manage=off
 yabai -m rule --add app="Inkscape" manage=off
-yabai -m rule --add app="Plex Media Player" manage=off
-yabai -m rule --add app="Plex" manage=off
-yabai -m rule --add app="Plexamp" manage=off
-yabai -m rule --add app="iStat Menus Status" manage=off
-yabai -m rule --add app="iStatMenusAgent" manage=off
+yabai -m rule --add app="Plex Media Player" border=off
+yabai -m rule --add app="Plex" border=off
+yabai -m rule --add app="Plexamp" manage=off border=off
+yabai -m rule --add app="^iStat*" sticky=on layer=above manage=off border=off
+yabai -m rule --add app="^iStat*" mouse_follows_focus=off
 
 echo "yabai configuration loaded.."
