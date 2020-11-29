@@ -5,10 +5,10 @@ import shutil
 import sys
 from PIL import Image
 
-horz_dir = pathlib.Path('/Users/josejavier/dbm/misc/_Wallpapers/_Chill2')
-vert_dir = pathlib.Path('/Users/josejavier/dbm/misc/_Wallpapers/_VChill2')
+horz_dir = pathlib.Path("/Users/josejavier/Sync/media/wallpapers/nature-horizontal")
+vert_dir = pathlib.Path("/Users/josejavier/Sync/media/wallpapers/nature-vertical")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     for f in pathlib.Path(sys.argv[1]).glob("*-unsplash.jpg"):
         print(f"Moved {f.name}")
