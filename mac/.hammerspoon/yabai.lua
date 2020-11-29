@@ -23,17 +23,18 @@ bindCmd({"shift", "cmd"}, "k", "/usr/local/bin/yabai -m window --warp north")
 bindCmd({"shift", "cmd"}, "l", "/usr/local/bin/yabai -m window --warp east")
 
 -- balance size of windows
-bindCmd({"shift", "alt"}, "0", "/usr/local/bin/yabai -m space --balance")
+-- bindCmd({"shift", "alt"}, "0", "/usr/local/bin/yabai -m space --balance")
+-- I use this often so I made it easier to trigger
 bindCmd({"alt"}, "b", "/usr/local/bin/yabai -m space --balance")
 
 -- make floating window fill screen
--- bindCmd({ "shift", "alt" - up}, " ", "/usr/local/bin/yabai -m window --grid 1:1:0:0:1:1")
+-- bindCmd({ "cmd", "alt"}, "up", "/usr/local/bin/yabai -m window --grid 1:1:0:0:1:1")
 
 -- make floating window fill left-half of screen
--- bindCmd({ "shift", "alt" - le}, " ", "/usr/local/bin/yabai -m window --grid 1:2:0:0:1:1")
+-- bindCmd({ "cmd", "alt"}, "left", "/usr/local/bin/yabai -m window --grid 1:2:0:0:1:1")
 
 -- make floating window fill right-half of screen
--- bindCmd({ "shift", "alt" - ri}, " ", "/usr/local/bin/yabai -m window --grid 1:2:1:0:1:1")
+-- bindCmd({ "cmd", "alt"}, "right", "/usr/local/bin/yabai -m window --grid 1:2:1:0:1:1")
 
 
 -- fast focus
@@ -82,6 +83,9 @@ bindCmd({"ctrl", "cmd" }, "1", "/usr/local/bin/yabai -m window --display 1; /usr
 bindCmd({"ctrl", "cmd" }, "2", "/usr/local/bin/yabai -m window --display 2; /usr/local/bin/yabai -m display --focus 2")
 bindCmd({"ctrl", "cmd" }, "3", "/usr/local/bin/yabai -m window --display 3; /usr/local/bin/yabai -m display --focus 3")
 
+bindCmd({"ctrl", "cmd" }, "h", "/usr/local/bin/yabai -m window --display prev; /usr/local/bin/yabai -m display --focus prev")
+bindCmd({"ctrl", "cmd" }, "l", "/usr/local/bin/yabai -m window --display next; /usr/local/bin/yabai -m display --focus next")
+
 -- move window
 bindCmd({"shift", "ctrl"}, "a", "/usr/local/bin/yabai -m window --move rel:-20:0")
 bindCmd({"shift", "ctrl"}, "s", "/usr/local/bin/yabai -m window --move rel:0:20")
@@ -108,6 +112,7 @@ bindCmd({"ctrl", "alt"}, "l", "/usr/local/bin/yabai -m window --insert east")
 
 -- rotate tree
 bindCmd({"alt"}, "r", "/usr/local/bin/yabai -m space --rotate 90")
+bindCmd({"alt", "shift"}, "r", "/usr/local/bin/yabai -m space --rotate 270")
 
 -- mirror tree y-axis
 bindCmd({"alt"}, "y", "/usr/local/bin/yabai -m space --mirror y-axis")
@@ -158,4 +163,3 @@ bindCmd({"ctrl", "cmd"}, "n", '/usr/local/bin/yabai -m space --create && \
 index=$(/usr/local/bin/yabai -m query --spaces --display | /usr/local/bin/jq \'map(select(."native-fullscreen" == 0))[-1].index\') && \
 /usr/local/bin/yabai -m window --space "${index}" && \
 /usr/local/bin/yabai -m space --focus "${index}"')
-
