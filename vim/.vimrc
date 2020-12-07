@@ -94,6 +94,7 @@ Plug 'vim-pandoc/vim-pandoc'           " Pandoc support
 Plug 'vim-pandoc/vim-pandoc-syntax'    " Pandoc syntax
 Plug 'chrisbra/colorizer'              " Colorize color codes
 Plug 'vim-scripts/applescript.vim'
+Plug 'pprovost/vim-ps1'
 " Plug 'norcalli/nvim-colorizer.lua'     " Faster colorzier (only neovim,
 " reconsider)
 Plug 'liuchengxu/vista.vim'
