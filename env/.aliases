@@ -58,7 +58,7 @@ alias jn-b="jupyter notebook --no-browser"
 # Yotube-DL
 alias yt="youtube-dl"
 alias yta="youtube-dl --extract-audio --audio-format mp3"
-alias ytad="youtube-dl --extract-audio --audio-format mp3 --write-description --add-metadata"
+alias ytad="youtube-dl --extract-audio --audio-format mp3 --write-description --add-metadata --embed-thumbnail --write-info-json"
 
 ## Misc
 alias my-ip="curl ipinfo.io/ip 2> /dev/null"
@@ -248,6 +248,14 @@ case "$(uname -s)" in
      alias veracrypt="/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt --text"
      alias sudoedit="sudo -E vim"
      alias casks=brews
+     op() {
+       local file
+       if [[ -f $1 ]]; then
+           open $1
+       else
+           file="$(fasd -Rl "$1" | fzf -1 -0 --no-sort +m)" && open "${file}" || return 1
+       fi
+     }
      ;;
 
    Linux)
