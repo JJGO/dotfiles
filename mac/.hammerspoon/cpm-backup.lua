@@ -9,6 +9,7 @@ function backupCallback(exitCode, stdOut, stdErr)
         hs.alert("CPM backup error: " .. exitCode, 3)
     end
 end
+
 function fsCallback(event, data)
     if (event == hs.fs.volume.didMount) then
         if (data["path"] == "/Volumes/COPPERMIND") then
@@ -19,6 +20,6 @@ function fsCallback(event, data)
     end
 end
 
-fswatcher = hs.fs.volume.new(fsCallback)
-fswatcher:start()
+-- fswatcher = hs.fs.volume.new(fsCallback)
+-- fswatcher:start()
 
