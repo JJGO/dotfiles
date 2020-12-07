@@ -163,3 +163,6 @@ bindCmd({"ctrl", "cmd"}, "n", '/usr/local/bin/yabai -m space --create && \
 index=$(/usr/local/bin/yabai -m query --spaces --display | /usr/local/bin/jq \'map(select(."native-fullscreen" == 0))[-1].index\') && \
 /usr/local/bin/yabai -m window --space "${index}" && \
 /usr/local/bin/yabai -m space --focus "${index}"')
+
+-- Destroy current space
+bindCmd({"cmd", "alt"}, "delete", "/usr/local/bin/yabai -m space --destroy")
