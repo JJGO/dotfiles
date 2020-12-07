@@ -10,7 +10,7 @@ vert_dir = pathlib.Path("/Users/josejavier/Sync/media/wallpapers/nature-vertical
 
 if __name__ == "__main__":
 
-    for f in pathlib.Path(sys.argv[1]).glob("*-unsplash.jpg"):
+    for f in pathlib.Path(sys.argv[1]).glob(sys.argv[2]):
         print(f"Moved {f.name}")
         with Image.open(f.as_posix()) as im:
             width, height = im.size
