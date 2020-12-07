@@ -37,9 +37,13 @@ export COMP_KNOWN_HOSTS_WITH_HOSTFILE=""
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
-# export HISTSIZE=1000000000
-# export SAVEHIST=$HISTSIZE
-# setopt EXTENDED_HISTORY
+export HISTFILE=~/.zsh_history
+export HISTSIZE=1000000000
+export SAVEHIST=$HISTSIZE
+setopt EXTENDED_HISTORY
+setopt HIST_IGNORE_SPACE 
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_SAVE_NO_DUPS
 
 # Remap clear-screen since ^L is taken by tmux-vim
 bindkey "^O" clear-screen
