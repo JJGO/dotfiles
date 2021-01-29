@@ -59,6 +59,7 @@ alias jn-b="jupyter notebook --no-browser"
 alias yt="youtube-dl"
 alias yta="youtube-dl --extract-audio --audio-format mp3"
 alias ytad="youtube-dl --extract-audio --audio-format mp3 --write-description --add-metadata --embed-thumbnail --write-info-json"
+alias gdl="gallery-dl"
 
 ## Misc
 alias my-ip="curl ipinfo.io/ip 2> /dev/null"
@@ -247,7 +248,12 @@ case "$(uname -s)" in
      # alias_if_exists "ls" "/usr/local/bin/gls"
      alias veracrypt="/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt --text"
      alias sudoedit="sudo -E vim"
-     alias casks=brews
+     alias casks="brew search --cask"
+     alias caski="brew install --cask"
+     alias caskx="brew uninstall --cask"
+     alias casks="brew search --cask"
+     alias caskl="brew list --cask"
+     alias casko="brew outdated --cask"
      op() {
        local file
        if [[ -f $1 ]]; then
