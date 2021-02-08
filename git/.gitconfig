@@ -1,6 +1,6 @@
 [user]
 	name = Jose Javier
-	email = josejavier.gonzalez.ortiz@gmail.com
+	email = 3844846+JJGO@users.noreply.github.com
 [push]
 	default = simple
 [pull]
@@ -48,3 +48,5 @@
     required = true
     clean = git media clean %f
     smudge = git media smudge %f
+[init]
+	defaultBranch = main
