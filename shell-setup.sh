@@ -121,5 +121,5 @@ fi
 
 for crate in bat fd-find ripgrep exa tealdeer procs ytop hyperfine bandwhich
 do
-    $HOME/.cargo/bin/cargo install --force $crate
+    $HOME/.cargo/bin/cargo install $crate
 done
