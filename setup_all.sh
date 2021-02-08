@@ -29,6 +29,8 @@ backup_if_exists ~/.bashrc
 backup_if_exists ~/.zshrc
 backup_if_exists ~/.gitconfig
 backup_if_exists ~/.tmux.conf
+backup_if_exists ~/.profile
+
 
 mkdir -p ~/.vim/undodir
 
