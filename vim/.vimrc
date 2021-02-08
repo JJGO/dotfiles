@@ -100,6 +100,7 @@ Plug 'pprovost/vim-ps1'
 Plug 'liuchengxu/vista.vim'
 Plug 'vim-python/python-syntax'
 " Plug 'sentientmachine/pretty-vim-python'
+Plug 'isobit/vim-caddyfile'
 
 " Colorschemes
 Plug 'morhetz/gruvbox'
