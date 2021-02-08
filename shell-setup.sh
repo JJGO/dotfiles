@@ -1,9 +1,16 @@
 #!/usr/bin/env zsh
 set -x
+set -e
 
 #######################
 # BIN
 #######################
+
+function pull_repo() {
+    cd $1
+    git pull
+    cd -
+}
 
 mkdir -p $HOME/bin
 
@@ -36,6 +43,7 @@ if [[ ! -d $HOME/.tmux/plugins/tpm ]]; then
     mkdir -p $HOME/.tmux/plugins
     git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
+pull_repo $HOME/.tmux/plugins/tpm
 
 
 #######################
@@ -49,6 +57,10 @@ if [[ ! -d $HOME/.zprezto ]]; then
       ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
     done
 fi
+cd $HOME/.zprezto
+git pull
+git submodule update --init --recursive
+cd - 
 
 mkdir -p $HOME/.zsh
 
@@ -56,6 +68,7 @@ mkdir -p $HOME/.zsh
 if [[ ! -d $HOME/.zsh/fast-syntax-highlighting ]]; then
     git clone https://github.com/zdharma/fast-syntax-highlighting.git $HOME/.zsh/fast-syntax-highlighting
 fi
+pull_repo $HOME/.zsh/fast-syntax-highlighting
 
 #######################
 # NEOVIM
@@ -65,12 +78,16 @@ NVIM=$HOME/.neovim
 mkdir -p $NVIM
 
 # AppImage in case the computer does not have a fallback nvim (appimage does not self update)
-mkdir -p $NVIM/bin
-cd $NVIM/bin
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod u+x nvim.appimage
-mv nvim.appimage nvim
-cd -
+if command -v nvim > /dev/null; then
+    echo "NVIM appears to be installed"
+else
+    mkdir -p $NVIM/bin
+    cd $NVIM/bin
+    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+    chmod u+x nvim.appimage
+    mv nvim.appimage nvim
+    cd -
+fi
 
 # Create Python3 environment
 if [[ ! -d $NVIM/py3 ]]; then
