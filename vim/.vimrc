@@ -135,7 +135,7 @@ if isdirectory($HOME . "/.vim/plugged/coc.nvim")
        \'coc-go',
        \'coc-highlight',
        \'coc-highlight',
-       \'coc-jedi',
+       \'coc-pyright',
        \'coc-json',
        \'coc-lua',
        \'coc-prettier',
