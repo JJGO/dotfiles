@@ -59,6 +59,7 @@ Plug 'tpope/vim-eunuch'               " Unix helpers
 " Git GUI
 Plug 'airblade/vim-gitgutter'         " Git gutter
 Plug 'tpope/vim-fugitive'             " Git interface
+Plug 'junegunn/gv.vim'                " TIG like navigation for vim
 Plug 'xuyuanp/nerdtree-git-plugin'    " Show status of files in NerdTree
 Plug 'tveskag/nvim-blame-line'        " Add git blame on line
 " Tmux GUI
