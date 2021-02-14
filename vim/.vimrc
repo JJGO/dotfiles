@@ -67,6 +67,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'christoomey/vim-tmux-navigator'
 " VIM Ui
+Plug 'psliwka/vim-smoothie'
 
 
 " Autocomplete
