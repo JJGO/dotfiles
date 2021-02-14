@@ -97,6 +97,7 @@ Plug 'vim-pandoc/vim-pandoc-syntax'    " Pandoc syntax
 Plug 'chrisbra/colorizer'              " Colorize color codes
 Plug 'vim-scripts/applescript.vim'
 Plug 'pprovost/vim-ps1'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Plug 'norcalli/nvim-colorizer.lua'     " Faster colorzier (only neovim,
 " reconsider)
 Plug 'liuchengxu/vista.vim'
@@ -126,8 +127,8 @@ Plug 'ron89/thesaurus_query.vim'       " Synonym query
 Plug 'wakatime/vim-wakatime'           " Wakatime time tracking
 Plug 'ihsanturk/neuron.vim'            " For neuron Zettelkasten
 Plug 'liuchengxu/vim-which-key'
-
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
 call plug#end()
 
 if isdirectory($HOME . "/.vim/plugged/coc.nvim")
