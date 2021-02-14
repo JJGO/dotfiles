@@ -109,7 +109,7 @@ Plug 'isobit/vim-caddyfile'
 Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'         " Base16 themes
 " Plug 'gerw/vim-hilinktrace'            " Syntax Highlighting Tracer
-" Plug 'tomasr/molokai'                  " Monokai and friends
+" Plug 'fatih/molokai'                  " Monokai and friends
 " Plug 'crusoexia/vim-monokai'
 " Plug 'phanviet/vim-monokai-pro'
 Plug 'patstockwell/vim-monokai-tasty'
