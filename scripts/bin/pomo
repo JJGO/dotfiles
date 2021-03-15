@@ -8,20 +8,50 @@ import urllib.parse
 import subprocess
 import sys
 
-
-POMO_END_SOUND = "/Users/josejavier/dbm/misc/sounds/school_bells.mp3"
-
-
-parser = argparse.ArgumentParser(description='Pomodoro command line tool')
-
-parser.add_argument('-d', '--duration', dest='duration', type=int,   default=25, help='Minutes for pomodoro')
-parser.add_argument('-b', '--break',    dest='break_',   type=int,   default=5, help='Minutes for break')
-parser.add_argument('-l', '--loop',     dest='loop',     action='store_true', default=False, help='Minutes for break')
-parser.add_argument('-s', '--sound',    dest='sound',    type=str,   default=POMO_END_SOUND,  help='File to play at each end')
-parser.add_argument(dest='task',  nargs='?', default=None, help="Name of task")
+# from rich.traceback import install
+# install()
 
 
-def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=100, fill='█'):
+
+POMO_END_SOUND = "/Users/josejavier/Sync/media/sounds/school_bells.mp3"
+POMO_END_BREAK_SOUND = "/Users/josejavier/Sync/media/sounds/japanese_school_bell.mp3"
+
+
+parser = argparse.ArgumentParser(description="Pomodoro command line tool")
+
+parser.add_argument(
+    "-d",
+    "--duration",
+    dest="duration",
+    type=int,
+    default=25,
+    help="Minutes for pomodoro",
+)
+parser.add_argument(
+    "-b", "--break", dest="break_", type=int, default=5, help="Minutes for break"
+)
+parser.add_argument(
+    "-l",
+    "--loop",
+    dest="loop",
+    action="store_true",
+    default=False,
+    help="Minutes for break",
+)
+parser.add_argument(
+    "-s",
+    "--sound",
+    dest="sound",
+    type=str,
+    default=POMO_END_SOUND,
+    help="File to play at each end",
+)
+parser.add_argument(dest="task", nargs="?", default=None, help="Name of task")
+
+
+def printProgressBar(
+    iteration, total, prefix="", suffix="", decimals=1, length=100, fill="█"
+):
     """
     Call in a loop to create terminal progress bar
     @params:
@@ -33,14 +63,13 @@ def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=
         length      - Optional  : character length of bar (Int)
         fill        - Optional  : bar fill character (Str)
     """
-    percent = ("{0:." + str(decimals) + "f}").format(100 *
-                                                     (iteration / float(total)))
+    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     if len(percent) < 2 and decimals == 0:
-        percent = " "+percent
+        percent = " " + percent
     filledLength = int(length * iteration // total)
-    bar = fill * filledLength + '-' * (length - filledLength)
+    bar = fill * filledLength + "-" * (length - filledLength)
     # print('\r%s |%s| %s%% %s' % (prefix, bar, percent, suffix), end='\r')
-    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end='\r')
+    print(f"\r{prefix} |{bar}| {percent}% {suffix}", end="\r")
     # Print New Line on Complete
     if iteration == total:
         print()
@@ -53,10 +82,12 @@ def countdown(minutes):
     for i in range(seconds):
         m, s = i // 60, i % 60
         # print(f'\r{m:02d}:{s:02d}', end="")
-        printProgressBar(i, seconds, prefix='\r', suffix=f'{m:02d}:{s:02d}', length=42, decimals=0)
+        printProgressBar(
+            i, seconds, prefix="\r", suffix=f"{m:02d}:{s:02d}", length=42, decimals=0
+        )
         time.sleep(1)
 
-    print('\rDone!')
+    print("\rDone!")
 
     # So next timer can start
     t = threading.Thread(target=playsound, args=(POMO_END_SOUND,))
@@ -64,29 +95,38 @@ def countdown(minutes):
 
 
 def toggl_stop(wait=False):
-    p = subprocess.Popen(['toggl', 'stop'])
+    p = subprocess.Popen(["toggl", "stop"])
     if wait:
         p.wait()
 
 
 def toggl_start(task):
-    if '@' in task:
-        task, project = task.split('@')
-        subprocess.Popen(['toggl', 'start', task, '-o', project])
+    if "@" in task:
+        task, project = task.split("@")
+        subprocess.Popen(["toggl", "start", task, "-o", project])
     else:
-        subprocess.Popen(['toggl', 'start', task])
+        subprocess.Popen(["toggl", "start", task])
 
 
 def alert(msg):
     print(msg)
-    if sys.platform == 'darwin':
+    if sys.platform == "darwin":
         msg = urllib.parse.quote(msg)
-        subprocess.run(['open', '-g', f'hammerspoon://alert?msg={msg}'])
+        subprocess.run(["open", "-g", f"hammerspoon://alert?msg={msg}"])
     else:
         print(f"Alert not implemented for platform {sys.platform}")
 
 
-if __name__ == '__main__':
+def hs_pomobreak(minutes):
+    print(minutes)
+    if sys.platform == "darwin":
+        minutes = urllib.parse.quote(str(minutes))
+        subprocess.run(["open", "-g", f"hammerspoon://pomodoroBreak?min={minutes}"])
+    else:
+        print(f"Alert not implemented for platform {sys.platform}")
+
+
+if __name__ == "__main__":
 
     args = parser.parse_args()
 
@@ -108,7 +148,8 @@ if __name__ == '__main__':
 
         if args.break_ > 0:
             try:
-                alert(f"Break for {args.break_}'")
+                # alert(f"Break for {args.break_}'")
+                hs_pomobreak(args.break_)
                 countdown(args.break_)
             except KeyboardInterrupt:
                 sys.exit(0)
