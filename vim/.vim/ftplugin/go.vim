@@ -26,7 +26,7 @@ let g:go_highlight_diagnostic_warnings = 1
 " let g:go_auto_sameids = 1
 let g:go_fmt_autosave = 1
 let g:go_fmt_command = "goimports"
-let g:go_auto_type_info = 1
+let g:go_auto_type_info = 0
 let g:go_template_autocreate = 0
 let g:go_doc_keywordprg_enabled = 0
 au FileType go set noexpandtab
@@ -53,3 +53,6 @@ function! s:build_go_files()
 endfunction
 
 autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+let b:ale_linters = ['golangci-lint'] ", 'revive']
+let g:go_list_type = 'quickfix'
+let g:go_metalinter_autosave = 1

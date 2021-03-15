@@ -7,7 +7,7 @@ let python_highlight_all = 1  " python-syntax package
 
 """""""""""" ALE
 " Check Python files with flake8 and pylint.
-let b:ale_linters = ['flake8', 'pylint']
+let b:ale_linters = ['flake8', 'pylint', 'mypy']
 " Fix Python files with black
 let b:ale_fixers = ['black']
 " " Disable warnings about trailing whitespace for Python files.
