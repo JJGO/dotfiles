@@ -83,7 +83,7 @@ bindCmd({"ctrl", "cmd" }, "1", "/usr/local/bin/yabai -m window --display 1; /usr
 bindCmd({"ctrl", "cmd" }, "2", "/usr/local/bin/yabai -m window --display 2; /usr/local/bin/yabai -m display --focus 2")
 bindCmd({"ctrl", "cmd" }, "3", "/usr/local/bin/yabai -m window --display 3; /usr/local/bin/yabai -m display --focus 3")
 
-bindCmd({"ctrl", "cmd" }, "h", "/usr/local/bin/yabai -m window --display prev; /usr/local/bin/yabai -m display --focus prev")
+-- bindCmd({"ctrl", "cmd" }, "h", "/usr/local/bin/yabai -m window --display prev; /usr/local/bin/yabai -m display --focus prev")
 bindCmd({"ctrl", "cmd" }, "l", "/usr/local/bin/yabai -m window --display next; /usr/local/bin/yabai -m display --focus next")
 
 -- move window
