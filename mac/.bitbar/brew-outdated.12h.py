@@ -17,13 +17,10 @@ BREW = '/usr/local/bin/brew'
 
 BREW_UPDATE_CMD = [BREW, 'update']
 BREW_OUTDATED_CMD = [BREW, 'outdated']
-CASK_OUTDATED_CMD = [BREW, 'outdated', '--cask']
 BREW_UPGRADE = [BREW, 'upgrade']
-CASK_UPGRADE = [BREW, 'cask', 'upgrade']
 BREW_CLEANUP = [BREW, 'cleanup', '-s']
 
 FIXED_FORMULA = ['mkvtoolnix', 'bitbar']
-FIXED_CASK = ['wifi-explorer', 'filebot', 'eqmac', 'bitbar']
 
 parser = argparse.ArgumentParser(description='Brew updater')
 parser.add_argument('-u', '--upgrade', dest='upgrade', action='store_true')
@@ -33,8 +30,6 @@ parser.add_argument('formulas', nargs='*', default=None, help='Formulas to upgra
 
 def get_outdated():
 
-    s = subprocess.check_output(BREW_UPDATE_CMD)
-
     outdated = subprocess.check_output(BREW_OUTDATED_CMD).decode()
     if len(outdated) > 0:
         outdated = [line.split(' ')[0] for line in outdated.strip().split('\n')]
@@ -42,14 +37,7 @@ def get_outdated():
     else:
         outdated = []
 
-    outdated_cask = subprocess.check_output(CASK_OUTDATED_CMD).decode()
-    if len(outdated_cask) > 0:
-        outdated_cask = [line.split(' ')[0] for line in outdated_cask.strip().split('\n')]
-        outdated_cask = [i for i in outdated_cask if i not in FIXED_CASK]
-    else:
-        outdated_cask = []
-
-    return outdated, outdated_cask
+    return outdated
 
 
 def write_to_clipboard(output):
@@ -92,10 +80,10 @@ if __name__ == '__main__':
         write_to_clipboard(cmd)
 
     else:
-        outdated, outdated_cask = get_outdated()
+        outdated = get_outdated()
 
-        if len(outdated+outdated_cask) > 0:
-            print('U:{}'.format(len(outdated) + len(outdated_cask)))
+        if len(outdated) > 0:
+            print('U:{}'.format(len(outdated)))
         else:
             print(' ')
 
@@ -110,10 +98,3 @@ if __name__ == '__main__':
             cmd = cmd.replace(' ', '!')
             print("Copy upgrade cmd | terminal=false bash={} param1=--copy param2={}".format(SELF, cmd))
 
-        if len(outdated_cask) > 0:
-            print('---')
-            for cask in outdated_cask:
-                print(cask)
-            cmd = 'brew cask upgrade ' + ' '.join(outdated_cask)
-            cmd = cmd.replace(' ', '!')
-            print("Copy upgrade cask cmd | terminal=false bash={} param1=--copy param2={}".format(SELF, cmd))
