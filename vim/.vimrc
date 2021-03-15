@@ -147,6 +147,11 @@ if isdirectory($HOME . "/.vim/plugged/coc.nvim")
        \'coc-tabnine',
        \'coc-vimlsp',
        \'coc-yaml',
+       \'coc-eslint',
+       \'coc-tsserver',
+       \'coc-xml',
+       \'coc-css',
+       \'coc-stylelint',
      \)
 endif
 
@@ -440,6 +445,12 @@ let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \   'javascript': ['prettier'],
+    \   'css': ['prettier'],
+    \   'html': ['prettier'],
+    \   'markdown': ['prettier'],
+    \   'json': ['prettier'],
+    \   'yaml': ['prettier'],
     \}
 nmap <silent> [a <Plug>(ale_previous_wrap)
 nmap <silent> ]a <Plug>(ale_next_wrap)
@@ -519,8 +530,10 @@ let g:lightline.component_expand = {
     "   endif
     " endfunction
     " autocmd TextChanged,CursorMoved * call EasyMotionCoc()
-    
-   nnoremap <silent> <space>Y  :<C-u>CocList -A --normal yank<cr> 
+
+   nnoremap <silent> <space>Y  :<C-u>CocList -A --normal yank<cr>
+
+   command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 endif
 
