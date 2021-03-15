@@ -41,4 +41,5 @@ require_if_exists("cpm-backup")
 require_if_exists("cpm-backup2")
 require_if_exists("zoom-mute")
 require_if_exists("multidisplay-black")
-
+require_if_exists("pomo")
+require_if_exists("distractions")
