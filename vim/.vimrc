@@ -76,8 +76,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Syntactic language support
-" Plug 'nvim-treesitter/nvim-treesitter' " LSP syntax highlighting - (Note:
-" needs neovim >= 0.5)
 Plug 'w0rp/ale'                        " Linting engine
 Plug 'maximbaz/lightline-ale'          " Lightline + Ale
 Plug 'plasticboy/vim-markdown'         " Markdown support
@@ -128,6 +126,21 @@ Plug 'wakatime/vim-wakatime'           " Wakatime time tracking
 Plug 'ihsanturk/neuron.vim'            " For neuron Zettelkasten
 Plug 'liuchengxu/vim-which-key'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+if has('nvim-0.5')
+    Plug 'phaazon/hop.nvim'
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    " Plug 'nvim-telescope/telescope.nvim'
+
+    " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+    " Plug 'p00f/nvim-ts-rainbow'
+
+    " Plug 'kyazdani42/nvim-web-devicons' " for file icons
+    " Plug 'kyazdani42/nvim-tree.lua'
+
+    " Plug 'TimUntersberger/neogit'
+endif
 
 call plug#end()
 
