@@ -96,6 +96,7 @@ Plug 'chrisbra/colorizer'              " Colorize color codes
 Plug 'vim-scripts/applescript.vim'
 Plug 'pprovost/vim-ps1'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'mattn/emmet-vim'
 " Plug 'norcalli/nvim-colorizer.lua'     " Faster colorzier (only neovim,
 " reconsider)
 Plug 'liuchengxu/vista.vim'
