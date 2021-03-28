@@ -67,6 +67,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'christoomey/vim-tmux-navigator'
 " VIM Ui
+" Plug 'wellle/context.vim'
 " Plug 'psliwka/vim-smoothie'
 
 
@@ -785,6 +786,10 @@ if exists('g:coc_custom_config')
     xmap ig <Plug>(coc-git-chunk-inner)
     omap ag <Plug>(coc-git-chunk-outer)
     xmap ag <Plug>(coc-git-chunk-outer)
+
+    " Play nicely with EasyMotion
+    autocmd User EasyMotionPromptBegin silent! CocDisable
+    autocmd User EasyMotionPromptEnd silent! CocEnable
 endif
 
 " nnoremap <Leader>s :call <SID>StripTrailingWhitespaces()<CR>
@@ -832,6 +837,8 @@ let $LOCALFILE=expand("~/.vimrc_local")
 if filereadable($LOCALFILE)
     source $LOCALFILE
 endif
+
+
 function! DoPrettyXML()
   " save the filetype so we can restore it later
   let l:origft = &ft
