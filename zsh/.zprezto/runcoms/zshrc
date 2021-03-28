@@ -68,7 +68,7 @@ fi
 # if [ -f $HOME/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh ]; then
 #   source $HOME/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 # fi
-
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -98,3 +98,4 @@ fi
 if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
+
