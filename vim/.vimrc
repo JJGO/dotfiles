@@ -56,9 +56,12 @@ Plug 'andymass/vim-matchup'           " Highlight corresponding blocks e.g. if -
 Plug 'kshenoy/vim-signature'          " Show marks in the gutter
 Plug 'yggdroot/indentline'            " Shows indentation levels
 Plug 'tpope/vim-eunuch'               " Unix helpers
+Plug 'moll/vim-bbye'                  " optional dependency for vim-symlink
+Plug 'aymericbeaumet/vim-symlink'     " Resolve symlinks before editing, plays nicely with undodir
 " Git GUI
 Plug 'airblade/vim-gitgutter'         " Git gutter
 Plug 'tpope/vim-fugitive'             " Git interface
+Plug 'tpope/vim-rhubarb'                    " Enable GBrowse from fugitive for GitHub
 Plug 'junegunn/gv.vim'                " TIG like navigation for vim
 Plug 'xuyuanp/nerdtree-git-plugin'    " Show status of files in NerdTree
 Plug 'tveskag/nvim-blame-line'        " Add git blame on line
