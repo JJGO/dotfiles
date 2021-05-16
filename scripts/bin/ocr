@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 #
-# Siddharth Dushantha 2020
-#
-# https://github.com/sdushantha/bin
-#
+# Adapted from https://github.com/sdushantha/bin
 
 set -x
 TEXT_FILE="/tmp/ocr.txt"
