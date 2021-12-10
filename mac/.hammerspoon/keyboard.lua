@@ -1,13 +1,19 @@
 -- Bunch of convenient Keyboard Shorcut actions
 
+-- function openTerminal()
+--     -- kitty
+--     k = hs.application.find("kitty")
+--     if k == nil then
+--         hs.application.launchOrFocus("kitty")
+--     else
+--         k:selectMenuItem("New OS Window")
+--     end
+-- end
+
 function openTerminal()
-    -- kitty
-    k = hs.application.find("kitty")
-    if k == nil then
-        hs.application.launchOrFocus("kitty")
-    else
-        k:selectMenuItem("New OS window")
-    end
+    -- os.execute('open -nF /Applications/Alacritty.app')
+    hs.application.launchOrFocus("alacritty")
+    hs.eventtap.keyStroke({"cmd"}, "n")
 end
 
 function openBrowser()
