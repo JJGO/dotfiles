@@ -22,7 +22,12 @@
     graph2 = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m"
     # Print brnaches by last used
     wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
-
+[init]
+	defaultBranch = main
+[diff]
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
@@ -48,5 +53,3 @@
     required = true
     clean = git media clean %f
     smudge = git media smudge %f
-[init]
-	defaultBranch = main
