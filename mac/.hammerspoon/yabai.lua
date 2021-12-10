@@ -142,8 +142,8 @@ bindCmd({ "alt"}, "w", "/usr/local/bin/yabai -m window --toggle split")
 bindCmd({"alt"}, "t", "/usr/local/bin/yabai -m window --toggle float;\
           /usr/local/bin/yabai -m window --grid 4:4:1:1:2:2")
 
--- toggle sticky
-bindCmd({"alt"}, "s", "/usr/local/bin/yabai -m window --toggle sticky")
+-- -- toggle stiky
+-- bindCmd({"alt"}, "s", "/usr/local/bin/yabai -m window --toggle sticky")
 
 -- toggle sticky, float and resize to picture-in-picture size
 bindCmd({"alt"}, "p", "/usr/local/bin/yabai -m window --toggle sticky;\
