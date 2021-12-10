@@ -56,9 +56,9 @@ alias jn="jupyter notebook"
 alias jn-b="jupyter notebook --no-browser"
 
 # Yotube-DL
-alias yt="youtube-dl"
-alias yta="youtube-dl --extract-audio --audio-format mp3"
-alias ytad="youtube-dl --extract-audio --audio-format mp3 --write-description --add-metadata --embed-thumbnail --write-info-json"
+alias yt="yt-dlp"
+alias yta="yt-dlp --extract-audio --audio-format mp3"
+alias ytad="yt-dlp --extract-audio --audio-format mp3 --write-description --add-metadata --embed-thumbnail --write-info-json"
 alias gdl="gallery-dl"
 
 ## Misc
