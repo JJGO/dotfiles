@@ -5,7 +5,7 @@ zoomMuteStatusLine = nil
 zoomVideoStatusLine = nil
 
 function drawMuteBorder()
-    zoomMuteStatusLineColor = {["red"]=1,["blue"]=0,["green"]=0,["alpha"]=0.9}
+    zoomMuteStatusLineColor = {["red"]=1,["blue"]=0,["green"]=0,["alpha"]=0.5}
     max = hs.screen.primaryScreen():fullFrame()
     zoomMuteStatusLine = hs.drawing.rectangle(hs.geometry.rect(max.x, max.y, max.w, max.h))
     zoomMuteStatusLine:setStrokeColor(zoomMuteStatusLineColor)
@@ -16,7 +16,7 @@ function drawMuteBorder()
 end
 
 function drawVideoBorder()
-    zoomVideoStatusLineColor = {["red"]=0,["blue"]=0,["green"]=1,["alpha"]=0.9}
+    zoomVideoStatusLineColor = {["red"]=0,["blue"]=0,["green"]=1,["alpha"]=0.0}
     max = hs.screen.primaryScreen():fullFrame()
     zoomVideoStatusLine = hs.drawing.rectangle(hs.geometry.rect(max.x, max.y, max.w, max.y+25))
     zoomVideoStatusLine:setStrokeColor(zoomVideoStatusLineColor)
@@ -105,6 +105,7 @@ function toggleZoomVideo()
         zoomVideoStatusLine:delete()
         zoomVideoStatusLine = nil
     end
+    -- hs.execute('/usr/local/bin/uvcc set saturation 104 && /usr/local/bin/uvcc set absolute_zoom 133', true)
 end
 
 hs.application.enableSpotlightForNameSearches(true)
