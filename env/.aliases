@@ -121,6 +121,11 @@ function rcv() {
     /bin/rm "/tmp/passage/$file"
 }
 
+# Find docker container address with a given name
+function daddr() {
+    docker network ls | tail -n +2 | awk '{print $2}' | xargs docker network inspect | jq --arg NAME "$1" '.[].Containers | .[] | select(.Name == $NAME) | .IPv4Address'
+}
+
 # fzf
 if command -v fzf > /dev/null; then
 
