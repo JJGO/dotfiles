@@ -20,6 +20,9 @@ function _pomodoroRedraw(seconds, overlay, text)
         text:delete()
     end
 
+    -- overlay:hide()
+    -- overlay:show()
+
     if seconds == 0 or not pomoActive then
         overlay:delete()
     else
@@ -45,3 +48,8 @@ hs.hotkey.bind(hyper, "P", stopPomoBreak)
 hs.urlevent.bind("pomodoroBreak", function(eventName, params)
     pomodoroBreak(params['min'])
 end)
+
+
+-- Space switch watcher so border is propagated if necessary
+w = hs.spaces.watcher.new(function(x) if pomoActive then overlay:hide(); overlay:show() end end)
+w:start()
