@@ -121,6 +121,7 @@ Plug 'patstockwell/vim-monokai-tasty'
 " Plug 'flazz/vim-colorschemes'          " Bunch of color schemes
 Plug 'sainnhe/sonokai'                 " Monokai Pro-like scheme
 Plug 'tanvirtin/monokai.nvim'
+Plug 'srcery-colors/srcery-vim'
 
 " Writing
 Plug 'junegunn/goyo.vim'               " Distraction free mode
