@@ -5,5 +5,5 @@ from jupyterthemes import jtplot
 # set plot style if no arguments provided
 jtplot.style()
 
-from IPython.display import set_matplotlib_formats
-set_matplotlib_formats('svg', 'pdf')
+# from IPython.display import set_matplotlib_formats
+# set_matplotlib_formats('svg', 'pdf')
