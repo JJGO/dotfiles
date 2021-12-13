@@ -52,6 +52,7 @@ Plug 'scrooloose/nerdtree'            " File explorer
 Plug 'simnalamburt/vim-mundo'         " Gundo fork
 Plug 'majutsushi/tagbar'              " Pane with tags
 Plug 'machakann/vim-highlightedyank'  " Highlight yanks
+Plug 'ojroques/vim-oscyank'           " Yank from remote sessions
 Plug 'andymass/vim-matchup'           " Highlight corresponding blocks e.g. if - fi in bash
 Plug 'kshenoy/vim-signature'          " Show marks in the gutter
 Plug 'yggdroot/indentline'            " Shows indentation levels
@@ -631,6 +632,9 @@ let g:secure_modelines_allowed_items = [
                 \ "rightleft",   "rl",   "norightleft", "norl",
                 \ "colorcolumn"
                 \ ]
+
+" remote yanks OSC52
+autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '+' | execute 'OSCYankReg +' | endif
 
 " =============================================================================
 "   CUSTOM SHORTCUTS  (LEADER, FN, &c)
