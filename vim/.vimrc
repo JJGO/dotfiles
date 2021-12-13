@@ -398,13 +398,6 @@ function! ToggleALEFix()
     endif
 endfunc
 
-function! TogglePrettyJson()
-    if( line('$') == 1)
-        %!python -m json.tool
-    else
-        %j
-    endif
-endfunction
 
 function! ToggleColorColumn()
     if &colorcolumn == ""
@@ -464,6 +457,7 @@ let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save = 1
+let g:ale_float_preview=1
 let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
     \   'javascript': ['prettier'],
@@ -484,7 +478,7 @@ set noshowmode
 
 "Conquer of Completion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if isdirectory($HOME . "/.vim/plugged/coc.nvim")
+if !exists("*VSCodeNotify") && isdirectory($HOME . "/.vim/plugged/coc.nvim")
 
     let g:coc_custom_config = '1'
     let g:coc_node_path = $HOME . '/.neovim/node/bin/node'
@@ -714,7 +708,6 @@ nnoremap <Leader>ob :ToggleBlameLine<CR>
 nnoremap <Leader>oc :ColorToggle<CR>
 nnoremap <Leader>oe :NERDTreeToggle<CR>
 nnoremap <Leader>of :ALEfixToggle<CR>
-nnoremap <Leader>oj :call TogglePrettyJson()<CR>
 nnoremap <Leader>og :GitGutterToggle<CR>
 nnoremap <Leader>ol :ColorColumnToggle<CR>
 nnoremap <Leader>om :SignatureToggle<CR>
@@ -809,12 +802,6 @@ map <F5> :setlocal spell! spelllang=en_us<CR>
 map <F7> :NERDTreeToggle<CR>
 map <F8> :Vista!!<CR>
 
-" Syntax Highlighting Debugging
-" map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-" \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-" \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-
 " =============================================================================
 " # Autocommands
 " =============================================================================
@@ -845,35 +832,3 @@ let $LOCALFILE=expand("~/.vimrc_local")
 if filereadable($LOCALFILE)
     source $LOCALFILE
 endif
-
-
-function! DoPrettyXML()
-  " save the filetype so we can restore it later
-  let l:origft = &ft
-  set ft=
-  " delete the xml header if it exists. This will
-  " permit us to surround the document with fake tags
-  " without creating invalid xml.
-  1s/<?xml .*?>//e
-  " insert fake tags around the entire document.
-  " This will permit us to pretty-format excerpts of
-  " XML that may contain multiple top-level elements.
-  0put ='<PrettyXML>'
-  $put ='</PrettyXML>'
-  silent %!xmllint --format -
-  " xmllint will insert an <?xml?> header. it's easy enough to delete
-  " if you don't want it.
-  " delete the fake tags
-  2d
-  $d
-  " restore the 'normal' indentation, which is one extra level
-  " too deep due to the extra tags we wrapped around the document.
-  silent %<
-  " back to home
-  1
-  " restore the filetype
-  exe "set ft=" . l:origft
-endfunction
-command! PrettyXML call DoPrettyXML()
-
-let g:ale_float_preview=1
