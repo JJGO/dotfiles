@@ -66,7 +66,7 @@ mkdir -p $HOME/.zsh
 
 # Fast syntax highlighting
 if [[ ! -d $HOME/.zsh/fast-syntax-highlighting ]]; then
-    git clone https://github.com/zdharma/fast-syntax-highlighting.git $HOME/.zsh/fast-syntax-highlighting
+    git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git $HOME/.zsh/fast-syntax-highlighting
 fi
 pull_repo $HOME/.zsh/fast-syntax-highlighting
 
