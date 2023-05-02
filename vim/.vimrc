@@ -629,7 +629,7 @@ let g:secure_modelines_allowed_items = [
                 \ ]
 
 " remote yanks OSC52
-autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '+' | execute 'OSCYankReg +' | endif
+autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '+' | execute 'OSCYankRegister +' | endif
 
 " =============================================================================
 "   CUSTOM SHORTCUTS  (LEADER, FN, &c)
